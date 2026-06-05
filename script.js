@@ -158,12 +158,17 @@ function renderArticles() {
         <article class="recommended-card">
           <a href="articles/${article.id}.html" data-open-article="${article.id}">
             <span class="recommend-rank">No. ${article.recommendedRank}</span>
-            <img src="${article.image}" alt="${article.alt}" loading="lazy" width="960" height="540">
-            <span class="article-chip">${categoryLabel(article.category)}</span>
-            <strong>${article.title}</strong>
-            ${article.seoKeyword ? `<em class="keyword-tag">${article.seoKeyword}</em>` : ""}
-            <small>${article.date || "Fengshui Balance"}${article.metrics?.wei ? ` · WEI ${Math.round(article.metrics.wei).toLocaleString()}` : ""}</small>
-            <p>${excerpt(article.body, 150)}</p>
+            <div class="card-image-wrapper">
+              <img src="${article.image}" alt="${article.alt}" loading="lazy" width="960" height="540">
+            </div>
+            <div class="card-content">
+              <span class="article-chip">${categoryLabel(article.category)}</span>
+              <strong>${article.title}</strong>
+              ${article.seoKeyword ? `<em class="keyword-tag">${article.seoKeyword}</em>` : ""}
+              <small>${article.date || "Fengshui Balance"}${article.metrics?.wei ? ` · WEI ${Math.round(article.metrics.wei).toLocaleString()}` : ""}</small>
+              <p>${excerpt(article.body, 120)}</p>
+              <span class="read-more-link">${activeLang === "en" ? "Read Article" : "อ่านบทความ"} &rarr;</span>
+            </div>
           </a>
         </article>`
     )
@@ -178,12 +183,18 @@ function renderArticles() {
       (article) => `
         <article class="article-card ${article.image ? "" : "is-text-only"}">
           <a href="articles/${article.id}.html" data-open-article="${article.id}">
-            ${article.image ? `<img src="${article.image}" alt="${article.alt}" loading="lazy" width="640" height="480">` : ""}
-            <span class="article-chip">${categoryLabel(article.category)}</span>
-            <strong>${article.title}</strong>
-            ${article.seoKeyword ? `<em class="keyword-tag">${article.seoKeyword}</em>` : ""}
-            <small>${article.date || "Fengshui Balance"}${article.metrics?.wei ? ` · WEI ${Math.round(article.metrics.wei).toLocaleString()}` : ""}</small>
-            <p>${excerpt(article.body)}</p>
+            ${article.image ? `
+            <div class="card-image-wrapper">
+              <img src="${article.image}" alt="${article.alt}" loading="lazy" width="640" height="480">
+            </div>` : ""}
+            <div class="card-content">
+              <span class="article-chip">${categoryLabel(article.category)}</span>
+              <strong>${article.title}</strong>
+              ${article.seoKeyword ? `<em class="keyword-tag">${article.seoKeyword}</em>` : ""}
+              <small>${article.date || "Fengshui Balance"}${article.metrics?.wei ? ` · WEI ${Math.round(article.metrics.wei).toLocaleString()}` : ""}</small>
+              <p>${excerpt(article.body, 120)}</p>
+              <span class="read-more-link">${activeLang === "en" ? "Read Article" : "อ่านบทความ"} &rarr;</span>
+            </div>
           </a>
         </article>`
     )
