@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://fengshuibalance.example/sitemap.xml
+Sitemap: https://fengshuibalance.vercel.app/sitemap.xml
