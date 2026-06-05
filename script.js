@@ -267,16 +267,22 @@ document.addEventListener("keydown", (event) => {
 });
 
 articleSearch.addEventListener("input", () => {
-  visibleLimit = 9;
-  renderArticles();
+  ensureFullArticles().then(() => {
+    visibleLimit = 9;
+    renderArticles();
+  });
 });
+articleSearch.addEventListener("focus", ensureFullArticles);
+articleSearch.addEventListener("mouseenter", ensureFullArticles);
 
 articleFilters.addEventListener("click", (event) => {
   const button = event.target.closest("[data-filter]");
   if (!button) return;
   activeFilter = button.dataset.filter;
   visibleLimit = 9;
-  renderArticles();
+  ensureFullArticles().then(() => {
+    renderArticles();
+  });
 });
 
 articleGrid.addEventListener("click", (event) => {
@@ -294,8 +300,10 @@ recommendedGrid.addEventListener("click", (event) => {
 });
 
 loadMore.addEventListener("click", () => {
-  visibleLimit += 9;
-  renderArticles();
+  ensureFullArticles().then(() => {
+    visibleLimit += 9;
+    renderArticles();
+  });
 });
 
 document.querySelector("[data-dialog-close]").addEventListener("click", () => articleDialog.close());
@@ -348,24 +356,38 @@ applyLanguage(activeLang);
 renderArticles();
 setupCounters();
 
-// Lazy-load all 500 articles to keep initial PageSpeed Performance high
-function loadFullArticles() {
-  if (articles.length >= 500) return;
-  window.addEventListener("load", () => {
-    setTimeout(() => {
-      const script = document.createElement("script");
-      script.src = "articles-full.js";
-      script.defer = true;
-      script.onload = () => {
-        if (Array.isArray(window.FENGSHUI_ARTICLES_FULL)) {
-          articles = window.FENGSHUI_ARTICLES_FULL;
-          saveArticles();
-          renderArticles();
-          console.log(`Lazy-loaded all ${articles.length} articles.`);
-        }
-      };
-      document.body.appendChild(script);
-    }, 500);
+let fullArticlesLoaded = false;
+let loadingFullArticlesPromise = null;
+
+function ensureFullArticles() {
+  if (fullArticlesLoaded || articles.length >= 500) {
+    fullArticlesLoaded = true;
+    return Promise.resolve();
+  }
+  if (loadingFullArticlesPromise) {
+    return loadingFullArticlesPromise;
+  }
+  
+  loadingFullArticlesPromise = new Promise((resolve) => {
+    console.log("Lazy-loading full articles archive on interaction...");
+    const script = document.createElement("script");
+    script.src = "articles-full.js";
+    script.defer = true;
+    script.onload = () => {
+      if (Array.isArray(window.FENGSHUI_ARTICLES_FULL)) {
+        articles = window.FENGSHUI_ARTICLES_FULL;
+        fullArticlesLoaded = true;
+        saveArticles();
+        renderArticles();
+        console.log(`Successfully loaded all ${articles.length} articles.`);
+        resolve();
+      }
+    };
+    script.onerror = () => {
+      resolve();
+    };
+    document.body.appendChild(script);
   });
+  
+  return loadingFullArticlesPromise;
 }
-loadFullArticles();
