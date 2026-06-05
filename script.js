@@ -156,7 +156,7 @@ function renderArticles() {
     .map(
       (article) => `
         <article class="recommended-card">
-          <button type="button" data-open-article="${article.id}">
+          <a href="articles/${article.id}.html" data-open-article="${article.id}">
             <span class="recommend-rank">No. ${article.recommendedRank}</span>
             <img src="${article.image}" alt="${article.alt}" loading="lazy" width="960" height="540">
             <span class="article-chip">${categoryLabel(article.category)}</span>
@@ -164,7 +164,7 @@ function renderArticles() {
             ${article.seoKeyword ? `<em class="keyword-tag">${article.seoKeyword}</em>` : ""}
             <small>${article.date || "Fengshui Balance"}${article.metrics?.wei ? ` · WEI ${Math.round(article.metrics.wei).toLocaleString()}` : ""}</small>
             <p>${excerpt(article.body, 150)}</p>
-          </button>
+          </a>
         </article>`
     )
     .join("");
@@ -177,14 +177,14 @@ function renderArticles() {
     .map(
       (article) => `
         <article class="article-card ${article.image ? "" : "is-text-only"}">
-          <button type="button" data-open-article="${article.id}">
+          <a href="articles/${article.id}.html" data-open-article="${article.id}">
             ${article.image ? `<img src="${article.image}" alt="${article.alt}" loading="lazy" width="640" height="480">` : ""}
             <span class="article-chip">${categoryLabel(article.category)}</span>
             <strong>${article.title}</strong>
             ${article.seoKeyword ? `<em class="keyword-tag">${article.seoKeyword}</em>` : ""}
             <small>${article.date || "Fengshui Balance"}${article.metrics?.wei ? ` · WEI ${Math.round(article.metrics.wei).toLocaleString()}` : ""}</small>
             <p>${excerpt(article.body)}</p>
-          </button>
+          </a>
         </article>`
     )
     .join("");
@@ -269,15 +269,17 @@ articleFilters.addEventListener("click", (event) => {
 });
 
 articleGrid.addEventListener("click", (event) => {
-  const button = event.target.closest("[data-open-article]");
-  if (!button) return;
-  openArticle(button.dataset.openArticle);
+  const link = event.target.closest("[data-open-article]");
+  if (!link) return;
+  event.preventDefault();
+  openArticle(link.dataset.openArticle);
 });
 
 recommendedGrid.addEventListener("click", (event) => {
-  const button = event.target.closest("[data-open-article]");
-  if (!button) return;
-  openArticle(button.dataset.openArticle);
+  const link = event.target.closest("[data-open-article]");
+  if (!link) return;
+  event.preventDefault();
+  openArticle(link.dataset.openArticle);
 });
 
 loadMore.addEventListener("click", () => {

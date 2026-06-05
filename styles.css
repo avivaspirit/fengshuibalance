@@ -767,7 +767,9 @@ h3 {
 }
 
 .recommended-card button,
-.article-card button {
+.recommended-card a,
+.article-card button,
+.article-card a {
   display: block;
   width: 100%;
   min-height: 100%;
@@ -776,6 +778,7 @@ h3 {
   background: transparent;
   color: inherit;
   text-align: left;
+  text-decoration: none;
   cursor: pointer;
 }
 
