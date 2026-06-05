@@ -347,3 +347,25 @@ document.querySelector("[data-export-articles]").addEventListener("click", () =>
 applyLanguage(activeLang);
 renderArticles();
 setupCounters();
+
+// Lazy-load all 500 articles to keep initial PageSpeed Performance high
+function loadFullArticles() {
+  if (articles.length >= 500) return;
+  window.addEventListener("load", () => {
+    setTimeout(() => {
+      const script = document.createElement("script");
+      script.src = "articles-full.js";
+      script.defer = true;
+      script.onload = () => {
+        if (Array.isArray(window.FENGSHUI_ARTICLES_FULL)) {
+          articles = window.FENGSHUI_ARTICLES_FULL;
+          saveArticles();
+          renderArticles();
+          console.log(`Lazy-loaded all ${articles.length} articles.`);
+        }
+      };
+      document.body.appendChild(script);
+    }, 500);
+  });
+}
+loadFullArticles();
