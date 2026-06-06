@@ -1,4 +1,11 @@
+# Fengshui Balance — allow Google and other crawlers
 User-agent: *
 Allow: /
+
+User-agent: Googlebot
+Allow: /
+
+User-agent: Googlebot-Image
+Allow: /assets/images/
 
 Sitemap: https://fengshuibalance.vercel.app/sitemap.xml

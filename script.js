@@ -3,6 +3,7 @@ const langToggle = document.querySelector("[data-lang-toggle]");
 const langLabel = document.querySelector("[data-lang-label]");
 const menuToggle = document.querySelector("[data-menu-toggle]");
 const menu = document.querySelector("[data-menu]");
+const navBackdrop = document.querySelector("[data-nav-backdrop]");
 const recommendedGrid = document.querySelector("[data-recommended-grid]");
 const articleGrid = document.querySelector("[data-article-grid]");
 const articleSearch = document.querySelector("[data-article-search]");
@@ -20,10 +21,10 @@ let visibleLimit = 6;
 let activeArticleId = null;
 let bookmarkedIds = JSON.parse(localStorage.getItem("fengshui-read-later") || "[]");
 let editorMode = new URLSearchParams(location.search).has("edit") || location.hash === "#edit";
-const articleVersion = "top10-recommended-2026-06-05";
+const articleVersion = "multi-tag-titles-2026-06-06";
 const savedVersion = localStorage.getItem("fengshui-balance-articles-version");
 const savedArticles = JSON.parse(localStorage.getItem("fengshui-balance-articles") || "null");
-const sourceArticles = window.FENGSHUI_ARTICLES || [];
+const sourceArticles = window.FENGSHUI_ARTICLES_FULL || window.FENGSHUI_ARTICLES || [];
 let articles =
   savedVersion === articleVersion && Array.isArray(savedArticles) && savedArticles.length >= sourceArticles.length
     ? savedArticles
@@ -36,7 +37,7 @@ function applyLanguage(lang) {
     node.textContent = node.dataset[lang];
   });
   updateCounterSuffixes();
-  langLabel.textContent = lang === "en" ? "TH" : "EN";
+  langLabel && (langLabel.textContent = lang === "en" ? "TH" : "EN");
   document.title =
     lang === "en"
       ? "Fengshui Balance | Ajarn Suppachai Vivattanaprasert"
@@ -45,8 +46,19 @@ function applyLanguage(lang) {
 }
 
 function closeMenu() {
-  menu.classList.remove("is-open");
-  menuToggle.setAttribute("aria-expanded", "false");
+  menu?.classList.remove("is-open");
+  menuToggle?.classList.remove("is-open");
+  menuToggle?.setAttribute("aria-expanded", "false");
+  document.body.classList.remove("nav-open");
+  if (navBackdrop) navBackdrop.hidden = true;
+}
+
+function openMenu() {
+  menu?.classList.add("is-open");
+  menuToggle?.classList.add("is-open");
+  menuToggle?.setAttribute("aria-expanded", "true");
+  document.body.classList.add("nav-open");
+  if (navBackdrop) navBackdrop.hidden = false;
 }
 
 function updateCounterSuffixes() {
@@ -114,25 +126,46 @@ function excerpt(text, length = 120) {
   return clean.length > length ? `${clean.slice(0, length).trim()}...` : clean;
 }
 
+const CATEGORY_META = {
+  all: { emoji: "", en: "All", th: "ทั้งหมด" },
+  saved: { emoji: "🔖", en: "Saved", th: "ที่บันทึกไว้" },
+  timing: { emoji: "📅", en: "Auspicious Timing", th: "ฤกษ์ยาม" },
+  spirit: { emoji: "🏛", en: "Spirit House", th: "ศาลและตี่จู้" },
+  shop: { emoji: "🏪", en: "Shop", th: "ร้านค้า" },
+  office: { emoji: "🏢", en: "Office", th: "ออฟฟิศ" },
+  home: { emoji: "🏠", en: "Home", th: "บ้าน" },
+  factory: { emoji: "🏭", en: "Factory", th: "โรงงาน" },
+  astrology: { emoji: "⭐", en: "Destiny", th: "ดวงจีน" },
+  lineage: { emoji: "📜", en: "Lineage", th: "สายวิชา" },
+  general: { emoji: "📝", en: "Fengshui Notes", th: "บันทึกฮวงจุ้ย" },
+  business: { emoji: "💼", en: "Business", th: "ธุรกิจ" },
+  yearly: { emoji: "📆", en: "Yearly", th: "รายปี" },
+  energy: { emoji: "✨", en: "Energy", th: "พลังงาน" },
+  interactive: { emoji: "💬", en: "Community", th: "ชุมชน" },
+};
+
 function categoryLabel(category) {
-  const labels = {
-    all: activeLang === "en" ? "All" : "ทั้งหมด",
-    saved: activeLang === "en" ? "🔖 Saved" : "🔖 ที่บันทึกไว้",
-    home: activeLang === "en" ? "Home" : "บ้าน",
-    office: activeLang === "en" ? "Office" : "ออฟฟิศ",
-    spirit: activeLang === "en" ? "Spirit House" : "ศาลและตี่จู้",
-    lineage: activeLang === "en" ? "Lineage" : "สายวิชา",
-    yearly: activeLang === "en" ? "Yearly" : "รายปี",
-    business: activeLang === "en" ? "Business" : "ธุรกิจ",
-    shop: activeLang === "en" ? "Shop" : "ร้านค้า",
-    factory: activeLang === "en" ? "Factory" : "โรงงาน",
-    timing: activeLang === "en" ? "Auspicious Timing" : "ฤกษ์ยาม",
-    astrology: activeLang === "en" ? "Destiny" : "ดวงจีน",
-    general: activeLang === "en" ? "Fengshui Notes" : "บันทึกฮวงจุ้ย",
-    energy: activeLang === "en" ? "Energy" : "พลังงาน",
-    interactive: activeLang === "en" ? "Community" : "ชุมชน",
-  };
-  return labels[category] || category;
+  const meta = CATEGORY_META[category];
+  if (!meta) return category;
+  const label = activeLang === "en" ? meta.en : meta.th;
+  return meta.emoji ? `${meta.emoji} ${label}` : label;
+}
+
+function articleTags(article) {
+  if (Array.isArray(article.tags) && article.tags.length) return article.tags.slice(0, 2);
+  return article.category ? [article.category] : ["general"];
+}
+
+function renderArticleChips(article) {
+  return articleTags(article)
+    .map((tag) => `<span class="article-chip">${categoryLabel(tag)}</span>`)
+    .join("");
+}
+
+function popularityLabel(article) {
+  if (!article.metrics?.wei) return "";
+  const score = Math.round(article.metrics.wei).toLocaleString();
+  return activeLang === "en" ? ` · Popularity ${score}` : ` · ความนิยม ${score}`;
 }
 
 function saveArticles() {
@@ -160,12 +193,18 @@ function filteredArticles() {
   if (activeFilter === "saved") {
     list = articles.filter((article) => bookmarkedIds.includes(article.id));
   } else {
-    list = articles.filter((article) => !article.recommended && (activeFilter === "all" || article.category === activeFilter));
+    list = articles.filter(
+      (article) =>
+        !article.recommended &&
+        (activeFilter === "all" || articleTags(article).includes(activeFilter))
+    );
   }
-  return list.filter((article) => {
-    const haystack = `${article.title} ${article.body} ${article.category}`.toLowerCase();
-    return !q || haystack.includes(q);
-  });
+  return list
+    .filter((article) => {
+      const haystack = `${article.title} ${article.body} ${articleTags(article).join(" ")}`.toLowerCase();
+      return !q || haystack.includes(q);
+    })
+    .sort((a, b) => (b.metrics?.wei || 0) - (a.metrics?.wei || 0));
 }
 
 function recommendedArticles() {
@@ -176,7 +215,11 @@ function recommendedArticles() {
 
 function renderFilters() {
   if (!articleFilters) return;
-  const categories = ["all", "saved", ...new Set(articles.map((article) => article.category))];
+  const categories = [
+    "all",
+    "saved",
+    ...new Set(articles.flatMap((article) => articleTags(article))),
+  ];
   articleFilters.innerHTML = categories
     .map(
       (category) =>
@@ -195,10 +238,10 @@ function renderRecommendedCard(article) {
               <img src="${article.image}" alt="${article.alt}" loading="lazy" width="960" height="540">
             </div>
             <div class="card-content">
-              <span class="article-chip">${categoryLabel(article.category)}</span>
+              <div class="article-chip-row">${renderArticleChips(article)}</div>
               <strong>${article.title}</strong>
               ${article.seoKeyword ? `<em class="keyword-tag">${article.seoKeyword}</em>` : ""}
-              <small>${article.date || "Fengshui Balance"}${article.metrics?.wei ? ` · WEI ${Math.round(article.metrics.wei).toLocaleString()}` : ""}</small>
+              <small>${article.date || "Fengshui Balance"}${popularityLabel(article)}</small>
               <p>${excerpt(article.body, 120)}</p>
             </div>
           </a>
@@ -265,10 +308,10 @@ function renderArticles() {
               <img src="${article.image}" alt="${article.alt}" loading="lazy" width="640" height="480">
             </div>` : ""}
             <div class="card-content">
-              <span class="article-chip">${categoryLabel(article.category)}</span>
+              <div class="article-chip-row">${renderArticleChips(article)}</div>
               <strong>${article.title}</strong>
               ${article.seoKeyword ? `<em class="keyword-tag">${article.seoKeyword}</em>` : ""}
-              <small>${article.date || "Fengshui Balance"}${article.metrics?.wei ? ` · WEI ${Math.round(article.metrics.wei).toLocaleString()}` : ""}</small>
+              <small>${article.date || "Fengshui Balance"}${popularityLabel(article)}</small>
               <p>${excerpt(article.body, 120)}</p>
             </div>
           </a>
@@ -301,7 +344,9 @@ function openArticle(id) {
     dialogImage.removeAttribute("src");
     dialogImage.alt = "";
   }
-  articleDialog.querySelector("[data-dialog-category]").textContent = categoryLabel(article.category);
+  articleDialog.querySelector("[data-dialog-category]").textContent = articleTags(article)
+    .map((tag) => categoryLabel(tag))
+    .join(" · ");
   articleDialog.querySelector("[data-dialog-title]").textContent = article.title;
   articleDialog.querySelector("[data-dialog-content]").textContent = article.body;
   const source = articleDialog.querySelector("[data-dialog-source]");
@@ -328,17 +373,22 @@ function enableEditorMode() {
   articleDialog?.querySelector("[data-edit-actions]")?.removeAttribute("hidden");
 }
 
-langToggle.addEventListener("click", () => {
+langToggle?.addEventListener("click", () => {
   applyLanguage(activeLang === "en" ? "th" : "en");
   renderArticles();
 });
 
-menuToggle.addEventListener("click", () => {
-  const isOpen = menu.classList.toggle("is-open");
-  menuToggle.setAttribute("aria-expanded", String(isOpen));
+menuToggle?.addEventListener("click", () => {
+  if (menu?.classList.contains("is-open")) {
+    closeMenu();
+  } else {
+    openMenu();
+  }
 });
 
-menu.querySelectorAll("a").forEach((link) => {
+navBackdrop?.addEventListener("click", closeMenu);
+
+menu?.querySelectorAll("a").forEach((link) => {
   link.addEventListener("click", closeMenu);
 });
 
@@ -385,8 +435,10 @@ if (articleGrid) {
     }
     const link = event.target.closest("[data-open-article]");
     if (!link) return;
-    event.preventDefault();
-    openArticle(link.dataset.openArticle);
+    if (articleDialog) {
+      event.preventDefault();
+      openArticle(link.dataset.openArticle);
+    }
   });
 }
 
@@ -400,8 +452,10 @@ if (recommendedGrid) {
     }
     const link = event.target.closest("[data-open-article]");
     if (!link) return;
-    event.preventDefault();
-    openArticle(link.dataset.openArticle);
+    if (articleDialog) {
+      event.preventDefault();
+      openArticle(link.dataset.openArticle);
+    }
   });
 }
 
@@ -460,10 +514,6 @@ document.querySelector("[data-export-articles]")?.addEventListener("click", () =
   URL.revokeObjectURL(url);
 });
 
-applyLanguage(activeLang);
-renderArticles();
-setupCounters();
-
 let fullArticlesLoaded = false;
 let loadingFullArticlesPromise = null;
 
@@ -475,9 +525,8 @@ function ensureFullArticles() {
   if (loadingFullArticlesPromise) {
     return loadingFullArticlesPromise;
   }
-  
+
   loadingFullArticlesPromise = new Promise((resolve) => {
-    console.log("Lazy-loading full articles archive on interaction...");
     const script = document.createElement("script");
     script.src = "articles-full.js";
     script.defer = true;
@@ -487,15 +536,33 @@ function ensureFullArticles() {
         fullArticlesLoaded = true;
         saveArticles();
         renderArticles();
-        console.log(`Successfully loaded all ${articles.length} articles.`);
+        resolve();
+      } else {
         resolve();
       }
     };
-    script.onerror = () => {
-      resolve();
-    };
+    script.onerror = () => resolve();
     document.body.appendChild(script);
   });
-  
+
   return loadingFullArticlesPromise;
+}
+
+applyLanguage(activeLang);
+renderArticles();
+setupCounters();
+
+if (document.body.classList.contains("articles-archive-page")) {
+  visibleLimit = 12;
+  document.title =
+    activeLang === "en"
+      ? "Knowledge Library | Fengshui Balance"
+      : "คลังความรู้ | Fengshui Balance";
+  if (Array.isArray(window.FENGSHUI_ARTICLES_FULL) && window.FENGSHUI_ARTICLES_FULL.length) {
+    articles = window.FENGSHUI_ARTICLES_FULL;
+    fullArticlesLoaded = true;
+    renderArticles();
+  } else {
+    ensureFullArticles();
+  }
 }

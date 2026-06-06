@@ -10,9 +10,9 @@
     <meta property="og:type" content="profile">
     <meta property="og:title" content="ประวัติ อาจารย์สุภชัย วิวัฒนะประเสริฐ | Fengshui Balance">
     <meta property="og:description" content="ที่ปรึกษาฮวงจุ้ยสถาปัตยกรรมและดวงจีน ผู้ก่อตั้ง Fengshui Balance และศิษย์เอกของอาจารย์เกรียงไกร บุญธกานนท์">
-    <meta property="og:image" content="https://fengshuibalance.vercel.app/assets/images/ajarn-suppachai-vivattanaprasert-luopan-fengshui-consultant.jpg">
+    <meta property="og:image" content="https://fengshuibalance.vercel.app/assets/images/ajarn-suppachai-fengshui-consultant.png">
     <meta property="og:url" content="https://fengshuibalance.vercel.app/ajarn-suppachai.html">
-        <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400&family=Manrope:wght@300;400;600;700&family=Noto+Sans+Thai:wght@300;400;600;700&family=Noto+Serif+Thai:wght@400;700;900&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="styles.css">
@@ -29,62 +29,124 @@
       }
     </script>
   </head>
-  <body class="profile-page">
-    <header class="site-header project-header">
+  <body class="subpage">
+    <header class="site-header" data-header>
       <a class="brand" href="index.html#top">
-        <span class="brand-mark" aria-hidden="true">衡</span>
+        <span class="brand-mark" aria-hidden="true"></span>
         <span><strong>Fengshui Balance</strong><small>ฮวงจุ้ย สมดุลแห่งธรรมชาติ</small></span>
       </a>
-      <nav class="site-nav project-nav" aria-label="Profile navigation">
-        <a href="index.html">หน้าแรก</a>
+      <div class="header-tools">
+        <button class="menu-toggle" type="button" aria-expanded="false" aria-controls="site-menu" data-menu-toggle aria-label="Open menu">
+          <span class="menu-toggle-icon" aria-hidden="true"><span></span><span></span><span></span></span>
+        </button>
+      </div>
+      <div class="nav-backdrop" data-nav-backdrop hidden></div>
+      <nav id="site-menu" class="site-nav" aria-label="Primary navigation" data-menu>
+        <a href="index.html#services">ปรึกษา</a>
+        <a href="index.html#method">วิธีทำงาน</a>
         <a href="projects.html">ผลงานอ้างอิง</a>
-        <a href="ajarn-grianggrai.html">อาจารย์เกรียงไกร</a>
+        <a href="ajarn-suppachai.html" aria-current="page">ประวัติ</a>
+        <a href="articles.html">คลังความรู้</a>
         <a class="nav-cta" href="https://www.facebook.com/fengshuibalance" target="_blank" rel="noreferrer">ติดต่ออาจารย์</a>
       </nav>
     </header>
 
     <main>
-      <section class="profile-hero">
-        <div>
+      <section class="subpage-hero">
+        <div class="subpage-hero__copy">
           <p class="eyebrow">Biography</p>
-          <h1>ประวัติ อาจารย์สุภชัย สุภชัย วิวัฒนะประเสริฐ</h1>
-          <p>Ajarn Suppachai Vivattanaprasert ผู้ก่อตั้ง Fengshui Balance และผู้ให้คำปรึกษาฮวงจุ้ยที่เน้นหลักวิชา การใช้งานจริง และความสมดุลของพื้นที่</p>
-          <div class="portfolio-actions">
+          <h1>ประวัติ อาจารย์สุภชัย วิวัฒนะประเสริฐ</h1>
+          <p class="subpage-hero__lead">Ajarn Suppachai Vivattanaprasert — ผู้ก่อตั้ง Fengshui Balance และที่ปรึกษาฮวงจุ้ยที่เน้นหลักวิชา การใช้งานจริง และความสมดุลของพื้นที่</p>
+          <div class="hero-actions">
             <a class="button primary" href="https://www.facebook.com/fengshuibalance" target="_blank" rel="noreferrer">ติดต่ออาจารย์</a>
-            <a class="button secondary" href="ajarn-grianggrai.html">อ่านประวัติอาจารย์เกรียงไกร</a>
+            <a class="button secondary" href="projects.html">ดูผลงานอ้างอิง</a>
           </div>
         </div>
-        <img src="assets/images/ajarn-suppachai-vivattanaprasert-luopan-fengshui-consultant.jpg" alt="อาจารย์สุภชัย สุภชัย วิวัฒนะประเสริฐ ถือหล่อแก ที่ปรึกษาฮวงจุ้ย Fengshui Balance" width="720" height="720">
+        <figure class="subpage-hero__figure">
+          <img src="assets/images/ajarn-suppachai-fengshui-consultant.png" alt="อาจารย์สุภชัย วิวัฒนะประเสริฐ ที่ปรึกษาฮวงจุ้ย Fengshui Balance" width="720" height="900" loading="eager">
+        </figure>
       </section>
 
-      <section class="profile-content">
-        <article>
-          <p class="eyebrow">Fengshui Balance</p>
-          <h2>ที่ปรึกษาฮวงจุ้ยสำหรับบ้าน ธุรกิจ และออฟฟิศ</h2>
-          <img src="assets/images/ajarn-suppachai-tv.png" alt="อาจารย์สุภชัย วิวัฒนะประเสริฐ ผู้ก่อตั้ง Fengshui Balance" loading="lazy" style="width: 100%; border-radius: 12px; margin-bottom: 20px; box-shadow: 0 4px 12px rgba(0,0,0,0.08);">
-          <p>อาจารย์สุภชัย วิวัฒนะประเสริฐ เป็นที่รู้จักในฐานะผู้ก่อตั้ง Fengshui Balance - ฮวงจุ้ย สมดุลแห่งธรรมชาติ และเป็นผู้ให้ความรู้ด้านฮวงจุ้ยที่ประยุกต์หลักวิชาให้เข้ากับบ้าน ออฟฟิศ ร้านค้า โรงงาน และพื้นที่ใช้งานจริง</p>
-          <p>แนวทางของอาจารย์เน้นการวิเคราะห์ชัยภูมิ ทิศทาง ดวงจีน ฤกษ์ และข้อจำกัดของพื้นที่ เพื่อให้คำปรึกษาฮวงจุ้ยที่ใช้งานได้จริง ไม่ใช่คำแนะนำสำเร็จรูป</p>
-        </article>
-        <article>
-          <p class="eyebrow">Lineage</p>
-          <h2>ศิษย์ของ อาจารย์เกรียงไกร บุญธกานนท์</h2>
-          <img src="assets/images/ajarn-suppachai-microphone.png" alt="อาจารย์สุภชัย วิวัฒนะประเสริฐ บรรยายวิเคราะห์ฮวงจุ้ยร่วมสมัย" loading="lazy" style="width: 100%; border-radius: 12px; margin-bottom: 20px; box-shadow: 0 4px 12px rgba(0,0,0,0.08);">
-          <p>ข้อมูลจาก Aviva Spirit ระบุว่า อาจารย์สุภชัยเป็นลูกศิษย์ของ อาจารย์เกรียงไกร บุญธกานนท์ ปรมาจารย์ฮวงจุ้ย และประธานชมรมภูมิโหราศาสตร์ โดยศึกษาศาสตร์นี้มาเป็นเวลายาวนาน</p>
-          <p>สายวิชานี้เป็นส่วนสำคัญของภาพลักษณ์ Fengshui Balance เพราะสะท้อนทั้งความเคารพต่อครู ความเป็นระบบของหลักวิชา และการนำไปใช้กับพื้นที่สมัยใหม่</p>
-        </article>
-        <article>
-          <p class="eyebrow">Keynote Speaker</p>
-          <h2>ว่าด้วยฮวงจุ้ยและงานออกแบบ (ASA Collective Experience)</h2>
-          <img src="assets/images/ajarn-suppachai-poster.png" alt="อาจารย์สุภชัย วิวัฒนะประเสริฐ วิทยากรบรรยายงานสมาคมสถาปนิกสยาม" loading="lazy" style="width: 100%; border-radius: 12px; margin-bottom: 20px; box-shadow: 0 4px 12px rgba(0,0,0,0.08);">
-          <p>อาจารย์สุภชัยได้รับเกียรติเป็นวิทยากรบรรยายพิเศษร่วมกับสมาคมสถาปนิกสยาม ในหัวข้อ "ว่าด้วยฮวงจุ้ยและงานออกแบบ" (ASA Collective Experience) เพื่อให้ความรู้ในเชิงการผสมผสานหลักสถาปัตยกรรมและศาสตร์ฮวงจุ้ยเข้าด้วยกันอย่างสร้างสรรค์และลงตัว</p>
-        </article>
-        <article>
-          <p class="eyebrow">Source</p>
-          <h2>แหล่งอ้างอิง</h2>
-          <p><a href="https://www.avivaspirit.com/ajarnsuppachai/" target="_blank" rel="noreferrer">Aviva Spirit: ประวัติ อาจารย์สุภชัย วิวัฒนะประเสริฐ</a></p>
-          <p><a href="https://www.facebook.com/fengshuibalance" target="_blank" rel="noreferrer">Fengshui Balance Facebook</a></p>
-        </article>
+      <section class="subpage-section subpage-section--paper" aria-label="Lineage">
+        <div class="subpage-section__inner">
+          <div class="section-heading section-heading--center">
+            <p class="eyebrow">Lineage &amp; Respect</p>
+            <h2>สายวิชา — อาจารย์สุภชัย และอาจารย์เกรียงไกร</h2>
+            <p class="subpage-section__intro">อาจารย์สุภชัยศึกษาวิชากับ อาจารย์เกรียงไกร บุญธกานนท์ ปรมาจารย์ฮวงจุ้ยที่ได้รับความเคารพ — ส่วนนี้จัดวางให้เห็นที่มาของสายวิชาอย่างชัดเจน</p>
+          </div>
+          <div class="lineage-duo">
+            <figure class="lineage-photo-card">
+              <img src="assets/images/ajarn-suppachai-microphone.png" alt="อาจารย์สุภชัย วิวัฒนะประเสริฐ" loading="lazy" width="400" height="400">
+              <figcaption>สุภชัย วิวัฒนะประเสริฐ</figcaption>
+            </figure>
+            <figure class="lineage-photo-card">
+              <img src="assets/images/ajarn-grianggrai-portrait.png" alt="อาจารย์เกรียงไกร บุญธกานนท์" loading="lazy" width="400" height="400">
+              <figcaption>เกรียงไกร บุญธกานนท์</figcaption>
+            </figure>
+          </div>
+          <div class="lineage-duo-copy">
+            <p>ข้อมูลจาก Aviva Spirit ระบุว่า อาจารย์สุภชัยเป็นลูกศิษย์ของ อาจารย์เกรียงไกร บุญธกานนท์ ปรมาจารย์ฮวงจุ้ย และประธานชมรมภูมิโหราศาสตร์ โดยศึกษาศาสตร์นี้มาเป็นเวลายาวนาน</p>
+            <p>อาจารย์เกรียงไกรให้เกียรติเป็นที่ปรึกษาการออกแบบตัวเรือนศาลเจ้าที่ให้สง่างาม มงคล และถูกหลักวิชาฮวงจุ้ย — อ่านเพิ่มเติมได้ที่ <a href="ajarn-grianggrai.html">ประวัติอาจารย์เกรียงไกร</a></p>
+          </div>
+        </div>
+      </section>
+
+      <section class="subpage-section" aria-label="Biography highlights">
+        <div class="subpage-section__inner">
+          <div class="section-heading section-heading--center">
+            <p class="eyebrow">Profile</p>
+            <h2>ประวัติและบทบาท</h2>
+          </div>
+          <div class="subpage-card-grid">
+            <article class="subpage-card subpage-card--media">
+              <img src="assets/images/ajarn-suppachai-amarin-portrait.png" alt="อาจารย์สุภชัย วิวัฒนะประเสริฐ บนรายการโทรทัศน์" loading="lazy" width="640" height="400">
+              <div class="subpage-card__body">
+                <p class="trust-eyebrow">Fengshui Balance</p>
+                <h3>ที่ปรึกษาฮวงจุ้ยสำหรับบ้าน ธุรกิจ และออฟฟิศ</h3>
+                <p>ผู้ก่อตั้ง Fengshui Balance — ฮวงจุ้ย สมดุลแห่งธรรมชาติ ให้ความรู้ด้านฮวงจุ้ยที่ประยุกต์หลักวิชาให้เข้ากับบ้าน ออฟฟิศ ร้านค้า โรงงาน และพื้นที่ใช้งานจริง</p>
+                <p>ผู้ก่อตั้ง <a href="https://www.avivaspirit.com/" target="_blank" rel="noopener noreferrer">Aviva Spirit</a> และ <a href="https://miracles369-store.com/" target="_blank" rel="noopener noreferrer">Miracles369</a> — <a href="brand-portfolio.html">แบรนด์ในเครือ</a></p>
+              </div>
+            </article>
+            <article class="subpage-card subpage-card--media">
+              <img src="assets/images/ajarn-suppachai-poster.png" alt="อาจารย์สุภชัย วิทยากรบรรยายงานสมาคมสถาปนิกสยาม" loading="lazy" width="640" height="400">
+              <div class="subpage-card__body">
+                <p class="trust-eyebrow">Keynote Speaker</p>
+                <h3>ว่าด้วยฮวงจุ้ยและงานออกแบบ</h3>
+                <p>วิทยากรบรรยายพิเศษร่วมกับสมาคมสถาปนิกสยาม (ASA Collective Experience) ในหัวข้อการผสมผสานหลักสถาปัตยกรรมและศาสตร์ฮวงจุ้ยอย่างสร้างสรรค์</p>
+              </div>
+            </article>
+            <article class="subpage-card">
+              <p class="trust-eyebrow">Approach</p>
+              <h3>หลักวิชาและการใช้งานจริง</h3>
+              <p>เน้นการวิเคราะห์ชัยภูมิ ทิศทาง ดวงจีน ฤกษ์ และข้อจำกัดของพื้นที่ เพื่อให้คำปรึกษาที่ใช้งานได้จริง ไม่ใช่คำแนะนำสำเร็จรูป</p>
+            </article>
+            <article class="subpage-card">
+              <p class="trust-eyebrow">Source</p>
+              <h3>แหล่งอ้างอิง</h3>
+              <p><a href="https://www.avivaspirit.com/ajarnsuppachai/" target="_blank" rel="noreferrer">Aviva Spirit: ประวัติอาจารย์สุภชัย</a></p>
+              <p><a href="https://www.avivaspirit.com/ajarn-grianggrai/" target="_blank" rel="noreferrer">Aviva Spirit: ประวัติอาจารย์เกรียงไกร</a></p>
+              <p><a href="https://www.facebook.com/fengshuibalance" target="_blank" rel="noreferrer">Fengshui Balance Facebook</a></p>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <section class="section contact">
+        <div class="contact-panel contact-panel--simple">
+          <div class="contact-body">
+            <p class="eyebrow">Next Step</p>
+            <h2>ติดต่ออาจารย์สุภชัยโดยตรง</h2>
+            <p>ส่งแปลนพื้นที่ รูปถ่าย และช่วงเวลาที่สะดวกผ่าน Facebook Fengshui Balance</p>
+            <a class="button primary contact-cta" href="https://www.facebook.com/fengshuibalance" target="_blank" rel="noreferrer">ส่งข้อความผ่าน Facebook</a>
+          </div>
+        </div>
       </section>
     </main>
+
+    <footer class="site-footer">
+      <p>Fengshui Balance — <span>ฮวงจุ้ย สมดุลแห่งธรรมชาติ</span></p>
+      <p><a href="ajarn-grianggrai.html">ประวัติอาจารย์เกรียงไกร</a></p>
+    </footer>
+    <script src="script.js" defer></script>
   </body>
 </html>
