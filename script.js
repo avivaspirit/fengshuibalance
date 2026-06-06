@@ -151,8 +151,11 @@ function toggleBookmark(id) {
   renderArticles();
 }
 
+const hasArticleArchive = Boolean(articleGrid && articleSearch && articleFilters && articleCount && loadMore);
+const homepagePreviewCount = 5;
+
 function filteredArticles() {
-  const q = articleSearch.value.trim().toLowerCase();
+  const q = (articleSearch?.value || "").trim().toLowerCase();
   let list = articles;
   if (activeFilter === "saved") {
     list = articles.filter((article) => bookmarkedIds.includes(article.id));
@@ -172,6 +175,7 @@ function recommendedArticles() {
 }
 
 function renderFilters() {
+  if (!articleFilters) return;
   const categories = ["all", "saved", ...new Set(articles.map((article) => article.category))];
   articleFilters.innerHTML = categories
     .map(
@@ -181,14 +185,9 @@ function renderFilters() {
     .join("");
 }
 
-function renderArticles() {
-  renderFilters();
-  recommendedGrid.innerHTML = recommendedArticles()
-    .slice(0, 4)
-    .map(
-      (article) => {
-        const isBookmarked = bookmarkedIds.includes(article.id);
-        return `
+function renderRecommendedCard(article) {
+  const isBookmarked = bookmarkedIds.includes(article.id);
+  return `
         <article class="recommended-card">
           <a href="articles/${article.id}.html" class="card-link" data-open-article="${article.id}">
             <span class="recommend-rank">No. ${article.recommendedRank}</span>
@@ -213,9 +212,21 @@ function renderArticles() {
             </button>
           </div>
         </article>`;
-      }
-    )
-    .join("");
+}
+
+function renderRecommendedGrid() {
+  if (!recommendedGrid) return;
+  const picks = recommendedArticles();
+  const featured = picks.length
+    ? picks.slice(0, homepagePreviewCount)
+    : [...articles].sort((a, b) => (b.metrics?.wei || 0) - (a.metrics?.wei || 0)).slice(0, homepagePreviewCount);
+  recommendedGrid.innerHTML = featured.map((article) => renderRecommendedCard(article)).join("");
+}
+
+function renderArticles() {
+  renderFilters();
+  renderRecommendedGrid();
+  if (!hasArticleArchive) return;
 
   const list = filteredArticles();
   
@@ -341,75 +352,85 @@ document.addEventListener("keydown", (event) => {
   }
 });
 
-articleSearch.addEventListener("input", () => {
-  ensureFullArticles().then(() => {
+if (articleSearch) {
+  articleSearch.addEventListener("input", () => {
+    ensureFullArticles().then(() => {
+      visibleLimit = 6;
+      renderArticles();
+    });
+  });
+  articleSearch.addEventListener("focus", ensureFullArticles);
+  articleSearch.addEventListener("mouseenter", ensureFullArticles);
+}
+
+if (articleFilters) {
+  articleFilters.addEventListener("click", (event) => {
+    const button = event.target.closest("[data-filter]");
+    if (!button) return;
+    activeFilter = button.dataset.filter;
     visibleLimit = 6;
-    renderArticles();
+    ensureFullArticles().then(() => {
+      renderArticles();
+    });
   });
-});
-articleSearch.addEventListener("focus", ensureFullArticles);
-articleSearch.addEventListener("mouseenter", ensureFullArticles);
+}
 
-articleFilters.addEventListener("click", (event) => {
-  const button = event.target.closest("[data-filter]");
-  if (!button) return;
-  activeFilter = button.dataset.filter;
-  visibleLimit = 6;
-  ensureFullArticles().then(() => {
-    renderArticles();
-  });
-});
-
-articleGrid.addEventListener("click", (event) => {
-  const bookmarkBtn = event.target.closest("[data-bookmark]");
-  if (bookmarkBtn) {
+if (articleGrid) {
+  articleGrid.addEventListener("click", (event) => {
+    const bookmarkBtn = event.target.closest("[data-bookmark]");
+    if (bookmarkBtn) {
+      event.preventDefault();
+      toggleBookmark(bookmarkBtn.dataset.bookmark);
+      return;
+    }
+    const link = event.target.closest("[data-open-article]");
+    if (!link) return;
     event.preventDefault();
-    toggleBookmark(bookmarkBtn.dataset.bookmark);
-    return;
-  }
-  const link = event.target.closest("[data-open-article]");
-  if (!link) return;
-  event.preventDefault();
-  openArticle(link.dataset.openArticle);
-});
-
-recommendedGrid.addEventListener("click", (event) => {
-  const bookmarkBtn = event.target.closest("[data-bookmark]");
-  if (bookmarkBtn) {
-    event.preventDefault();
-    toggleBookmark(bookmarkBtn.dataset.bookmark);
-    return;
-  }
-  const link = event.target.closest("[data-open-article]");
-  if (!link) return;
-  event.preventDefault();
-  openArticle(link.dataset.openArticle);
-});
-
-loadMore.addEventListener("click", () => {
-  ensureFullArticles().then(() => {
-    visibleLimit += 6;
-    renderArticles();
+    openArticle(link.dataset.openArticle);
   });
-});
+}
 
-document.querySelector("[data-dialog-close]").addEventListener("click", () => articleDialog.close());
-document.querySelector("[data-admin-close]").addEventListener("click", () => adminDialog.close());
-document.querySelector("[data-admin-open]").addEventListener("click", () => {
+if (recommendedGrid) {
+  recommendedGrid.addEventListener("click", (event) => {
+    const bookmarkBtn = event.target.closest("[data-bookmark]");
+    if (bookmarkBtn) {
+      event.preventDefault();
+      toggleBookmark(bookmarkBtn.dataset.bookmark);
+      return;
+    }
+    const link = event.target.closest("[data-open-article]");
+    if (!link) return;
+    event.preventDefault();
+    openArticle(link.dataset.openArticle);
+  });
+}
+
+if (loadMore) {
+  loadMore.addEventListener("click", () => {
+    ensureFullArticles().then(() => {
+      visibleLimit += 6;
+      renderArticles();
+    });
+  });
+}
+
+document.querySelector("[data-dialog-close]")?.addEventListener("click", () => articleDialog?.close());
+document.querySelector("[data-admin-close]")?.addEventListener("click", () => adminDialog?.close());
+document.querySelector("[data-admin-open]")?.addEventListener("click", () => {
   enableEditorMode();
-  adminDialog.showModal();
+  adminDialog?.showModal();
 });
 
-document.querySelector("[data-edit-article]").addEventListener("click", () => openAdminFor(activeArticleId));
-document.querySelector("[data-delete-article]").addEventListener("click", () => {
+document.querySelector("[data-edit-article]")?.addEventListener("click", () => openAdminFor(activeArticleId));
+document.querySelector("[data-delete-article]")?.addEventListener("click", () => {
   if (!activeArticleId) return;
   articles = articles.filter((article) => article.id !== activeArticleId);
   saveArticles();
-  articleDialog.close();
+  articleDialog?.close();
   renderArticles();
 });
 
-adminForm.addEventListener("submit", (event) => {
+adminForm?.addEventListener("submit", (event) => {
   event.preventDefault();
   const id = adminForm.elements.id.value || `custom-${Date.now()}`;
   const existing = articles.find((article) => article.id === id);
@@ -429,7 +450,7 @@ adminForm.addEventListener("submit", (event) => {
   renderArticles();
 });
 
-document.querySelector("[data-export-articles]").addEventListener("click", () => {
+document.querySelector("[data-export-articles]")?.addEventListener("click", () => {
   const blob = new Blob([JSON.stringify(articles, null, 2)], { type: "application/json" });
   const url = URL.createObjectURL(blob);
   const link = document.createElement("a");
