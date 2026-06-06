@@ -1,8 +1,13 @@
 {
+  "functions": {
+    "api/*.js": {
+      "maxDuration": 15
+    }
+  },
   "crons": [
     {
       "path": "/api/facebook-sync",
-      "schedule": "0 */2 * * *"
+      "schedule": "0 0 * * *"
     }
   ]
 }
