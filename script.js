@@ -16,8 +16,9 @@ const counters = document.querySelectorAll("[data-counter]");
 
 let activeLang = localStorage.getItem("fengshui-balance-lang") || "en";
 let activeFilter = "all";
-let visibleLimit = 9;
+let visibleLimit = 6;
 let activeArticleId = null;
+let bookmarkedIds = JSON.parse(localStorage.getItem("fengshui-read-later") || "[]");
 let editorMode = new URLSearchParams(location.search).has("edit") || location.hash === "#edit";
 const articleVersion = "top10-recommended-2026-06-05";
 const savedVersion = localStorage.getItem("fengshui-balance-articles-version");
@@ -95,14 +96,28 @@ function setupCounters() {
   counters.forEach((counter) => observer.observe(counter));
 }
 
-function excerpt(text, length = 190) {
-  const compact = text.replace(/\s+/g, " ").trim();
-  return compact.length > length ? `${compact.slice(0, length).trim()}...` : compact;
+function cleanExcerptText(text) {
+  if (!text) return "";
+  let clean = text;
+  clean = clean.replace(/https?:\/\/\S+/gi, "");
+  clean = clean.replace(/\*+/g, "");
+  clean = clean.replace(/[()\[\]{}]/g, "");
+  clean = clean.replace(/[-=_.~·•]{2,}/g, " ");
+  clean = clean.replace(/\p{Emoji_Presentation}/gu, "");
+  clean = clean.replace(/\p{Extended_Pictographic}/gu, "");
+  clean = clean.replace(/\s+/g, " ").trim();
+  return clean;
+}
+
+function excerpt(text, length = 120) {
+  const clean = cleanExcerptText(text);
+  return clean.length > length ? `${clean.slice(0, length).trim()}...` : clean;
 }
 
 function categoryLabel(category) {
   const labels = {
     all: activeLang === "en" ? "All" : "ทั้งหมด",
+    saved: activeLang === "en" ? "🔖 Saved" : "🔖 ที่บันทึกไว้",
     home: activeLang === "en" ? "Home" : "บ้าน",
     office: activeLang === "en" ? "Office" : "ออฟฟิศ",
     spirit: activeLang === "en" ? "Spirit House" : "ศาลและตี่จู้",
@@ -125,12 +140,28 @@ function saveArticles() {
   localStorage.setItem("fengshui-balance-articles-version", articleVersion);
 }
 
+function toggleBookmark(id) {
+  const index = bookmarkedIds.indexOf(id);
+  if (index === -1) {
+    bookmarkedIds.push(id);
+  } else {
+    bookmarkedIds.splice(index, 1);
+  }
+  localStorage.setItem("fengshui-read-later", JSON.stringify(bookmarkedIds));
+  renderArticles();
+}
+
 function filteredArticles() {
   const q = articleSearch.value.trim().toLowerCase();
-  return articles.filter((article) => !article.recommended).filter((article) => {
-    const matchesFilter = activeFilter === "all" || article.category === activeFilter;
+  let list = articles;
+  if (activeFilter === "saved") {
+    list = articles.filter((article) => bookmarkedIds.includes(article.id));
+  } else {
+    list = articles.filter((article) => !article.recommended && (activeFilter === "all" || article.category === activeFilter));
+  }
+  return list.filter((article) => {
     const haystack = `${article.title} ${article.body} ${article.category}`.toLowerCase();
-    return matchesFilter && (!q || haystack.includes(q));
+    return !q || haystack.includes(q);
   });
 }
 
@@ -141,7 +172,7 @@ function recommendedArticles() {
 }
 
 function renderFilters() {
-  const categories = ["all", ...new Set(articles.map((article) => article.category))];
+  const categories = ["all", "saved", ...new Set(articles.map((article) => article.category))];
   articleFilters.innerHTML = categories
     .map(
       (category) =>
@@ -153,10 +184,13 @@ function renderFilters() {
 function renderArticles() {
   renderFilters();
   recommendedGrid.innerHTML = recommendedArticles()
+    .slice(0, 4)
     .map(
-      (article) => `
+      (article) => {
+        const isBookmarked = bookmarkedIds.includes(article.id);
+        return `
         <article class="recommended-card">
-          <a href="articles/${article.id}.html" data-open-article="${article.id}">
+          <a href="articles/${article.id}.html" class="card-link" data-open-article="${article.id}">
             <span class="recommend-rank">No. ${article.recommendedRank}</span>
             <div class="card-image-wrapper">
               <img src="${article.image}" alt="${article.alt}" loading="lazy" width="960" height="540">
@@ -167,22 +201,54 @@ function renderArticles() {
               ${article.seoKeyword ? `<em class="keyword-tag">${article.seoKeyword}</em>` : ""}
               <small>${article.date || "Fengshui Balance"}${article.metrics?.wei ? ` · WEI ${Math.round(article.metrics.wei).toLocaleString()}` : ""}</small>
               <p>${excerpt(article.body, 120)}</p>
-              <span class="read-more-link">${activeLang === "en" ? "Read Article" : "อ่านบทความ"} &rarr;</span>
             </div>
           </a>
-        </article>`
+          <div class="card-footer">
+            <a href="articles/${article.id}.html" class="read-more-link" data-open-article="${article.id}">
+              <span>${activeLang === "en" ? "Read Article" : "อ่านบทความ"} &rarr;</span>
+            </a>
+            <button class="bookmark-btn ${isBookmarked ? "is-saved" : ""}" data-bookmark="${article.id}" aria-label="${isBookmarked ? "Remove Bookmark" : "Save for Later"}">
+              <span class="bookmark-icon">${isBookmarked ? "🔖" : "🏷️"}</span>
+              <span class="bookmark-text">${isBookmarked ? (activeLang === "en" ? "Saved" : "ที่บันทึกไว้") : (activeLang === "en" ? "Read Later" : "บันทึกไว้อ่าน")}</span>
+            </button>
+          </div>
+        </article>`;
+      }
     )
     .join("");
 
   const list = filteredArticles();
+  
+  if (list.length === 0) {
+    if (activeFilter === "saved") {
+      articleCount.textContent = activeLang === "en" ? "0 saved articles" : "0 บทความที่บันทึกไว้";
+      articleGrid.innerHTML = `
+        <div class="empty-state">
+          <span class="empty-icon">🔖</span>
+          <p class="empty-title">${activeLang === "en" ? "No saved articles yet" : "ยังไม่มีบทความที่บันทึกไว้"}</p>
+          <p class="empty-desc">${activeLang === "en" ? "Articles you bookmark will appear here." : "บทความที่คุณบันทึกไว้จะแสดงที่นี่"}</p>
+        </div>`;
+    } else {
+      articleCount.textContent = activeLang === "en" ? "0 published articles" : "0 บทความที่เผยแพร่";
+      articleGrid.innerHTML = `
+        <div class="empty-state">
+          <p class="empty-title">${activeLang === "en" ? "No articles found" : "ไม่พบบทความ"}</p>
+        </div>`;
+    }
+    loadMore.hidden = true;
+    return;
+  }
+
   const visible = list.slice(0, visibleLimit);
   articleCount.textContent =
     activeLang === "en" ? `${list.length} published articles` : `${list.length} บทความที่เผยแพร่`;
   articleGrid.innerHTML = visible
     .map(
-      (article) => `
+      (article) => {
+        const isBookmarked = bookmarkedIds.includes(article.id);
+        return `
         <article class="article-card ${article.image ? "" : "is-text-only"}">
-          <a href="articles/${article.id}.html" data-open-article="${article.id}">
+          <a href="articles/${article.id}.html" class="card-link" data-open-article="${article.id}">
             ${article.image ? `
             <div class="card-image-wrapper">
               <img src="${article.image}" alt="${article.alt}" loading="lazy" width="640" height="480">
@@ -193,10 +259,19 @@ function renderArticles() {
               ${article.seoKeyword ? `<em class="keyword-tag">${article.seoKeyword}</em>` : ""}
               <small>${article.date || "Fengshui Balance"}${article.metrics?.wei ? ` · WEI ${Math.round(article.metrics.wei).toLocaleString()}` : ""}</small>
               <p>${excerpt(article.body, 120)}</p>
-              <span class="read-more-link">${activeLang === "en" ? "Read Article" : "อ่านบทความ"} &rarr;</span>
             </div>
           </a>
-        </article>`
+          <div class="card-footer">
+            <a href="articles/${article.id}.html" class="read-more-link" data-open-article="${article.id}">
+              <span>${activeLang === "en" ? "Read Article" : "อ่านบทความ"} &rarr;</span>
+            </a>
+            <button class="bookmark-btn ${isBookmarked ? "is-saved" : ""}" data-bookmark="${article.id}" aria-label="${isBookmarked ? "Remove Bookmark" : "Save for Later"}">
+              <span class="bookmark-icon">${isBookmarked ? "🔖" : "🏷️"}</span>
+              <span class="bookmark-text">${isBookmarked ? (activeLang === "en" ? "Saved" : "ที่บันทึกไว้") : (activeLang === "en" ? "Read Later" : "บันทึกไว้อ่าน")}</span>
+            </button>
+          </div>
+        </article>`;
+      }
     )
     .join("");
   loadMore.hidden = list.length <= visibleLimit;
@@ -268,7 +343,7 @@ document.addEventListener("keydown", (event) => {
 
 articleSearch.addEventListener("input", () => {
   ensureFullArticles().then(() => {
-    visibleLimit = 9;
+    visibleLimit = 6;
     renderArticles();
   });
 });
@@ -279,13 +354,19 @@ articleFilters.addEventListener("click", (event) => {
   const button = event.target.closest("[data-filter]");
   if (!button) return;
   activeFilter = button.dataset.filter;
-  visibleLimit = 9;
+  visibleLimit = 6;
   ensureFullArticles().then(() => {
     renderArticles();
   });
 });
 
 articleGrid.addEventListener("click", (event) => {
+  const bookmarkBtn = event.target.closest("[data-bookmark]");
+  if (bookmarkBtn) {
+    event.preventDefault();
+    toggleBookmark(bookmarkBtn.dataset.bookmark);
+    return;
+  }
   const link = event.target.closest("[data-open-article]");
   if (!link) return;
   event.preventDefault();
@@ -293,6 +374,12 @@ articleGrid.addEventListener("click", (event) => {
 });
 
 recommendedGrid.addEventListener("click", (event) => {
+  const bookmarkBtn = event.target.closest("[data-bookmark]");
+  if (bookmarkBtn) {
+    event.preventDefault();
+    toggleBookmark(bookmarkBtn.dataset.bookmark);
+    return;
+  }
   const link = event.target.closest("[data-open-article]");
   if (!link) return;
   event.preventDefault();
@@ -301,7 +388,7 @@ recommendedGrid.addEventListener("click", (event) => {
 
 loadMore.addEventListener("click", () => {
   ensureFullArticles().then(() => {
-    visibleLimit += 9;
+    visibleLimit += 6;
     renderArticles();
   });
 });
