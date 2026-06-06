@@ -1,0 +1,19 @@
+# Fengshui Balance (fengshuibalance.vercel.app)
+
+> Modern luxury Fengshui consultation by Ajarn Suppachai Vivattanaprasert.
+
+Fengshui Balance is a public website for residential, commercial, spirit-house, and Chinese astrology Fengshui guidance in Thailand.
+
+## Public pages
+- https://fengshuibalance.vercel.app/
+- https://fengshuibalance.vercel.app/projects.html
+- https://fengshuibalance.vercel.app/ajarn-suppachai.html
+- https://fengshuibalance.vercel.app/ajarn-grianggrai.html
+- https://fengshuibalance.vercel.app/brand-portfolio.html
+
+## Contact / social
+- Facebook: https://www.facebook.com/fengshuibalance
+
+## Crawling
+- robots.txt: https://fengshuibalance.vercel.app/robots.txt
+- sitemap: https://fengshuibalance.vercel.app/sitemap.xml
