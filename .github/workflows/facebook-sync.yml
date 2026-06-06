@@ -1,0 +1,59 @@
+name: Facebook article sync
+
+on:
+  schedule:
+    - cron: "0 */2 * * *"
+  workflow_dispatch:
+    inputs:
+      backfill:
+        description: "Scan full FB history for missing posts"
+        type: boolean
+        default: false
+  repository_dispatch:
+    types: [facebook-sync]
+
+permissions:
+  contents: write
+
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Verify Facebook token
+        env:
+          FB_PAGE_ACCESS_TOKEN: ${{ secrets.FB_PAGE_ACCESS_TOKEN }}
+          FB_PAGE_ID: ${{ secrets.FB_PAGE_ID }}
+          FB_APP_ID: ${{ secrets.FB_APP_ID }}
+          FB_APP_SECRET: ${{ secrets.FB_APP_SECRET }}
+        run: python scripts/sync-facebook-posts.py --verify-token
+
+      - name: Sync original Facebook posts
+        env:
+          FB_PAGE_ACCESS_TOKEN: ${{ secrets.FB_PAGE_ACCESS_TOKEN }}
+          FB_PAGE_ID: ${{ secrets.FB_PAGE_ID }}
+        run: |
+          if [ "${{ github.event.inputs.backfill }}" = "true" ]; then
+            python scripts/sync-facebook-posts.py --backfill
+          else
+            python scripts/sync-facebook-posts.py
+          fi
+
+      - name: Commit and push if changed
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add articles-full.js articles/ scripts/fb-sync-state.json scripts/fb-sync-report.json sitemap.xml robots.txt
+          if git diff --staged --quiet; then
+            echo "No new articles"
+            exit 0
+          fi
+          git commit -m "Sync new original Facebook posts from Fengshui Balance page"
+          git push
