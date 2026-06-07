@@ -67,19 +67,6 @@
     return /^([-•*]|\d+[\.)])\s+/.test(line);
   }
 
-  function endsSentence(line) {
-    return /[.!?…:]$/.test(line) || /ครับ$|ค่ะ$|นะ$|เลย$|ด้วย$/.test(line);
-  }
-
-  function shouldContinue(prev, line) {
-    if (!prev) return false;
-    if (endsSentence(prev)) return false;
-    if (/^\d+[\.)]\s/.test(line)) return false;
-    if (isCallout(line) || isListItem(line) || isDivider(line)) return false;
-    if (prev.length > 120) return false;
-    return /[,，(\[]$/.test(prev) || line.length < 48;
-  }
-
   function formatArticleBody(text) {
     var normalized = (text || "").replace(/\r\n/g, "\n").trim();
     if (!normalized) return "";
@@ -136,13 +123,7 @@
       }
 
       flushList();
-      var prev = paragraph[paragraph.length - 1] || "";
-      if (paragraph.length && shouldContinue(prev, line)) {
-        paragraph.push(line);
-      } else {
-        flushParagraph();
-        paragraph.push(line);
-      }
+      paragraph.push(line);
     });
 
     flushList();
@@ -150,10 +131,12 @@
     return html.join("");
   }
 
-  if (!content.dataset.formatted) {
+  if (!content.dataset.formatted && !content.querySelector("p")) {
     content.innerHTML = formatArticleBody(content.textContent || "");
     content.dataset.formatted = "true";
     content.dataset.brandLinked = "true";
+  } else {
+    document.body.classList.add("article-page");
   }
 
   var hasAviva = /avivaspirit|aviva\s*spirit/i.test(content.textContent || "");

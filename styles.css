@@ -1281,75 +1281,126 @@ body.article-page{background:linear-gradient(180deg,var(--white) 0%,var(--paper)
 .article-related-brand h3{margin:0 0 10px;font-size:clamp(18px,3.5vw,22px);line-height:1.35}
 .article-related-brand p{margin:0 0 14px;font-size:15px;line-height:1.75;color:var(--muted)}
 .article-related-brand__cta{margin-top:8px}
+body.article-page,
+body:has(.article-page-main){
+  overflow-x:clip;
+}
 body.article-page .article-content,
-body.article-page .article-page-main .article-content{
+body.article-page .article-page-main .article-content,
+body:has(.article-page-main) .article-content{
   white-space:normal !important;
   word-break:break-word !important;
   overflow-wrap:anywhere !important;
+  max-width:100%;
+}
+body:has(.article-page-main) .article-page-main .article-content p,
+body.article-page .article-page-main .article-content p{
+  max-width:100%;
 }
 @media (max-width:768px){
-  body.article-page .site-header{
+  body.article-page .site-header,
+  body:has(.article-page-main) .site-header{
     position:sticky;
     top:0;
     z-index:10;
     min-height:64px;
     padding:10px 14px;
+    gap:12px;
   }
-  body.article-page .site-nav{display:none}
-  body.article-page .article-page-main{
-    padding:72px 12px 40px;
+  body.article-page .brand,
+  body:has(.article-page-main) .brand{
+    min-width:0;
+    flex:1;
+  }
+  body.article-page .brand small,
+  body:has(.article-page-main) .brand small{
+    display:none;
+  }
+  body.article-page .site-nav,
+  body:has(.article-page-main) .site-nav{
+    display:none;
+  }
+  body.article-page .article-page-main,
+  body:has(.article-page-main) .article-page-main{
+    padding:20px 14px 40px;
     max-width:100%;
+    width:100%;
   }
-  body.article-page .article-card-detail{
+  body.article-page .article-card-detail,
+  body:has(.article-page-main) .article-card-detail{
     padding:16px 14px 20px;
     border-radius:14px;
     box-shadow:0 8px 24px rgba(26,61,46,0.05);
+    width:100%;
+    max-width:100%;
   }
-  body.article-page .article-header h1{
+  body.article-page .article-header h1,
+  body:has(.article-page-main) .article-header h1{
     font-size:clamp(22px,6.2vw,28px);
     line-height:1.32;
   }
-  body.article-page .article-meta{
+  body.article-page .article-meta,
+  body:has(.article-page-main) .article-meta{
     flex-direction:column;
     align-items:flex-start;
     gap:6px;
     font-size:12px;
   }
-  body.article-page .article-meta span{
+  body.article-page .article-meta span,
+  body:has(.article-page-main) .article-meta span{
     display:block;
     width:100%;
     padding:6px 0;
     border-bottom:1px solid rgba(26,61,46,0.06);
   }
-  body.article-page .article-meta span:last-child{border-bottom:0}
-  body.article-page .article-content{
+  body.article-page .article-meta span:last-child,
+  body:has(.article-page-main) .article-meta span:last-child{
+    border-bottom:0;
+  }
+  body.article-page .article-content,
+  body:has(.article-page-main) .article-content{
     font-size:16px;
     line-height:1.72;
     letter-spacing:0.01em;
+    width:100%;
   }
-  body.article-page .article-content p{
+  body.article-page .article-content p,
+  body:has(.article-page-main) .article-content p{
     max-width:none;
-    margin:0 0 0.95em;
+    width:100%;
+    margin:0 0 1em;
     text-align:left;
   }
-  body.article-page .article-content p.article-callout{
+  body.article-page .article-content p.article-callout,
+  body:has(.article-page-main) .article-content p.article-callout{
     padding:10px 12px;
     font-size:15px;
   }
-  body.article-page .article-content ul.article-list{
+  body.article-page .article-content ul.article-list,
+  body:has(.article-page-main) .article-content ul.article-list{
     padding-left:1.1em;
     max-width:none;
+    width:100%;
   }
-  body.article-page .article-footer-cta{
+  body.article-page .article-footer-cta,
+  body:has(.article-page-main) .article-footer-cta{
     padding:18px 14px;
     margin-top:24px;
   }
-  body.article-page .article-footer-cta .button{
+  body.article-page .article-footer-cta .button,
+  body:has(.article-page-main) .article-footer-cta .button{
     width:100%;
     min-height:46px;
   }
-  body.article-page .article-related-brand{
+  body.article-page .article-related-brand,
+  body:has(.article-page-main) .article-related-brand{
     padding:14px;
+  }
+  body.article-page .site-footer,
+  body:has(.article-page-main) .site-footer{
+    flex-direction:column;
+    padding:20px 14px;
+    font-size:13px;
   }
 }
 

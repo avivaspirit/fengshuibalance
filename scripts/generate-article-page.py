@@ -43,8 +43,15 @@ def format_popularity(article: dict) -> str:
 
 
 def render_body(body: str) -> str:
-    escaped = html.escape(body or "")
-    return escaped
+    import sys
+    from pathlib import Path
+
+    scripts_dir = Path(__file__).resolve().parent
+    if str(scripts_dir) not in sys.path:
+        sys.path.insert(0, str(scripts_dir))
+    from article_body_format import format_article_body
+
+    return format_article_body(body or "")
 
 
 def meta_description(body: str, limit: int = 160) -> str:
@@ -109,7 +116,7 @@ def render_article_html(article: dict, enrich) -> str:
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400&family=Manrope:wght@300;400;600;700&family=Noto+Sans+Thai:wght@300;400;600;700&family=Noto+Serif+Thai:wght@400;700;900&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="../styles.css">
   </head>
-  <body>
+  <body class="article-page">
     <header class="site-header">
       <a class="brand" href="../index.html#top">
         <span class="brand-mark" aria-hidden="true"></span>
@@ -139,7 +146,7 @@ def render_article_html(article: dict, enrich) -> str:
             <span>📈 ความนิยม: {popularity}</span>
           </div>
         </header>
-        <div class="article-content">{body_html}</div>
+        <div class="article-content" data-formatted="true" data-brand-linked="true">{body_html}</div>
         <div class="article-footer-cta">
           <h3>จัดปรับพื้นที่และสถาปัตยกรรมตามหลักฮวงจุ้ย</h3>
           <p>ให้คำปรึกษาและวิเคราะห์พื้นที่จริงสำหรับบ้าน คฤหาสน์ ออฟฟิศ และวางตำแหน่งศาลเจ้าที่/ตี่จู้ โดยอาจารย์สุภชัย วิวัฒนะประเสริฐ</p>
@@ -150,7 +157,7 @@ def render_article_html(article: dict, enrich) -> str:
     <footer class="site-footer">
       <p>Fengshui Balance - <span>ฮวงจุ้ย สมดุลแห่งธรรมชาติ</span></p>
     </footer>
-    <script src="../article-enhancements.js"></script>
+    <script src="../article-enhancements.js?v=20260608"></script>
   </body>
 </html>
 """
