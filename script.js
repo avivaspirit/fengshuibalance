@@ -21,7 +21,7 @@ let visibleLimit = 6;
 let activeArticleId = null;
 let bookmarkedIds = JSON.parse(localStorage.getItem("fengshui-read-later") || "[]");
 let editorMode = new URLSearchParams(location.search).has("edit") || location.hash === "#edit";
-const articleVersion = "multi-tag-titles-2026-06-06";
+const articleVersion = "titles-readable-2026-06-06";
 const savedVersion = localStorage.getItem("fengshui-balance-articles-version");
 const savedArticles = JSON.parse(localStorage.getItem("fengshui-balance-articles") || "null");
 const sourceArticles = window.FENGSHUI_ARTICLES_FULL || window.FENGSHUI_ARTICLES || [];
@@ -127,28 +127,57 @@ function excerpt(text, length = 120) {
 }
 
 const CATEGORY_META = {
-  all: { emoji: "", en: "All", th: "ทั้งหมด" },
-  saved: { emoji: "🔖", en: "Saved", th: "ที่บันทึกไว้" },
-  timing: { emoji: "📅", en: "Auspicious Timing", th: "ฤกษ์ยาม" },
-  spirit: { emoji: "🏛", en: "Spirit House", th: "ศาลและตี่จู้" },
-  shop: { emoji: "🏪", en: "Shop", th: "ร้านค้า" },
-  office: { emoji: "🏢", en: "Office", th: "ออฟฟิศ" },
-  home: { emoji: "🏠", en: "Home", th: "บ้าน" },
-  factory: { emoji: "🏭", en: "Factory", th: "โรงงาน" },
-  astrology: { emoji: "⭐", en: "Destiny", th: "ดวงจีน" },
-  lineage: { emoji: "📜", en: "Lineage", th: "สายวิชา" },
-  general: { emoji: "📝", en: "Fengshui Notes", th: "บันทึกฮวงจุ้ย" },
-  business: { emoji: "💼", en: "Business", th: "ธุรกิจ" },
-  yearly: { emoji: "📆", en: "Yearly", th: "รายปี" },
-  energy: { emoji: "✨", en: "Energy", th: "พลังงาน" },
-  interactive: { emoji: "💬", en: "Community", th: "ชุมชน" },
+  all: { en: "All", th: "ทั้งหมด" },
+  saved: { en: "Saved", th: "ที่บันทึกไว้" },
+  timing: { en: "Auspicious Timing", th: "ฤกษ์ยาม" },
+  spirit: { en: "Spirit House", th: "ศาลและตี่จู้" },
+  shop: { en: "Shop", th: "ร้านค้า" },
+  office: { en: "Office", th: "ออฟฟิศ" },
+  home: { en: "Home", th: "บ้าน" },
+  factory: { en: "Factory", th: "โรงงาน" },
+  astrology: { en: "Destiny", th: "ดวงจีน" },
+  lineage: { en: "Lineage", th: "สายวิชา" },
+  general: { en: "Fengshui Notes", th: "บันทึกฮวงจุ้ย" },
+  business: { en: "Business", th: "ธุรกิจ" },
+  yearly: { en: "Yearly", th: "รายปี" },
+  energy: { en: "Energy", th: "พลังงาน" },
+  interactive: { en: "Community", th: "ชุมชน" },
 };
+
+const CHIP_ICONS = {
+  timing: "M2 4.5h12v9H2zM5 2.5V4M11 2.5V4",
+  spirit: "M3 13V6l5-3.5L13 6v7",
+  shop: "M3 6h10l1.2 7H1.8z",
+  office: "M3 13V5h10v8M6 5V3h4v2",
+  home: "M2.5 12.5V7L8 3l5.5 4v5.5",
+  factory: "M2 13V8l4-2v7M8 13V6l4-1.5V13",
+  astrology: "M8 3l1.4 4.3H14l-3.7 2.7 1.4 4.3L8 11.6 4.3 14.3l1.4-4.3L2 7.3h4.6z",
+  lineage: "M4 4h8v9H4z",
+  general: "M4 4h8v9H4z",
+  business: "M3 6h10v7H3z",
+  yearly: "M2 4.5h12v9H2z",
+  energy: "M8 2v6l4 2",
+  interactive: "M3 8c0-2.8 2.2-5 5-5s5 2.2 5 5",
+  saved: "M4 3.5h8v9l-4-2.5-4 2.5z",
+  all: "M8 3v10",
+};
+
+function chipIconHtml(category) {
+  const path = CHIP_ICONS[category] || CHIP_ICONS.general;
+  return `<span class="chip-icon" aria-hidden="true"><svg viewBox="0 0 16 16" width="13" height="13" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="${path}" stroke="currentColor" stroke-width="1.35" stroke-linecap="round" stroke-linejoin="round"/></svg></span>`;
+}
 
 function categoryLabel(category) {
   const meta = CATEGORY_META[category];
   if (!meta) return category;
+  return activeLang === "en" ? meta.en : meta.th;
+}
+
+function categoryChipHtml(category) {
+  const meta = CATEGORY_META[category];
+  if (!meta) return `<span class="article-chip">${category}</span>`;
   const label = activeLang === "en" ? meta.en : meta.th;
-  return meta.emoji ? `${meta.emoji} ${label}` : label;
+  return `<span class="article-chip">${chipIconHtml(category)}<span class="chip-label">${label}</span></span>`;
 }
 
 function articleTags(article) {
@@ -157,9 +186,9 @@ function articleTags(article) {
 }
 
 function renderArticleChips(article) {
-  return articleTags(article)
-    .map((tag) => `<span class="article-chip">${categoryLabel(tag)}</span>`)
-    .join("");
+  return `<div class="article-chip-row">${articleTags(article)
+    .map((tag) => categoryChipHtml(tag))
+    .join("")}</div>`;
 }
 
 function popularityLabel(article) {
@@ -185,7 +214,7 @@ function toggleBookmark(id) {
 }
 
 const hasArticleArchive = Boolean(articleGrid && articleSearch && articleFilters && articleCount && loadMore);
-const homepagePreviewCount = 5;
+const homepagePreviewCount = 6;
 
 function filteredArticles() {
   const q = (articleSearch?.value || "").trim().toLowerCase();
@@ -228,17 +257,42 @@ function renderFilters() {
     .join("");
 }
 
-function renderRecommendedCard(article) {
+function homepageFeaturedArticles() {
+  const picks = recommendedArticles();
+  const featured = [];
+  const seen = new Set();
+
+  picks.forEach((article) => {
+    if (featured.length >= homepagePreviewCount || seen.has(article.id)) return;
+    seen.add(article.id);
+    featured.push(article);
+  });
+
+  if (featured.length < homepagePreviewCount) {
+    [...articles]
+      .sort((a, b) => (b.metrics?.wei || 0) - (a.metrics?.wei || 0))
+      .forEach((article) => {
+        if (featured.length >= homepagePreviewCount || seen.has(article.id)) return;
+        seen.add(article.id);
+        featured.push(article);
+      });
+  }
+
+  return featured.slice(0, homepagePreviewCount);
+}
+
+function renderRecommendedCard(article, rank) {
   const isBookmarked = bookmarkedIds.includes(article.id);
+  const displayRank = rank ?? article.recommendedRank ?? article.displayRank;
   return `
         <article class="recommended-card">
           <a href="articles/${article.id}.html" class="card-link" data-open-article="${article.id}">
-            <span class="recommend-rank">No. ${article.recommendedRank}</span>
+            ${displayRank ? `<span class="recommend-rank">No. ${displayRank}</span>` : ""}
             <div class="card-image-wrapper">
               <img src="${article.image}" alt="${article.alt}" loading="lazy" width="960" height="540">
             </div>
             <div class="card-content">
-              <div class="article-chip-row">${renderArticleChips(article)}</div>
+              ${renderArticleChips(article)}
               <strong>${article.title}</strong>
               ${article.seoKeyword ? `<em class="keyword-tag">${article.seoKeyword}</em>` : ""}
               <small>${article.date || "Fengshui Balance"}${popularityLabel(article)}</small>
@@ -259,11 +313,10 @@ function renderRecommendedCard(article) {
 
 function renderRecommendedGrid() {
   if (!recommendedGrid) return;
-  const picks = recommendedArticles();
-  const featured = picks.length
-    ? picks.slice(0, homepagePreviewCount)
-    : [...articles].sort((a, b) => (b.metrics?.wei || 0) - (a.metrics?.wei || 0)).slice(0, homepagePreviewCount);
-  recommendedGrid.innerHTML = featured.map((article) => renderRecommendedCard(article)).join("");
+  const featured = homepageFeaturedArticles();
+  recommendedGrid.innerHTML = featured
+    .map((article, index) => renderRecommendedCard(article, index + 1))
+    .join("");
 }
 
 function renderArticles() {
@@ -308,7 +361,7 @@ function renderArticles() {
               <img src="${article.image}" alt="${article.alt}" loading="lazy" width="640" height="480">
             </div>` : ""}
             <div class="card-content">
-              <div class="article-chip-row">${renderArticleChips(article)}</div>
+              ${renderArticleChips(article)}
               <strong>${article.title}</strong>
               ${article.seoKeyword ? `<em class="keyword-tag">${article.seoKeyword}</em>` : ""}
               <small>${article.date || "Fengshui Balance"}${popularityLabel(article)}</small>

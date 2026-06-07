@@ -304,9 +304,13 @@ def collect_candidates(
 
 
 def render_article_html(article: dict, enrich) -> str:
-    from generate_article_page import render_article_html as render
-
-    return render(article, enrich)
+    path = ROOT / "scripts" / "generate-article-page.py"
+    spec = importlib.util.spec_from_file_location("generate_article_page", path)
+    if not spec or not spec.loader:
+        raise RuntimeError("Could not load generate-article-page.py")
+    module = importlib.util.module_from_spec(spec)
+    spec.loader.exec_module(module)
+    return module.render_article_html(article, enrich)
 
 
 def sync_new_posts(
