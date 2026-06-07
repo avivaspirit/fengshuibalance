@@ -91,6 +91,9 @@ def render_article_html(article: dict, enrich) -> str:
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="icon" href="../assets/favicon.svg" type="image/svg+xml">
+    <link rel="apple-touch-icon" href="../assets/favicon.svg">
+    <link rel="shortcut icon" href="../assets/favicon.svg">
     <title>{title} | Fengshui Balance</title>
     <meta name="description" content="{description}">
     <link rel="canonical" href="{article_url}">

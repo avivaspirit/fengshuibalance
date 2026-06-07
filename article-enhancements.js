@@ -2,9 +2,7 @@
   var content = document.querySelector(".article-content");
   if (!content) return;
 
-  var rawText = content.textContent || "";
-  var hasAviva = /avivaspirit|aviva\s*spirit/i.test(rawText);
-  var hasMiracles = /miracles369/i.test(rawText);
+  document.body.classList.add("article-page");
 
   function escapeHtml(str) {
     return str
@@ -51,10 +49,94 @@
     return html;
   }
 
-  if (!content.dataset.brandLinked && (hasAviva || hasMiracles)) {
-    content.innerHTML = linkifyPlainText(rawText);
+  function isDivider(line) {
+    return /^(-{3,}|={3,}|\*{3,})$/.test(line);
+  }
+
+  function isCallout(line) {
+    return /^(\*{2,3}|#{1,3}\s|>>>|\d+[\.)]\s)/.test(line);
+  }
+
+  function isListItem(line) {
+    return /^([-•*]|\d+[\.)])\s+/.test(line);
+  }
+
+  function formatArticleBody(text) {
+    var normalized = (text || "").replace(/\r\n/g, "\n").trim();
+    if (!normalized) return "";
+
+    var lines = normalized.split("\n");
+    var html = [];
+    var paragraph = [];
+    var listItems = [];
+
+    function flushParagraph() {
+      if (!paragraph.length) return;
+      var joined = paragraph.join(" ").replace(/\s+/g, " ").trim();
+      paragraph = [];
+      if (!joined) return;
+      html.push("<p>" + linkifyPlainText(joined) + "</p>");
+    }
+
+    function flushList() {
+      if (!listItems.length) return;
+      html.push("<ul class=\"article-list\">");
+      listItems.forEach(function (item) {
+        html.push("<li>" + linkifyPlainText(item) + "</li>");
+      });
+      html.push("</ul>");
+      listItems = [];
+    }
+
+    lines.forEach(function (rawLine) {
+      var line = rawLine.trim();
+
+      if (!line) {
+        flushList();
+        flushParagraph();
+        return;
+      }
+
+      if (isDivider(line)) {
+        flushList();
+        flushParagraph();
+        html.push("<hr class=\"article-divider\" />");
+        return;
+      }
+
+      if (isListItem(line)) {
+        flushParagraph();
+        listItems.push(line.replace(/^([-•*]|\d+[\.)])\s+/, ""));
+        return;
+      }
+
+      if (isCallout(line)) {
+        flushList();
+        flushParagraph();
+        html.push(
+          '<p class="article-callout">' + linkifyPlainText(line) + "</p>"
+        );
+        return;
+      }
+
+      flushList();
+      paragraph.push(line);
+    });
+
+    flushList();
+    flushParagraph();
+    return html.join("");
+  }
+
+  if (!content.dataset.formatted) {
+    var rawText = content.textContent || "";
+    content.innerHTML = formatArticleBody(rawText);
+    content.dataset.formatted = "true";
     content.dataset.brandLinked = "true";
   }
+
+  var hasAviva = /avivaspirit|aviva\s*spirit/i.test(content.textContent || "");
+  var hasMiracles = /miracles369/i.test(content.textContent || "");
 
   if (document.querySelector(".article-related-brand")) return;
 
