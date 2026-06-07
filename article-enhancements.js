@@ -38,27 +38,46 @@
         );
       }
     );
-    html = html.replace(
-      /(?<![/\w])Miracles369\b/g,
-      '<a href="https://www.miracles369-store.com/" target="_blank" rel="noopener noreferrer" class="article-brand-link">Miracles369</a>'
-    );
-    html = html.replace(
-      /(?<![/\w])Aviva Spirit\b/g,
-      '<a href="https://www.avivaspirit.com/" target="_blank" rel="noopener noreferrer" class="article-brand-link">Aviva Spirit</a>'
-    );
+    html = html.replace(/\bMiracles369\b/g, function (match, offset, full) {
+      var before = full.charAt(offset - 1) || "";
+      if (/[\/\w]/.test(before)) return match;
+      return (
+        '<a href="https://www.miracles369-store.com/" target="_blank" rel="noopener noreferrer" class="article-brand-link">Miracles369</a>'
+      );
+    });
+    html = html.replace(/\bAviva Spirit\b/g, function (match, offset, full) {
+      var before = full.charAt(offset - 1) || "";
+      if (/[\/\w]/.test(before)) return match;
+      return (
+        '<a href="https://www.avivaspirit.com/" target="_blank" rel="noopener noreferrer" class="article-brand-link">Aviva Spirit</a>'
+      );
+    });
     return html;
   }
 
   function isDivider(line) {
-    return /^(-{3,}|={3,}|\*{3,})$/.test(line);
+    return /^(-{3,}|={3,}|\*{3,}|\.{3,})$/.test(line);
   }
 
   function isCallout(line) {
-    return /^(\*{2,3}|#{1,3}\s|>>>|\d+[\.)]\s)/.test(line);
+    return /^(\*{2,3}|#{1,3}\s|>>>)/.test(line);
   }
 
   function isListItem(line) {
     return /^([-•*]|\d+[\.)])\s+/.test(line);
+  }
+
+  function endsSentence(line) {
+    return /[.!?…:]$/.test(line) || /ครับ$|ค่ะ$|นะ$|เลย$|ด้วย$/.test(line);
+  }
+
+  function shouldContinue(prev, line) {
+    if (!prev) return false;
+    if (endsSentence(prev)) return false;
+    if (/^\d+[\.)]\s/.test(line)) return false;
+    if (isCallout(line) || isListItem(line) || isDivider(line)) return false;
+    if (prev.length > 120) return false;
+    return /[,，(\[]$/.test(prev) || line.length < 48;
   }
 
   function formatArticleBody(text) {
@@ -80,7 +99,7 @@
 
     function flushList() {
       if (!listItems.length) return;
-      html.push("<ul class=\"article-list\">");
+      html.push('<ul class="article-list">');
       listItems.forEach(function (item) {
         html.push("<li>" + linkifyPlainText(item) + "</li>");
       });
@@ -90,7 +109,6 @@
 
     lines.forEach(function (rawLine) {
       var line = rawLine.trim();
-
       if (!line) {
         flushList();
         flushParagraph();
@@ -100,7 +118,7 @@
       if (isDivider(line)) {
         flushList();
         flushParagraph();
-        html.push("<hr class=\"article-divider\" />");
+        html.push('<hr class="article-divider" />');
         return;
       }
 
@@ -113,14 +131,18 @@
       if (isCallout(line)) {
         flushList();
         flushParagraph();
-        html.push(
-          '<p class="article-callout">' + linkifyPlainText(line) + "</p>"
-        );
+        html.push('<p class="article-callout">' + linkifyPlainText(line) + "</p>");
         return;
       }
 
       flushList();
-      paragraph.push(line);
+      var prev = paragraph[paragraph.length - 1] || "";
+      if (paragraph.length && shouldContinue(prev, line)) {
+        paragraph.push(line);
+      } else {
+        flushParagraph();
+        paragraph.push(line);
+      }
     });
 
     flushList();
@@ -129,8 +151,7 @@
   }
 
   if (!content.dataset.formatted) {
-    var rawText = content.textContent || "";
-    content.innerHTML = formatArticleBody(rawText);
+    content.innerHTML = formatArticleBody(content.textContent || "");
     content.dataset.formatted = "true";
     content.dataset.brandLinked = "true";
   }
@@ -144,8 +165,7 @@
   if (!footer) return;
 
   var sectionMeta = document.querySelector('meta[property="article:section"]');
-  var isSpiritArticle =
-    sectionMeta && sectionMeta.content === "ศาลและตี่จู้";
+  var isSpiritArticle = sectionMeta && sectionMeta.content === "ศาลและตี่จู้";
 
   if (!isSpiritArticle && !hasAviva && !hasMiracles) return;
 
@@ -162,11 +182,9 @@
       'ดูแคตตาล็อกผลงาน บทความศาลเจ้าที่ และตู้ตี่จู้ได้ที่เว็บไซต์ Aviva Spirit — หรืออ่าน <a href="../brand-portfolio.html">แบรนด์ในเครือของอาจารย์สุภชัย</a></p>' +
       '<a class="button secondary article-related-brand__cta" href="https://www.avivaspirit.com/" target="_blank" rel="noopener noreferrer">เยี่ยมชม Aviva Spirit</a>';
   } else {
-    var blocks = [];
-    blocks.push(
-      '<p class="article-related-brand__eyebrow">แบรนด์ในเครือ · อาจารย์สุภชัย</p>'
-    );
-
+    var blocks = [
+      '<p class="article-related-brand__eyebrow">แบรนด์ในเครือ · อาจารย์สุภชัย</p>',
+    ];
     if (hasAviva) {
       blocks.push(
         "<h3>Aviva Spirit — ตู้ศาลเจ้าที่และตี่จู้หินอ่อน Modern Luxury</h3>" +
@@ -174,7 +192,6 @@
           '<a class="button secondary article-related-brand__cta" href="https://www.avivaspirit.com/" target="_blank" rel="noopener noreferrer">เยี่ยมชม Aviva Spirit</a>'
       );
     }
-
     if (hasMiracles) {
       blocks.push(
         "<h3>Miracles369 — แผ่นกั้นดาวและของเสริมฮวงจุ้ย</h3>" +
@@ -182,7 +199,6 @@
           '<a class="button secondary article-related-brand__cta" href="https://www.miracles369-store.com/" target="_blank" rel="noopener noreferrer">เยี่ยมชม Miracles369</a>'
       );
     }
-
     blocks.push(
       '<p class="article-related-brand__more"><a href="../brand-portfolio.html">ดูแบรนด์ในเครือทั้งหมดของอาจารย์สุภชัย</a></p>'
     );
