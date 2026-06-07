@@ -214,7 +214,8 @@ function toggleBookmark(id) {
 }
 
 const hasArticleArchive = Boolean(articleGrid && articleSearch && articleFilters && articleCount && loadMore);
-const homepagePreviewCount = 6;
+const homepagePreviewCount = 3;
+const articleSearchSubmit = document.querySelector("[data-article-search-submit]");
 
 function filteredArticles() {
   const q = (articleSearch?.value || "").trim().toLowerCase();
@@ -281,12 +282,23 @@ function homepageFeaturedArticles() {
   return featured.slice(0, homepagePreviewCount);
 }
 
-function renderRecommendedCard(article, rank) {
+function renderRecommendedCard(article, rank, { preview = false } = {}) {
   const isBookmarked = bookmarkedIds.includes(article.id);
   const displayRank = rank ?? article.recommendedRank ?? article.displayRank;
+  const previewText = excerpt(article.body, preview ? 100 : 120);
+  const readLabel = activeLang === "en" ? "Read more" : "อ่านต่อ";
+  const readArticleLabel = activeLang === "en" ? "Read Article" : "อ่านบทความ";
+  const metaBlock = preview
+    ? article.date
+      ? `<time class="card-preview-date" datetime="${article.date}">${article.date}</time>`
+      : ""
+    : `<small>${article.date || "Fengshui Balance"}${popularityLabel(article)}</small>`;
+  const keywordBlock =
+    preview || !article.seoKeyword ? "" : `<em class="keyword-tag">${article.seoKeyword}</em>`;
+
   return `
-        <article class="recommended-card">
-          <a href="articles/${article.id}.html" class="card-link" data-open-article="${article.id}">
+        <article class="recommended-card${preview ? " recommended-card--preview" : ""}">
+          <a href="articles/${article.id}.html" class="card-link" data-open-article="${article.id}" aria-label="${article.title}">
             ${displayRank ? `<span class="recommend-rank">No. ${displayRank}</span>` : ""}
             <div class="card-image-wrapper">
               <img src="${article.image}" alt="${article.alt}" loading="lazy" width="960" height="540">
@@ -294,14 +306,14 @@ function renderRecommendedCard(article, rank) {
             <div class="card-content">
               ${renderArticleChips(article)}
               <strong>${article.title}</strong>
-              ${article.seoKeyword ? `<em class="keyword-tag">${article.seoKeyword}</em>` : ""}
-              <small>${article.date || "Fengshui Balance"}${popularityLabel(article)}</small>
-              <p>${excerpt(article.body, 120)}</p>
+              ${keywordBlock}
+              ${metaBlock}
+              <p>${previewText}</p>
             </div>
           </a>
           <div class="card-footer">
             <a href="articles/${article.id}.html" class="read-more-link" data-open-article="${article.id}">
-              <span>${activeLang === "en" ? "Read Article" : "อ่านบทความ"} &rarr;</span>
+              <span>${preview ? readLabel : readArticleLabel} &rarr;</span>
             </a>
             <button class="bookmark-btn ${isBookmarked ? "is-saved" : ""}" data-bookmark="${article.id}" aria-label="${isBookmarked ? "Remove Bookmark" : "Save for Later"}">
               <span class="bookmark-icon">${isBookmarked ? "🔖" : "🏷️"}</span>
@@ -315,7 +327,7 @@ function renderRecommendedGrid() {
   if (!recommendedGrid) return;
   const featured = homepageFeaturedArticles();
   recommendedGrid.innerHTML = featured
-    .map((article, index) => renderRecommendedCard(article, index + 1))
+    .map((article, index) => renderRecommendedCard(article, index + 1, { preview: true }))
     .join("");
 }
 
@@ -455,15 +467,31 @@ document.addEventListener("keydown", (event) => {
   }
 });
 
+function runArticleSearch() {
+  ensureFullArticles().then(() => {
+    visibleLimit = 6;
+    renderArticles();
+    articleGrid?.scrollIntoView({ behavior: "smooth", block: "nearest" });
+  });
+}
+
 if (articleSearch) {
-  articleSearch.addEventListener("input", () => {
-    ensureFullArticles().then(() => {
-      visibleLimit = 6;
-      renderArticles();
-    });
+  articleSearch.addEventListener("input", runArticleSearch);
+  articleSearch.addEventListener("keydown", (event) => {
+    if (event.key === "Enter") {
+      event.preventDefault();
+      runArticleSearch();
+    }
   });
   articleSearch.addEventListener("focus", ensureFullArticles);
   articleSearch.addEventListener("mouseenter", ensureFullArticles);
+}
+
+if (articleSearchSubmit && articleSearch) {
+  articleSearchSubmit.addEventListener("click", () => {
+    articleSearch.focus();
+    runArticleSearch();
+  });
 }
 
 if (articleFilters) {

@@ -14,7 +14,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400&family=Manrope:wght@300;400;600;700&family=Noto+Sans+Thai:wght@300;400;600;700&family=Noto+Serif+Thai:wght@400;700;900&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="styles.css?v=20260608b">
   </head>
   <body class="subpage articles-archive-page">
     <header class="site-header" data-header>
@@ -56,7 +56,12 @@
             <div class="article-toolbar">
               <label class="search-box">
                 <span data-en="Search articles" data-th="ค้นหาบทความ">Search articles</span>
-                <input type="search" data-article-search placeholder="ฮวงจุ้ย บ้าน ศาล ดวงจีน…" autocomplete="off">
+                <div class="search-field">
+                  <input type="search" data-article-search placeholder="ฮวงจุ้ย บ้าน ศาล ดวงจีน…" autocomplete="off" enterkeyhint="search">
+                  <button class="search-submit" type="button" data-article-search-submit aria-label="Search articles">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="7"></circle><path d="m20 20-3.5-3.5"></path></svg>
+                  </button>
+                </div>
               </label>
               <div class="filter-row" data-article-filters></div>
             </div>
@@ -74,6 +79,6 @@
     </footer>
 
     <script src="articles-full.js" defer></script>
-    <script src="script.js" defer></script>
+    <script src="script.js?v=20260608b" defer></script>
   </body>
 </html>
