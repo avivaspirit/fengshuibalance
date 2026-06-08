@@ -216,6 +216,7 @@ function toggleBookmark(id) {
 const hasArticleArchive = Boolean(articleGrid && articleSearch && articleFilters && articleCount && loadMore);
 const homepagePreviewCount = 3;
 const articleSearchSubmit = document.querySelector("[data-article-search-submit]");
+const articleSearchForm = document.querySelector("[data-article-search-form]");
 
 function filteredArticles() {
   const q = (articleSearch?.value || "").trim().toLowerCase();
@@ -487,9 +488,17 @@ if (articleSearch) {
   articleSearch.addEventListener("mouseenter", ensureFullArticles);
 }
 
+if (articleSearchForm && articleSearch) {
+  articleSearchForm.addEventListener("submit", (event) => {
+    event.preventDefault();
+    runArticleSearch();
+  });
+}
+
 if (articleSearchSubmit && articleSearch) {
-  articleSearchSubmit.addEventListener("click", () => {
-    articleSearch.focus();
+  articleSearchSubmit.addEventListener("click", (event) => {
+    if (articleSearchForm) return;
+    event.preventDefault();
     runArticleSearch();
   });
 }

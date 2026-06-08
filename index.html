@@ -23,7 +23,47 @@
         <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400&family=Manrope:wght@300;400;600;700&family=Noto+Sans+Thai:wght@300;400;600;700&family=Noto+Serif+Thai:wght@400;700;900&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="styles.css?v=20260608b">
+    <link rel="stylesheet" href="styles.css?v=20260608c">
+    <style>
+      /* Homepage recommended — inline so mobile always gets 1 full-width card column */
+      #articles .recommended-grid{
+        display:grid !important;
+        grid-template-columns:minmax(0,1fr) !important;
+        gap:20px !important;
+        width:100% !important;
+      }
+      #articles .recommended-card,
+      #articles .recommended-card .card-link{
+        display:flex !important;
+        flex-direction:column !important;
+        width:100% !important;
+        max-width:100% !important;
+        height:auto !important;
+        min-height:0 !important;
+      }
+      #articles .recommended-card .card-image-wrapper{
+        width:100% !important;
+        aspect-ratio:16/9 !important;
+        overflow:hidden !important;
+        flex-shrink:0 !important;
+      }
+      #articles .recommended-card .card-image-wrapper img{
+        width:100% !important;
+        height:100% !important;
+        object-fit:cover !important;
+      }
+      #articles .recommended-card strong,
+      #articles .recommended-card p{
+        min-height:0 !important;
+        height:auto !important;
+      }
+      @media (min-width:768px){
+        #articles .recommended-grid{grid-template-columns:repeat(2,minmax(0,1fr)) !important;}
+      }
+      @media (min-width:1100px){
+        #articles .recommended-grid{grid-template-columns:repeat(3,minmax(0,1fr)) !important;}
+      }
+    </style>
     <script type="application/ld+json">
       {
         "@context": "https://schema.org",
@@ -257,7 +297,7 @@
         </div>
         <div class="articles-panel">
           <p class="articles-panel-label" data-en="Recommended" data-th="บทความแนะนำ">Recommended</p>
-          <div class="recommended-grid" data-recommended-grid></div>
+          <div class="recommended-grid recommended-grid--home" data-recommended-grid></div>
         </div>
         <div class="articles-read-more-wrap">
           <a class="button secondary" href="articles.html" data-en="Read more articles" data-th="อ่านบทความทั้งหมด">Read more articles</a>        </div>
@@ -357,6 +397,6 @@
     </dialog>
 
     <script src="articles-full.js" defer></script>
-    <script src="script.js?v=20260608b" defer></script>
+    <script src="script.js?v=20260608c" defer></script>
   </body>
 </html>

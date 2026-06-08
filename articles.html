@@ -14,7 +14,54 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400&family=Manrope:wght@300;400;600;700&family=Noto+Sans+Thai:wght@300;400;600;700&family=Noto+Serif+Thai:wght@400;700;900&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="styles.css?v=20260608b">
+    <link rel="stylesheet" href="styles.css?v=20260608d">
+    <style>
+      /* Search icon inside the field — right where users tap to search */
+      .articles-archive-page .search-field--inbox{
+        position:relative;
+        display:block;
+        width:100%;
+      }
+      .articles-archive-page .search-field--inbox input[type="search"]{
+        display:block;
+        width:100% !important;
+        box-sizing:border-box;
+        min-height:52px;
+        padding:14px 54px 14px 16px !important;
+        border:1px solid rgba(23,63,49,0.18) !important;
+        border-radius:10px !important;
+        background:#fff !important;
+        font:inherit;
+        font-size:16px;
+      }
+      .articles-archive-page .search-submit-infield{
+        position:absolute;
+        top:50%;
+        right:6px;
+        transform:translateY(-50%);
+        display:flex !important;
+        align-items:center;
+        justify-content:center;
+        width:42px;
+        height:42px;
+        margin:0;
+        padding:0;
+        border:0;
+        border-radius:8px;
+        background:#2d5a47;
+        color:#fff;
+        cursor:pointer;
+        -webkit-tap-highlight-color:transparent;
+      }
+      .articles-archive-page .search-submit-infield svg{
+        display:block;
+        width:22px;
+        height:22px;
+      }
+      .articles-archive-page .search-submit-infield:active{
+        background:#1a3d2e;
+      }
+    </style>
   </head>
   <body class="subpage articles-archive-page">
     <header class="site-header" data-header>
@@ -54,15 +101,15 @@
 
           <div class="articles-panel articles-panel--archive">
             <div class="article-toolbar">
-              <label class="search-box">
-                <span data-en="Search articles" data-th="ค้นหาบทความ">Search articles</span>
-                <div class="search-field">
-                  <input type="search" data-article-search placeholder="ฮวงจุ้ย บ้าน ศาล ดวงจีน…" autocomplete="off" enterkeyhint="search">
-                  <button class="search-submit" type="button" data-article-search-submit aria-label="Search articles">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="7"></circle><path d="m20 20-3.5-3.5"></path></svg>
+              <div class="search-box">
+                <label for="article-search-input" data-en="Search articles" data-th="ค้นหาบทความ">Search articles</label>
+                <form class="search-field search-field--inbox search-form" role="search" data-article-search-form>
+                  <input id="article-search-input" type="search" data-article-search placeholder="ฮวงจุ้ย บ้าน ศาล ดวงจีน…" autocomplete="off" enterkeyhint="search">
+                  <button class="search-submit-infield" type="submit" data-article-search-submit aria-label="Search articles" title="Search">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="7"></circle><path d="m20 20-3.5-3.5"></path></svg>
                   </button>
-                </div>
-              </label>
+                </form>
+              </div>
               <div class="filter-row" data-article-filters></div>
             </div>
             <p class="article-meta-row"><span data-article-count>Loading…</span></p>
@@ -79,6 +126,6 @@
     </footer>
 
     <script src="articles-full.js" defer></script>
-    <script src="script.js?v=20260608b" defer></script>
+    <script src="script.js?v=20260608d" defer></script>
   </body>
 </html>
