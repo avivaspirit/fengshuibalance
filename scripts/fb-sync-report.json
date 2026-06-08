@@ -1,20 +1,14 @@
 {
-  "added": 1,
-  "skipped_shared": 6,
-  "checked": 75,
-  "pages_scanned": 3,
+  "added": 0,
+  "skipped_shared": 4,
+  "checked": 50,
+  "pages_scanned": 2,
   "backfill": false,
   "token": {
     "page_name": "Fengshui Balance - ฮวงจุ้ย สมดุลแห่งธรรมชาติ",
     "permanent": null,
     "warning": null
   },
-  "articles": [
-    {
-      "id": "wei-4791",
-      "title": "รับวิเคราะห์ดวง @ 1000",
-      "url": "https://www.facebook.com/1409584711201780/posts/1413297464163838"
-    }
-  ],
+  "articles": [],
   "dry_run": false
 }
