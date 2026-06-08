@@ -1,42 +1,11 @@
-# Fengshui Balance — public site, open to search engines and AI crawlers
+# Fengshui Balance — allow Google and other crawlers
 User-agent: *
 Allow: /
 
 User-agent: Googlebot
 Allow: /
 
-User-agent: Bingbot
-Allow: /
-
 User-agent: Googlebot-Image
 Allow: /assets/images/
-
-# AI / LLM crawlers
-User-agent: GPTBot
-Allow: /
-
-User-agent: ChatGPT-User
-Allow: /
-
-User-agent: Google-Extended
-Allow: /
-
-User-agent: anthropic-ai
-Allow: /
-
-User-agent: ClaudeBot
-Allow: /
-
-User-agent: Claude-Web
-Allow: /
-
-User-agent: PerplexityBot
-Allow: /
-
-User-agent: Applebot-Extended
-Allow: /
-
-User-agent: cohere-ai
-Allow: /
 
 Sitemap: https://fengshuibalance.vercel.app/sitemap.xml
