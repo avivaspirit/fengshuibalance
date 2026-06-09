@@ -16,6 +16,7 @@ ROOT = Path(__file__).resolve().parents[1]
 ARTICLES_JS = ROOT / "articles-full.js"
 ARTICLES_DIR = ROOT / "articles"
 STATE_FILE = ROOT / "scripts" / "fb-sync-state.json"
+PAGE_STATS_FILE = ROOT / "page-stats.json"
 DEFAULT_IMAGE = "assets/images/modern-chinese-spirit-house-teeju.jpg"
 DEFAULT_ALT = "บทความฮวงจุ้ยจาก Fengshui Balance"
 GRAPH_VERSION = "v21.0"
@@ -110,6 +111,28 @@ def verify_page_token(page_id: str, token: str) -> dict:
         "page_id": payload.get("id"),
         "page_name": payload.get("name"),
     }
+
+
+def fetch_page_fan_count(page_id: str, token: str) -> int:
+    """Return live Facebook page follower count from Graph API."""
+    payload = graph_get(page_id, token, {"fields": "fan_count,followers_count"})
+    count = payload.get("followers_count") or payload.get("fan_count") or 0
+    return int(count)
+
+
+def sync_page_stats(page_id: str, token: str, dry_run: bool = False) -> dict:
+    """Write homepage follower stats from the live Facebook page."""
+    fan_count = fetch_page_fan_count(page_id, token)
+    followers_k = max(1, fan_count // 1000)
+    stats = {
+        "followers": fan_count,
+        "followersK": followers_k,
+        "updatedAt": datetime.now(timezone.utc).isoformat(),
+        "pageId": page_id,
+    }
+    if not dry_run:
+        PAGE_STATS_FILE.write_text(json.dumps(stats, ensure_ascii=False, indent=2), encoding="utf-8", newline="\n")
+    return stats
 
 
 def inspect_token_expiry(token: str) -> dict:
@@ -325,6 +348,7 @@ def sync_new_posts(
         raise RuntimeError("Missing FB_PAGE_ACCESS_TOKEN environment variable")
 
     token_report = token_health_report(page_id, token)
+    page_stats = sync_page_stats(page_id, token, dry_run=dry_run)
     enrich = load_enrich_module()
     articles = load_articles()
     existing_ids = {article.get("sourceId") for article in articles if article.get("sourceId")}
@@ -369,6 +393,7 @@ def sync_new_posts(
             "permanent": token_report.get("permanent"),
             "warning": token_report.get("warning"),
         },
+        "page_stats": page_stats,
         "articles": [{"id": a["id"], "title": a["title"], "url": a["url"]} for a in added],
         "dry_run": dry_run,
     }

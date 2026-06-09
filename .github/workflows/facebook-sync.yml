@@ -50,11 +50,11 @@ jobs:
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add articles-full.js articles/ scripts/fb-sync-state.json scripts/fb-sync-report.json sitemap.xml robots.txt
+          git add articles-full.js articles/ scripts/fb-sync-state.json scripts/fb-sync-report.json sitemap.xml robots.txt page-stats.json
           if git diff --staged --quiet; then
-            echo "No new articles"
+            echo "No sync changes"
             exit 0
           fi
-          git commit -m "Sync new original Facebook posts from Fengshui Balance page"
+          git commit -m "Sync Facebook page content and follower stats from Fengshui Balance"
           git pull --rebase origin main
           git push origin main

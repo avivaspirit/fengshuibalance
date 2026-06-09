@@ -108,6 +108,22 @@ function setupCounters() {
   counters.forEach((counter) => observer.observe(counter));
 }
 
+async function refreshFollowerCounter() {
+  const followerCounter = document.querySelector("[data-followers-counter]");
+  if (!followerCounter) return;
+  try {
+    const response = await fetch("page-stats.json?v=" + Date.now(), { cache: "no-store" });
+    if (!response.ok) return;
+    const stats = await response.json();
+    const followersK = Number(stats.followersK);
+    if (Number.isFinite(followersK) && followersK > 0) {
+      followerCounter.dataset.target = String(followersK);
+    }
+  } catch {
+    /* keep HTML fallback */
+  }
+}
+
 function cleanExcerptText(text) {
   if (!text) return "";
   let clean = text;
@@ -640,7 +656,7 @@ function ensureFullArticles() {
 
 applyLanguage(activeLang);
 renderArticles();
-setupCounters();
+refreshFollowerCounter().finally(setupCounters);
 
 if (document.body.classList.contains("articles-archive-page")) {
   visibleLimit = 12;
