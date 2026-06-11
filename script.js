@@ -34,7 +34,10 @@ function applyLanguage(lang) {
   activeLang = lang;
   root.lang = lang;
   document.querySelectorAll("[data-en][data-th]").forEach((node) => {
+    // Preserve child elements (e.g. SVG icons) — only replace text nodes
+    const icon = node.querySelector("svg.btn-icon");
     node.textContent = node.dataset[lang];
+    if (icon) node.prepend(icon);
   });
   updateCounterSuffixes();
   langLabel && (langLabel.textContent = lang === "en" ? "TH" : "EN");

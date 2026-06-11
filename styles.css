@@ -2116,3 +2116,11 @@ body.subpage{padding-top:72px;background:linear-gradient(180deg,var(--white) 0%,
   height:auto !important;
   flex:1 0 auto !important;
 }
+
+/* CTA button icon alignment (Messenger / Facebook SVG inline icons) */
+.button .btn-icon{display:inline-block;vertical-align:-0.22em;width:1.05em;height:1.05em;margin-right:0.45em;flex-shrink:0}
+.nav-cta .btn-icon{display:inline-block;vertical-align:-0.2em;width:0.95em;height:0.95em;margin-right:0.35em}
+/* wrapper for 2-button CTA pairs inside contact sections */
+.cta-pair{display:flex;flex-wrap:wrap;gap:12px;margin-top:28px;flex-shrink:0}
+/* keep pair side-by-side on mobile — override the global .button{width:100%} */
+@media(max-width:640px){.cta-pair .button{width:auto;flex:1 1 0;min-width:120px}}
