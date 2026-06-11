@@ -44,10 +44,12 @@ function applyLanguage(lang) {
       lang === "en"
         ? "Knowledge Library | Fengshui Balance"
         : "คลังความรู้ | บทความฮวงจุ้ยกว่า 4,700 เรื่อง | Fengshui Balance";
-  } else if (lang === "en") {
-    document.title = "Fengshui Consultant Thailand | Modern Luxury | Ajarn Suppachai";
-  } else {
-    document.title = "ที่ปรึกษาฮวงจุ้ย บ้าน ธุรกิจ ออฟฟิศ | อาจารย์สุภชัย | Fengshui Balance";
+  } else if (!document.body.classList.contains("subpage")) {
+    // Homepage only — subpages (ajarn, projects, brand-portfolio, …) keep their own static <title>
+    document.title =
+      lang === "en"
+        ? "Fengshui Consultant Thailand | Modern Luxury | Ajarn Suppachai"
+        : "ที่ปรึกษาฮวงจุ้ย บ้าน ธุรกิจ ออฟฟิศ | อาจารย์สุภชัย | Fengshui Balance";
   }
   localStorage.setItem("fengshui-balance-lang", lang);
 }
