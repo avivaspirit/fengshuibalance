@@ -1,8 +1,8 @@
 {
-  "added": 6,
-  "skipped_shared": 7,
-  "checked": 75,
-  "pages_scanned": 3,
+  "added": 0,
+  "skipped_shared": 5,
+  "checked": 50,
+  "pages_scanned": 2,
   "backfill": false,
   "token": {
     "page_name": "Fengshui Balance - ฮวงจุ้ย สมดุลแห่งธรรมชาติ",
@@ -10,42 +10,11 @@
     "warning": null
   },
   "page_stats": {
-    "followers": 161281,
+    "followers": 161280,
     "followersK": 161,
-    "updatedAt": "2026-06-11T12:33:24.842821+00:00",
+    "updatedAt": "2026-06-11T21:36:24.977554+00:00",
     "pageId": "367355370015900"
   },
-  "articles": [
-    {
-      "id": "wei-4792",
-      "title": "หลังจากปรับฮวงจุ้ยโรงงานใหญ่แห่งหนึ่ง",
-      "url": "https://www.facebook.com/1409584711201780/posts/1415693803924204"
-    },
-    {
-      "id": "wei-4793",
-      "title": "สำหรับเสริมโชคลาภ โชคดี",
-      "url": "https://www.facebook.com/1409584711201780/posts/1414856454007939"
-    },
-    {
-      "id": "wei-4794",
-      "title": "บทความจาก Fengshui Balance",
-      "url": "https://www.facebook.com/reel/929371033448406/"
-    },
-    {
-      "id": "wei-4795",
-      "title": "แจ้งเตือน ‼ เดือนนี้ ธาตุไฟรุนแรงสุด ในรอบปี",
-      "url": "https://www.facebook.com/1409584711201780/posts/1414809237345994"
-    },
-    {
-      "id": "wei-4796",
-      "title": "บทความจาก Fengshui Balance",
-      "url": "https://www.facebook.com/1409584711201780/posts/1414235107403407"
-    },
-    {
-      "id": "wei-4797",
-      "title": "เสียเงินมาละสิ ถึงนึกออกว่าต้องดูดวง",
-      "url": "https://www.facebook.com/1409584711201780/posts/1413874737439444"
-    }
-  ],
+  "articles": [],
   "dry_run": false
 }
