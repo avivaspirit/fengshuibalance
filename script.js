@@ -15,7 +15,7 @@ const adminDialog = document.querySelector("[data-admin-dialog]");
 const adminForm = document.querySelector("[data-admin-form]");
 const counters = document.querySelectorAll("[data-counter]");
 
-let activeLang = localStorage.getItem("fengshui-balance-lang") || "en";
+let activeLang = localStorage.getItem("fengshui-balance-lang") || "th";
 let activeFilter = "all";
 let visibleLimit = 6;
 let activeArticleId = null;
@@ -38,10 +38,17 @@ function applyLanguage(lang) {
   });
   updateCounterSuffixes();
   langLabel && (langLabel.textContent = lang === "en" ? "TH" : "EN");
-  document.title =
-    lang === "en"
-      ? "Fengshui Balance | Ajarn Suppachai Vivattanaprasert"
-      : "Fengshui Balance | อาจารย์ สุภชัย วิวัฒนะประเสริฐ";
+  // Keep the keyword-rich title on the homepage; only swap when the user changes language.
+  if (document.body.classList.contains("articles-archive-page")) {
+    document.title =
+      lang === "en"
+        ? "Knowledge Library | Fengshui Balance"
+        : "คลังความรู้ | บทความฮวงจุ้ยกว่า 4,700 เรื่อง | Fengshui Balance";
+  } else if (lang === "en") {
+    document.title = "Fengshui Consultant Thailand | Modern Luxury | Ajarn Suppachai";
+  } else {
+    document.title = "ที่ปรึกษาฮวงจุ้ย บ้าน ธุรกิจ ออฟฟิศ | อาจารย์สุภชัย | Fengshui Balance";
+  }
   localStorage.setItem("fengshui-balance-lang", lang);
 }
 
@@ -196,6 +203,13 @@ function categoryChipHtml(category) {
   return `<span class="article-chip">${chipIconHtml(category)}<span class="chip-label">${label}</span></span>`;
 }
 
+function articlePictureHtml(article, width, height) {
+  // Every article image has a .webp twin (scripts/generate-article-webp.py).
+  const webp = article.image.replace(/\.(jpe?g|png)$/i, ".webp");
+  const source = webp === article.image ? "" : `<source type="image/webp" srcset="${webp}">`;
+  return `<picture>${source}<img src="${article.image}" alt="${article.alt}" loading="lazy" decoding="async" width="${width}" height="${height}"></picture>`;
+}
+
 function articleTags(article) {
   if (Array.isArray(article.tags) && article.tags.length) return article.tags.slice(0, 2);
   return article.category ? [article.category] : ["general"];
@@ -214,8 +228,18 @@ function popularityLabel(article) {
 }
 
 function saveArticles() {
-  localStorage.setItem("fengshui-balance-articles", JSON.stringify(articles));
-  localStorage.setItem("fengshui-balance-articles-version", articleVersion);
+  try {
+    const payload = JSON.stringify(articles);
+    // localStorage quota is ~5MB; never let the full archive blow it up and break rendering.
+    if (payload.length > 3_000_000) {
+      localStorage.removeItem("fengshui-balance-articles");
+      return;
+    }
+    localStorage.setItem("fengshui-balance-articles", payload);
+    localStorage.setItem("fengshui-balance-articles-version", articleVersion);
+  } catch {
+    /* quota exceeded — keep in-memory articles working */
+  }
 }
 
 function toggleBookmark(id) {
@@ -318,7 +342,7 @@ function renderRecommendedCard(article, rank, { preview = false } = {}) {
           <a href="articles/${article.id}.html" class="card-link" data-open-article="${article.id}" aria-label="${article.title}">
             ${displayRank ? `<span class="recommend-rank">No. ${displayRank}</span>` : ""}
             <div class="card-image-wrapper">
-              <img src="${article.image}" alt="${article.alt}" loading="lazy" width="960" height="540">
+              ${articlePictureHtml(article, 960, 540)}
             </div>
             <div class="card-content">
               ${renderArticleChips(article)}
@@ -387,7 +411,7 @@ function renderArticles() {
           <a href="articles/${article.id}.html" class="card-link" data-open-article="${article.id}">
             ${article.image ? `
             <div class="card-image-wrapper">
-              <img src="${article.image}" alt="${article.alt}" loading="lazy" width="640" height="480">
+              ${articlePictureHtml(article, 640, 480)}
             </div>` : ""}
             <div class="card-content">
               ${renderArticleChips(article)}
@@ -624,7 +648,7 @@ let fullArticlesLoaded = false;
 let loadingFullArticlesPromise = null;
 
 function ensureFullArticles() {
-  if (fullArticlesLoaded || articles.length >= 500) {
+  if (fullArticlesLoaded || Array.isArray(window.FENGSHUI_ARTICLES_FULL)) {
     fullArticlesLoaded = true;
     return Promise.resolve();
   }
@@ -663,7 +687,7 @@ if (document.body.classList.contains("articles-archive-page")) {
   document.title =
     activeLang === "en"
       ? "Knowledge Library | Fengshui Balance"
-      : "คลังความรู้ | Fengshui Balance";
+      : "คลังความรู้ | บทความฮวงจุ้ยกว่า 4,700 เรื่อง | Fengshui Balance";
   if (Array.isArray(window.FENGSHUI_ARTICLES_FULL) && window.FENGSHUI_ARTICLES_FULL.length) {
     articles = window.FENGSHUI_ARTICLES_FULL;
     fullArticlesLoaded = true;

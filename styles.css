@@ -1913,3 +1913,194 @@ body.subpage{padding-top:72px;background:linear-gradient(180deg,var(--white) 0%,
   font-size:13px;
   font-weight:700;
 }
+/* ============================================================
+   2026-06-11 — Real-case strip, FAQ, hero CTA note, mobile CTA bar
+   Mobile-first; uses existing CI tokens (--ink/--paper/--gold/--red)
+   ============================================================ */
+
+/* Hero CTA support */
+.hero-cta-note{
+  margin:14px 0 0;
+  color:rgba(255,255,255,0.78);
+  font-size:14px;
+  font-weight:600;
+}
+.hero .hero-actions .button{min-height:52px}
+.hero-secondary-cta{
+  background:rgba(255,255,255,0.12);
+  border:1px solid rgba(255,255,255,0.34);
+  color:var(--white);
+}
+.hero-secondary-cta:hover{
+  background:rgba(255,255,255,0.2);
+  border-color:rgba(255,255,255,0.55);
+  color:var(--white);
+}
+
+/* Real-case proof strip */
+.case-strip-section{background:var(--white)}
+.case-strip{
+  display:grid;
+  grid-template-columns:1fr;
+  gap:16px;
+}
+.case-card{
+  display:flex;
+  flex-direction:column;
+  overflow:hidden;
+  border:1px solid rgba(26,61,46,0.1);
+  border-radius:18px;
+  background:rgba(255,253,248,0.92);
+  box-shadow:0 10px 40px rgba(26,61,46,0.05);
+  text-decoration:none;
+  color:var(--ink);
+  transition:transform 320ms cubic-bezier(0.16,1,0.3,1),box-shadow 320ms cubic-bezier(0.16,1,0.3,1),border-color 320ms ease;
+}
+.case-card:hover{
+  transform:translateY(-3px);
+  border-color:rgba(184,152,110,0.4);
+  box-shadow:0 18px 48px rgba(26,61,46,0.1);
+}
+.case-card picture{display:block}
+.case-card img{
+  width:100%;
+  aspect-ratio:16/10;
+  object-fit:cover;
+}
+.case-card__body{
+  display:flex;
+  flex-direction:column;
+  flex:1;
+  gap:8px;
+  padding:20px 22px 24px;
+}
+.case-card__tag{
+  margin:0;
+  color:#8a6a3f;
+  font-size:12px;
+  font-weight:800;
+  letter-spacing:0.08em;
+  text-transform:uppercase;
+}
+.case-card h3{
+  margin:0;
+  font-size:22px;
+  line-height:1.3;
+}
+.case-card__body p:not(.case-card__tag){
+  margin:0;
+  color:var(--muted);
+  font-size:var(--step-small);
+  line-height:1.65;
+}
+.case-card__link{
+  margin-top:auto;
+  padding-top:10px;
+  color:var(--red);
+  font-size:14px;
+  font-weight:800;
+}
+.case-card--cta{
+  justify-content:center;
+  border-style:dashed;
+  border-color:rgba(184,152,110,0.5);
+  background:linear-gradient(160deg,rgba(26,61,46,0.96),rgba(45,90,71,0.94));
+  color:var(--white);
+}
+.case-card--cta .case-card__tag{color:var(--gold-light)}
+.case-card--cta h3{color:var(--white)}
+.case-card--cta .case-card__body p:not(.case-card__tag){color:rgba(255,255,255,0.78)}
+.case-card--cta .case-card__link{color:var(--gold-light)}
+
+/* FAQ */
+.faq-section{background:var(--paper)}
+.faq-list{
+  display:grid;
+  gap:12px;
+  max-width:860px;
+  margin:0 auto;
+}
+.faq-item{
+  border:1px solid rgba(26,61,46,0.1);
+  border-radius:14px;
+  background:var(--white);
+  box-shadow:0 6px 24px rgba(26,61,46,0.04);
+  overflow:hidden;
+}
+.faq-item summary{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:14px;
+  min-height:56px;
+  padding:16px 20px;
+  cursor:pointer;
+  color:var(--ink);
+  font-family:var(--font-serif);
+  font-size:18px;
+  font-weight:700;
+  line-height:1.45;
+  list-style:none;
+}
+.faq-item summary::-webkit-details-marker{display:none}
+.faq-item summary::after{
+  content:"+";
+  flex:0 0 auto;
+  display:grid;
+  place-items:center;
+  width:28px;
+  height:28px;
+  border:1px solid rgba(184,152,110,0.5);
+  border-radius:50%;
+  color:var(--gold);
+  font-family:var(--font-sans);
+  font-size:18px;
+  font-weight:600;
+  line-height:1;
+  transition:transform 200ms ease;
+}
+.faq-item[open] summary::after{transform:rotate(45deg)}
+.faq-item summary:hover{background:rgba(232,240,235,0.5)}
+.faq-item summary:focus-visible{outline:2px solid var(--gold);outline-offset:-2px}
+.faq-item > p{
+  margin:0;
+  padding:0 20px 20px;
+  color:var(--muted);
+  line-height:1.75;
+}
+
+/* Sticky mobile consult bar */
+.mobile-cta-bar{
+  position:fixed;
+  right:0;
+  bottom:0;
+  left:0;
+  z-index:8;
+  display:none;
+  padding:10px 16px calc(10px + env(safe-area-inset-bottom, 0px));
+  background:rgba(250,248,240,0.96);
+  border-top:1px solid rgba(26,61,46,0.12);
+  box-shadow:0 -10px 30px rgba(15,28,24,0.12);
+  backdrop-filter:blur(14px);
+}
+.mobile-cta-bar .button{
+  width:100%;
+  min-height:50px;
+  font-size:16px;
+}
+@media (max-width:768px){
+  .mobile-cta-bar{display:block}
+  body{padding-bottom:84px}
+}
+@media (prefers-reduced-motion: reduce){
+  .case-card,.case-card:hover{transform:none;transition:none}
+  .faq-item summary::after{transition:none}
+}
+
+/* Tablet/desktop layout for case strip + FAQ */
+@media (min-width:700px){
+  .case-strip{grid-template-columns:repeat(2,minmax(0,1fr))}
+}
+@media (min-width:1100px){
+  .case-strip{grid-template-columns:repeat(3,minmax(0,1fr))}
+}
