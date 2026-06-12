@@ -34,9 +34,9 @@ function applyLanguage(lang) {
   activeLang = lang;
   root.lang = lang;
   document.querySelectorAll("[data-en][data-th]").forEach((node) => {
-    // Preserve child elements (e.g. SVG icons) — only replace text nodes
+    // innerHTML preserves markup in data-en/data-th; re-prepend SVG icons after
     const icon = node.querySelector("svg.btn-icon");
-    node.textContent = node.dataset[lang];
+    node.innerHTML = node.dataset[lang];
     if (icon) node.prepend(icon);
   });
   updateCounterSuffixes();
