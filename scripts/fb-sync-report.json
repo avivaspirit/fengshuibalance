@@ -1,8 +1,8 @@
 {
-  "added": 2,
-  "skipped_shared": 6,
-  "checked": 75,
-  "pages_scanned": 3,
+  "added": 0,
+  "skipped_shared": 5,
+  "checked": 50,
+  "pages_scanned": 2,
   "backfill": false,
   "token": {
     "page_name": "Fengshui Balance - ฮวงจุ้ย สมดุลแห่งธรรมชาติ",
@@ -10,22 +10,11 @@
     "warning": null
   },
   "page_stats": {
-    "followers": 161276,
+    "followers": 161275,
     "followersK": 161,
-    "updatedAt": "2026-06-13T08:33:19.903175+00:00",
+    "updatedAt": "2026-06-13T15:51:59.981599+00:00",
     "pageId": "367355370015900"
   },
-  "articles": [
-    {
-      "id": "wei-4799",
-      "title": "ธาตุไฟรุนแรง ต้องดูแลจริงจัง",
-      "url": "https://www.facebook.com/1409584711201780/posts/1417576393735945"
-    },
-    {
-      "id": "wei-4800",
-      "title": "มางาน Reiki Master",
-      "url": "https://www.facebook.com/1409584711201780/posts/1417465013747083"
-    }
-  ],
+  "articles": [],
   "dry_run": false
 }
