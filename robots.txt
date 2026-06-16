@@ -1,5 +1,6 @@
 # Fengshui Balance — allow Google and other crawlers
 User-agent: *
+Content-Signal: search=yes, ai-train=no
 Allow: /
 
 User-agent: Googlebot

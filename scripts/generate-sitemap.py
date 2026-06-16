@@ -64,6 +64,7 @@ def build_robots() -> str:
     return (
         "# Fengshui Balance — allow Google and other crawlers\n"
         "User-agent: *\n"
+        "Content-Signal: search=yes, ai-train=no\n"
         "Allow: /\n"
         "\n"
         "User-agent: Googlebot\n"
