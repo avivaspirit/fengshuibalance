@@ -1,5 +1,5 @@
 {
-  "added": 2,
+  "added": 1,
   "skipped_shared": 7,
   "checked": 75,
   "pages_scanned": 3,
@@ -10,21 +10,16 @@
     "warning": null
   },
   "page_stats": {
-    "followers": 161240,
+    "followers": 161233,
     "followersK": 161,
-    "updatedAt": "2026-06-16T13:19:01.641569+00:00",
+    "updatedAt": "2026-06-16T22:21:53.863502+00:00",
     "pageId": "367355370015900"
   },
   "articles": [
     {
-      "id": "wei-4806",
-      "title": "วันนี้ ไปเพชรบุรี",
-      "url": "https://www.facebook.com/1409584711201780/posts/1420107903482794"
-    },
-    {
-      "id": "wei-4807",
-      "title": "ลูกชายทดลองทำ Web",
-      "url": "https://www.facebook.com/1409584711201780/posts/1420062383487346"
+      "id": "wei-4808",
+      "title": "พบกัน พรุ่งนี้ 20.30",
+      "url": "https://www.facebook.com/1409584711201780/posts/1420501280110123"
     }
   ],
   "dry_run": false
