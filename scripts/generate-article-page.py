@@ -72,6 +72,8 @@ def render_article_html(article: dict, enrich) -> str:
     tag_row = html.escape(tag_label_row(article, enrich))
     popularity = format_popularity(article)
     body_html = render_body(article.get("body", ""))
+    summary_text = html.escape(meta_description(article.get("body", ""), limit=180))
+    summary_html = f'<p class="article-callout">💡 สรุปใจความสำคัญ: {summary_text}</p>\n' if summary_text else ""
 
     schema = {
         "@context": "https://schema.org",
@@ -146,7 +148,7 @@ def render_article_html(article: dict, enrich) -> str:
             <span>📈 ความนิยม: {popularity}</span>
           </div>
         </header>
-        <div class="article-content" data-formatted="true" data-brand-linked="true">{body_html}</div>
+        <div class="article-content" data-formatted="true" data-brand-linked="true">{summary_html}{body_html}</div>
         <div class="article-footer-cta">
           <h3>จัดปรับพื้นที่และสถาปัตยกรรมตามหลักฮวงจุ้ย</h3>
           <p>ให้คำปรึกษาและวิเคราะห์พื้นที่จริงสำหรับบ้าน คฤหาสน์ ออฟฟิศ และวางตำแหน่งศาลเจ้าที่/ตี่จู้ โดยอาจารย์สุภชัย วิวัฒนะประเสริฐ</p>
