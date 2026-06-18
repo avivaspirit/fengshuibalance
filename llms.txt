@@ -1,19 +1,23 @@
-# Fengshui Balance (fengshuibalance.vercel.app)
+# Fengshui Balance
 
 > Modern luxury Fengshui consultation by Ajarn Suppachai Vivattanaprasert.
 
 Fengshui Balance is a public website for residential, commercial, spirit-house, and Chinese astrology Fengshui guidance in Thailand.
 
-## Public pages
-- https://fengshuibalance.vercel.app/
-- https://fengshuibalance.vercel.app/projects.html
-- https://fengshuibalance.vercel.app/ajarn-suppachai.html
-- https://fengshuibalance.vercel.app/ajarn-grianggrai.html
-- https://fengshuibalance.vercel.app/brand-portfolio.html
+## Public Pages
 
-## Contact / social
-- Facebook: https://www.facebook.com/fengshuibalance
+- [Home](https://fengshuibalance.vercel.app/): Main page of Fengshui Balance, showing services, methodology, customer reviews, and featured articles.
+- [Projects](https://fengshuibalance.vercel.app/projects.html): Client projects and reference works for homes, offices, and shrines.
+- [Ajarn Suppachai Biography](https://fengshuibalance.vercel.app/ajarn-suppachai.html): Biography, credentials, and lineage of Ajarn Suppachai.
+- [Ajarn Grianggrai Biography](https://fengshuibalance.vercel.app/ajarn-grianggrai.html): Biography of Ajarn Grianggrai Boonthakanon, who is Ajarn Suppachai's mentor.
+- [Brand Portfolio](https://fengshuibalance.vercel.app/brand-portfolio.html): Portfolio of sister brands under Ajarn Suppachai (Aviva Spirit, Miracles369).
+- [Articles](https://fengshuibalance.vercel.app/articles.html): Complete knowledge library of articles and fengshui tips.
 
-## Crawling
-- robots.txt: https://fengshuibalance.vercel.app/robots.txt
-- sitemap: https://fengshuibalance.vercel.app/sitemap.xml
+## Contact & Socials
+
+- [Facebook Page](https://www.facebook.com/fengshuibalance): Official Fengshui Balance Facebook page for inquiries and daily updates.
+
+## Meta Resources
+
+- [robots.txt](https://fengshuibalance.vercel.app/robots.txt): Search engine crawler directives.
+- [sitemap.xml](https://fengshuibalance.vercel.app/sitemap.xml): XML sitemap listing all crawlable URLs.
