@@ -41,6 +41,9 @@ def url_entry(loc: str, lastmod: str, changefreq: str, priority: str) -> str:
     )
 
 
+MIN_BODY_CHARS = 200  # Only include articles with substantial content
+
+
 def build_sitemap(articles: list[dict]) -> str:
     lines = [
         '<?xml version="1.0" encoding="UTF-8"?>',
@@ -51,7 +54,14 @@ def build_sitemap(articles: list[dict]) -> str:
         loc = BASE_URL if not path else f"{BASE_URL}/{path}"
         lines.append(url_entry(loc, TODAY, changefreq, priority))
 
-    for article in sorted(articles, key=lambda item: item["id"]):
+    # Only include articles with real body content (not empty/image-only posts)
+    quality_articles = [
+        a for a in articles
+        if len(a.get("body", "").strip()) >= MIN_BODY_CHARS
+    ]
+    print(f"  {len(quality_articles)}/{len(articles)} articles have body >= {MIN_BODY_CHARS} chars")
+
+    for article in sorted(quality_articles, key=lambda item: item["id"]):
         article_date = article.get("date") or TODAY
         loc = f"{BASE_URL}/articles/{article['id']}.html"
         lines.append(url_entry(loc, article_date, "monthly", "0.6"))
@@ -85,7 +95,7 @@ def main() -> None:
     (ROOT / "sitemap.xml").write_text(sitemap, encoding="utf-8", newline="\n")
     (ROOT / "robots.txt").write_text(robots, encoding="utf-8", newline="\n")
 
-    total_urls = len(STATIC_PAGES) + len(articles)
+    total_urls = len(STATIC_PAGES) + len([a for a in articles if len(a.get("body","").strip()) >= MIN_BODY_CHARS])
     print(f"Wrote sitemap.xml ({total_urls} URLs)")
     print(f"Wrote robots.txt")
 
