@@ -46,6 +46,9 @@ jobs:
             python scripts/sync-facebook-posts.py
           fi
 
+      - name: Regenerate sitemap.xml and robots.txt
+        run: python scripts/generate-sitemap.py
+
       - name: Commit and push if changed
         run: |
           git config user.name "github-actions[bot]"
