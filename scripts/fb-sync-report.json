@@ -1,8 +1,8 @@
 {
-  "added": 0,
-  "skipped_shared": 6,
-  "checked": 50,
-  "pages_scanned": 2,
+  "added": 9,
+  "skipped_shared": 7,
+  "checked": 75,
+  "pages_scanned": 3,
   "backfill": false,
   "token": {
     "page_name": "Fengshui Balance - ฮวงจุ้ย สมดุลแห่งธรรมชาติ",
@@ -10,11 +10,57 @@
     "warning": null
   },
   "page_stats": {
-    "followers": 161233,
+    "followers": 161208,
     "followersK": 161,
-    "updatedAt": "2026-06-17T00:48:05.464029+00:00",
+    "updatedAt": "2026-06-19T02:25:56.114552+00:00",
     "pageId": "367355370015900"
   },
-  "articles": [],
+  "articles": [
+    {
+      "id": "wei-4809",
+      "title": "ดิถีไหน เดือนนี้ แย่สุด",
+      "url": "https://www.facebook.com/1409584711201780/posts/1422657336561184"
+    },
+    {
+      "id": "wei-4810",
+      "title": "รับวิเคราะห์ดวง @1000",
+      "url": "https://www.facebook.com/1409584711201780/posts/1422079529952298"
+    },
+    {
+      "id": "wei-4811",
+      "title": "ท่านที่ดวงตก พลังงานไม่ดี",
+      "url": "https://www.facebook.com/1409584711201780/posts/1421976529962598"
+    },
+    {
+      "id": "wei-4812",
+      "title": "เวลาจะสร้างสถานที่สำคัญของจีน",
+      "url": "https://www.facebook.com/1409584711201780/posts/1421856649974586"
+    },
+    {
+      "id": "wei-4813",
+      "title": "NewMoon in Gemini Meditation",
+      "url": "https://www.facebook.com/1409584711201780/videos/1209206124623606"
+    },
+    {
+      "id": "wei-4814",
+      "title": "Card ทอง เหลือ 29 แผ่นเท่านั้น",
+      "url": "https://www.facebook.com/1409584711201780/posts/1421244446702473"
+    },
+    {
+      "id": "wei-4815",
+      "title": "คิวงานฮวงจุ้ย",
+      "url": "https://www.facebook.com/1409584711201780/posts/1420988920061359"
+    },
+    {
+      "id": "wei-4816",
+      "title": "บทความจาก Fengshui Balance",
+      "url": "https://www.facebook.com/reel/1580152197149237/"
+    },
+    {
+      "id": "wei-4817",
+      "title": "ตามที่แจ้งเตือนตลอด",
+      "url": "https://www.facebook.com/1409584711201780/posts/1420950086731909"
+    }
+  ],
   "dry_run": false
 }
