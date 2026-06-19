@@ -4,3 +4,5 @@
 scripts/exchange-token-output.txt
 scripts/fb-dry-run-result.json
 .claude/
+__pycache__/
+*.pyc
