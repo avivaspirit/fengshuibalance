@@ -1,8 +1,8 @@
 {
-  "added": 0,
-  "skipped_shared": 6,
-  "checked": 50,
-  "pages_scanned": 2,
+  "added": 1,
+  "skipped_shared": 7,
+  "checked": 75,
+  "pages_scanned": 3,
   "backfill": false,
   "token": {
     "page_name": "Fengshui Balance - ฮวงจุ้ย สมดุลแห่งธรรมชาติ",
@@ -10,11 +10,17 @@
     "warning": null
   },
   "page_stats": {
-    "followers": 161208,
+    "followers": 161207,
     "followersK": 161,
-    "updatedAt": "2026-06-19T04:22:52.813641+00:00",
+    "updatedAt": "2026-06-19T06:28:40.187042+00:00",
     "pageId": "367355370015900"
   },
-  "articles": [],
+  "articles": [
+    {
+      "id": "wei-4818",
+      "title": "ลูกค้าพามาทาน ร้านโอม Michelin 6 ปี",
+      "url": "https://www.facebook.com/1409584711201780/posts/1422782183215366"
+    }
+  ],
   "dry_run": false
 }
