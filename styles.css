@@ -2124,3 +2124,24 @@ body.subpage{padding-top:72px;background:linear-gradient(180deg,var(--white) 0%,
 .cta-pair{display:flex;flex-wrap:wrap;gap:12px;margin-top:28px;flex-shrink:0}
 /* keep pair side-by-side on mobile — override the global .button{width:100%} */
 @media(max-width:640px){.cta-pair .button{width:auto;flex:1 1 0;min-width:120px}}
+
+/* Accessibility: respect reduced-motion preference */
+@media (prefers-reduced-motion: reduce){
+  *,*::before,*::after{
+    animation-duration:0.01ms !important;
+    animation-iteration-count:1 !important;
+    transition-duration:0.01ms !important;
+    scroll-behavior:auto !important;
+  }
+  .recommended-card:hover img,.article-card:hover img{transform:none !important}
+  .button:hover{transform:none !important}
+}
+
+/* Contact phone link styling */
+.contact-phone{margin-top:16px;font-size:20px;font-weight:800}
+.contact-phone a{color:var(--red);text-decoration:none;display:inline-flex;align-items:center;gap:6px}
+.contact-phone a:hover{text-decoration:underline}
+
+/* Article page: more articles navigation */
+.article-more-links{display:flex;flex-wrap:wrap;gap:12px;justify-content:center;max-width:600px;margin:32px auto 0;padding:0 24px}
+.article-more-links .button{width:auto;flex:0 1 auto}

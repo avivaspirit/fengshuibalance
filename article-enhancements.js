@@ -189,4 +189,16 @@
   }
 
   footer.parentNode.insertBefore(aside, footer);
+
+  // --- Related articles navigation ---
+  var main = document.querySelector(".article-page-main");
+  if (main && !main.querySelector(".article-more-links")) {
+    var moreLinks = document.createElement("nav");
+    moreLinks.className = "article-more-links";
+    moreLinks.innerHTML =
+      '<a href="../articles.html" class="button secondary">← กลับสู่คลังความรู้ทั้งหมด</a>' +
+      '<a href="../index.html#services" class="button secondary">ปรึกษาฮวงจุ้ย →</a>';
+    main.appendChild(moreLinks);
+  }
+
 })();
