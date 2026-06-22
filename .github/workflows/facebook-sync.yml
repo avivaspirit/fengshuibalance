@@ -57,7 +57,7 @@ jobs:
           # so it can never interfere with the commit/push. (.gitignore also blocks it.)
           git rm -r --cached --ignore-unmatch 'scripts/__pycache__/' >/dev/null 2>&1 || true
           git clean -fdX scripts/ >/dev/null 2>&1 || true
-          git add articles-full.js articles/ scripts/fb-sync-state.json scripts/fb-sync-report.json sitemap.xml robots.txt page-stats.json
+          git add articles-full.js articles/ scripts/fb-sync-state.json scripts/fb-sync-report.json sitemap.xml sitemap-main.xml sitemap-articles.xml robots.txt page-stats.json
           if git diff --staged --quiet; then
             echo "No sync changes"
             exit 0

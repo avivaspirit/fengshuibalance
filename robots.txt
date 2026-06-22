@@ -18,22 +18,16 @@ Disallow: /
 User-agent: CCBot
 Disallow: /
 
-User-agent: anthropic-ai
-Disallow: /
-
-User-agent: Claude-Web
-Disallow: /
-
 User-agent: Google-Extended
 Disallow: /
 
 User-agent: PerplexityBot
 Disallow: /
 
-User-agent: Bytespider
+User-agent: anthropic-ai
 Disallow: /
 
-User-agent: Amazonbot
+User-agent: Claude-Web
 Disallow: /
 
 Sitemap: https://fengshuibalance.vercel.app/sitemap.xml

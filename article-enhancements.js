@@ -201,4 +201,31 @@
     main.appendChild(moreLinks);
   }
 
+  // --- Inject BreadcrumbList schema ---
+  (function() {
+    var existingSchemas = document.querySelectorAll('script[type="application/ld+json"]');
+    var articleSchema = null;
+    existingSchemas.forEach(function(s) {
+      try {
+        var d = JSON.parse(s.textContent);
+        if (d["@type"] === "Article") articleSchema = d;
+      } catch(e) {}
+    });
+    if (articleSchema) {
+      var breadcrumbLd = {
+        "@context": "https://schema.org",
+        "@type": "BreadcrumbList",
+        "itemListElement": [
+          {"@type": "ListItem", "position": 1, "name": "Fengshui Balance", "item": "https://fengshuibalance.vercel.app/"},
+          {"@type": "ListItem", "position": 2, "name": "คลังความรู้", "item": "https://fengshuibalance.vercel.app/articles.html"},
+          {"@type": "ListItem", "position": 3, "name": articleSchema.headline || "บทความ"}
+        ]
+      };
+      var scriptEl = document.createElement("script");
+      scriptEl.type = "application/ld+json";
+      scriptEl.textContent = JSON.stringify(breadcrumbLd);
+      document.head.appendChild(scriptEl);
+    }
+  })();
+
 })();
