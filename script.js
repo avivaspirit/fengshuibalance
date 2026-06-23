@@ -486,20 +486,20 @@ function enableEditorMode() {
 
 langToggle?.addEventListener("click", () => {
   // Navigate to the equivalent page in the other language
-  const currentPath = location.pathname.replace(/\/+$/, '');
-  const isEn = currentPath.startsWith('/en');
-  const langTarget = isEn ? "th" : "en";
-  const pageName = currentPath.split('/').pop() || 'index.html';
+  const path = location.pathname.replace(/\/+$/, '');
+  const isEn = path.startsWith('/en');
+  // Extract the page name after /en/ or after /
+  const pageName = isEn
+    ? (path === '/en' ? 'index.html' : path.replace('/en/', ''))
+    : (path === '' ? 'index.html' : path.replace('/', ''));
   
-  if (langTarget === "en") {
-    // Navigate to /en/ version
-    const target = pageName === 'index.html' || currentPath === '' 
-      ? '/en/index.html' 
-      : '/en/' + pageName;
+  if (isEn) {
+    // Currently on /en/ — go to Thai
+    const target = pageName === 'index.html' ? '/' : '/' + pageName;
     location.href = target;
   } else {
-    // Navigate to Thai root
-    const target = pageName === 'index.html' ? '/' : '/' + pageName;
+    // Currently on Thai — go to /en/
+    const target = pageName === 'index.html' ? '/en/index.html' : '/en/' + pageName;
     location.href = target;
   }
 });
