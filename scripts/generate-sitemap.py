@@ -21,6 +21,15 @@ STATIC_PAGES = [
     ("brand-portfolio.html", "0.7", "monthly"),
 ]
 
+EN_PAGES = [
+    ("en/index.html", "0.9", "weekly"),
+    ("en/projects.html", "0.8", "monthly"),
+    ("en/ajarn-suppachai.html", "0.8", "monthly"),
+    ("en/ajarn-grianggrai.html", "0.7", "monthly"),
+    ("en/articles.html", "0.8", "weekly"),
+    ("en/brand-portfolio.html", "0.6", "monthly"),
+]
+
 MIN_BODY_CHARS = 200
 
 
@@ -51,6 +60,8 @@ def build_main_sitemap() -> str:
     for path, priority, changefreq in STATIC_PAGES:
         loc = BASE_URL if not path else f"{BASE_URL}/{path}"
         lines.append(url_entry(loc, TODAY, changefreq, priority))
+    for path, priority, changefreq in EN_PAGES:
+        lines.append(url_entry(f"{BASE_URL}/{path}", TODAY, changefreq, priority))
     lines.append("</urlset>")
     return "\n".join(lines) + "\n"
 
@@ -137,7 +148,7 @@ def main() -> None:
 
     quality_count = len([a for a in articles if len(a.get("body", "").strip()) >= MIN_BODY_CHARS])
     print(f"Wrote sitemap.xml (index)")
-    print(f"Wrote sitemap-main.xml ({len(STATIC_PAGES)} URLs)")
+    print(f"Wrote sitemap-main.xml ({len(STATIC_PAGES) + len(EN_PAGES)} URLs, incl. /en/)")
     print(f"Wrote sitemap-articles.xml ({quality_count} URLs)")
     print(f"Wrote robots.txt")
 

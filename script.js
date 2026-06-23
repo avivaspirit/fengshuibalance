@@ -485,8 +485,17 @@ function enableEditorMode() {
 }
 
 langToggle?.addEventListener("click", () => {
-  applyLanguage(activeLang === "en" ? "th" : "en");
-  renderArticles();
+  // Navigate between /en/ and root URL for proper SEO
+  const path = location.pathname;
+  const isEn = path.startsWith("/en") || path.startsWith("en/");
+  if (isEn) {
+    // Switch to Thai: remove /en/ prefix
+    const thaiPath = path.replace(/^\/?en\/?/, "/") || "/";
+    location.href = thaiPath === "/" ? "/" : thaiPath;
+  } else {
+    // Switch to English: add /en/ prefix
+    location.href = "/en" + (path === "/" ? "/" : path);
+  }
 });
 
 menuToggle?.addEventListener("click", () => {
