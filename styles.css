@@ -1576,6 +1576,8 @@ body.subpage{padding-top:72px;background:linear-gradient(180deg,var(--white) 0%,
 .site-nav-link{
   display:inline-flex;
   align-items:center;
+  flex-shrink:0;
+  white-space:nowrap;
   gap:7px;
   padding:10px 12px;
   border-radius:10px;
