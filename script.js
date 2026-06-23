@@ -486,15 +486,15 @@ function enableEditorMode() {
 
 langToggle?.addEventListener("click", () => {
   // Navigate to the equivalent page in the other language
-  const currentPath = location.pathname;
+  const currentPath = location.pathname.replace(/\/+$/, '');
   const isEn = currentPath.startsWith('/en');
   const langTarget = isEn ? "th" : "en";
   const pageName = currentPath.split('/').pop() || 'index.html';
   
   if (langTarget === "en") {
     // Navigate to /en/ version
-    const target = pageName === 'index.html' || pageName === '' 
-      ? '/en/' 
+    const target = pageName === 'index.html' || currentPath === '' 
+      ? '/en/index.html' 
       : '/en/' + pageName;
     location.href = target;
   } else {
