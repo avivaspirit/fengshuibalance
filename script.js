@@ -731,6 +731,7 @@ if (document.body.classList.contains("articles-archive-page")) {
       if (!img) return;
       lbImg.src = img.src;
       lbImg.alt = img.alt || "";
+      lbImg.setAttribute("aria-hidden", "false");
       lbCap.textContent = cap ? cap.textContent : "";
       lb.classList.add("is-open");
       lb.setAttribute("aria-hidden", "false");
@@ -741,6 +742,7 @@ if (document.body.classList.contains("articles-archive-page")) {
   function close() {
     lb.classList.remove("is-open");
     lb.setAttribute("aria-hidden", "true");
+    lbImg.setAttribute("aria-hidden", "true");
     document.body.style.overflow = "";
   }
 
