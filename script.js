@@ -15,7 +15,7 @@ const adminDialog = document.querySelector("[data-admin-dialog]");
 const adminForm = document.querySelector("[data-admin-form]");
 const counters = document.querySelectorAll("[data-counter]");
 
-let activeLang = localStorage.getItem("fengshui-balance-lang") || "th";
+let activeLang = window.__forceLang || localStorage.getItem("fengshui-balance-lang") || "th";
 let activeFilter = "all";
 let visibleLimit = 6;
 let activeArticleId = null;
