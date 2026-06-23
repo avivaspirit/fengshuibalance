@@ -715,3 +715,40 @@ if (document.body.classList.contains("articles-archive-page")) {
     ensureFullArticles();
   }
 }
+
+/* Gallery lightbox — click photo to enlarge + CTA */
+(function () {
+  var lb = document.getElementById("galleryLightbox");
+  if (!lb) return;
+  var lbImg = document.getElementById("lightboxImg");
+  var lbCap = document.getElementById("lightboxCaption");
+  var lbClose = lb.querySelector(".lightbox-close");
+
+  document.querySelectorAll(".gallery figure").forEach(function (fig) {
+    fig.addEventListener("click", function () {
+      var img = fig.querySelector("img");
+      var cap = fig.querySelector("figcaption");
+      if (!img) return;
+      lbImg.src = img.src;
+      lbImg.alt = img.alt || "";
+      lbCap.textContent = cap ? cap.textContent : "";
+      lb.classList.add("is-open");
+      lb.setAttribute("aria-hidden", "false");
+      document.body.style.overflow = "hidden";
+    });
+  });
+
+  function close() {
+    lb.classList.remove("is-open");
+    lb.setAttribute("aria-hidden", "true");
+    document.body.style.overflow = "";
+  }
+
+  lbClose.addEventListener("click", close);
+  lb.addEventListener("click", function (e) {
+    if (e.target === lb) close();
+  });
+  document.addEventListener("keydown", function (e) {
+    if (e.key === "Escape" && lb.classList.contains("is-open")) close();
+  });
+})();
