@@ -485,19 +485,24 @@ function enableEditorMode() {
 }
 
 langToggle?.addEventListener("click", () => {
-  // Navigate between /en/ and root URL for proper SEO
-  const path = location.pathname;
-  const isEn = path.startsWith("/en") || path.startsWith("en/");
-  if (isEn) {
-    // Switch to Thai: remove /en/ prefix
-    const thaiPath = path.replace(/^\/?en\/?/, "/") || "/";
-    location.href = thaiPath === "/" ? "/" : thaiPath;
+  // Navigate to the equivalent page in the other language
+  const currentPath = location.pathname;
+  const isEn = currentPath.startsWith('/en');
+  const langTarget = isEn ? "th" : "en";
+  const pageName = currentPath.split('/').pop() || 'index.html';
+  
+  if (langTarget === "en") {
+    // Navigate to /en/ version
+    const target = pageName === 'index.html' || pageName === '' 
+      ? '/en/' 
+      : '/en/' + pageName;
+    location.href = target;
   } else {
-    // Switch to English: add /en/ prefix
-    location.href = "/en" + (path === "/" ? "/" : path);
+    // Navigate to Thai root
+    const target = pageName === 'index.html' ? '/' : '/' + pageName;
+    location.href = target;
   }
 });
-
 menuToggle?.addEventListener("click", () => {
   if (menu?.classList.contains("is-open")) {
     closeMenu();
