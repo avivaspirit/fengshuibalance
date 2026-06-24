@@ -1,0 +1,99 @@
+name: FB Publish — any brand
+
+on:
+  workflow_dispatch:
+    inputs:
+      brand:
+        description: 'Brand'
+        required: true
+        type: choice
+        options:
+          - aviva
+          - fengshui
+          - flow
+          - miracles
+      message:
+        description: 'Post text (Thai)'
+        required: true
+        type: string
+      image_url:
+        description: 'Optional image URL'
+        required: false
+        type: string
+      dry_run:
+        description: 'Dry run only'
+        required: false
+        type: boolean
+        default: false
+
+permissions:
+  contents: read
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Publish to Facebook
+        env:
+          AVIVA_TOKEN: ${{ secrets.AVIVA_PAGE_ACCESS_TOKEN }}
+          AVIVA_ID: ${{ secrets.AVIVA_PAGE_ID }}
+          FENGSHUI_TOKEN: ${{ secrets.FB_PAGE_ACCESS_TOKEN }}
+          FENGSHUI_ID: ${{ secrets.FB_PAGE_ID }}
+          FLOW_TOKEN: ${{ secrets.FLOW_PAGE_ACCESS_TOKEN }}
+          MIRACLES_TOKEN: ${{ secrets.MIRACLES_PAGE_ACCESS_TOKEN }}
+        run: |
+          BRAND="${{ github.event.inputs.brand }}"
+          MSG="${{ github.event.inputs.message }}"
+          IMG="${{ github.event.inputs.image_url }}"
+          DRY="${{ github.event.inputs.dry_run }}"
+
+          case $BRAND in
+            aviva)    TOKEN="$AVIVA_TOKEN";  PAGE_ID="$AVIVA_ID" ;;
+            fengshui) TOKEN="$FENGSHUI_TOKEN"; PAGE_ID="$FENGSHUI_ID" ;;
+            flow)     TOKEN="$FLOW_TOKEN";     PAGE_ID="914737241717875" ;;
+            miracles) TOKEN="$MIRACLES_TOKEN";  PAGE_ID="107760637798012" ;;
+          esac
+
+          if [ "$DRY" = "true" ]; then
+            echo "=== DRY RUN: ${BRAND} ==="
+            echo "Page: ${PAGE_ID}"
+            echo "Has token: $([ -n "$TOKEN" ] && echo YES || echo NO)"
+            echo "Message: ${MSG}"
+            exit 0
+          fi
+
+          if [ -z "$TOKEN" ]; then
+            echo "❌ No token for brand: ${BRAND}"
+            exit 1
+          fi
+
+          echo "=== Posting as ${BRAND} (Page ${PAGE_ID}) ==="
+
+          if [ -n "$IMG" ]; then
+            STAGE=$(curl -s -X POST "https://graph.facebook.com/v21.0/${PAGE_ID}/photos" \
+              -F "url=${IMG}" -F "published=false" -F "access_token=${TOKEN}")
+            MEDIA_ID=$(echo "$STAGE" | python3 -c "import sys,json; print(json.load(sys.stdin).get('id',''))" 2>/dev/null || true)
+            if [ -z "$MEDIA_ID" ]; then
+              echo "❌ Image upload failed"
+              echo "$STAGE" | python3 -m json.tool
+              exit 1
+            fi
+            RESULT=$(curl -s -X POST "https://graph.facebook.com/v21.0/${PAGE_ID}/feed" \
+              -F "message=${MSG}" \
+              -F "attached_media[0]={\"media_fbid\":\"${MEDIA_ID}\"}" \
+              -F "access_token=${TOKEN}")
+          else
+            RESULT=$(curl -s -X POST "https://graph.facebook.com/v21.0/${PAGE_ID}/feed" \
+              -d "message=${MSG}" -d "access_token=${TOKEN}")
+          fi
+
+          echo "$RESULT" | python3 -m json.tool
+          POST_ID=$(echo "$RESULT" | python3 -c "import sys,json; print(json.load(sys.stdin).get('id',''))" 2>/dev/null || true)
+          if [ -n "$POST_ID" ]; then
+            echo ""
+            echo "✅ Posted: ${POST_ID}"
+            echo "URL: https://www.facebook.com/${PAGE_ID}/posts/${POST_ID#*_}"
+          else
+            echo ""
+            echo "❌ Post failed"
+          fi
