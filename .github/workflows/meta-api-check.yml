@@ -9,11 +9,13 @@ on:
         type: choice
         options:
           - debug_only
+          - get_aviva_token
           - test_post
       target_page:
-        description: 'FB Page ID (Fengshui=367355370015900, Aviva=445083192208430)'
-        required: true
+        description: 'FB Page ID (default: Fengshui Balance)'
+        required: false
         type: string
+        default: '367355370015900'
 
 permissions:
   contents: read
@@ -27,37 +29,53 @@ jobs:
           FB_PAGE_ACCESS_TOKEN: ${{ secrets.FB_PAGE_ACCESS_TOKEN }}
           FB_APP_ID: ${{ secrets.FB_APP_ID }}
           FB_APP_SECRET: ${{ secrets.FB_APP_SECRET }}
-          FB_PAGE_ID: ${{ github.event.inputs.target_page }}
+          FB_PAGE_ID: ${{ github.event.inputs.target_page || '367355370015900' }}
         run: |
           echo "=== TOKEN DEBUG ==="
           curl -s "https://graph.facebook.com/v21.0/debug_token?input_token=${FB_PAGE_ACCESS_TOKEN}&access_token=${FB_APP_ID}|${FB_APP_SECRET}" | python3 -m json.tool
 
           echo ""
           echo "=== PAGE INFO ==="
-          curl -s "https://graph.facebook.com/v21.0/${FB_PAGE_ID}?fields=id,name,username,access_token&access_token=${FB_PAGE_ACCESS_TOKEN}" | python3 -m json.tool
+          curl -s "https://graph.facebook.com/v21.0/${FB_PAGE_ID}?fields=id,name,username&access_token=${FB_PAGE_ACCESS_TOKEN}" | python3 -m json.tool
 
           echo ""
           echo "=== IG BUSINESS ACCOUNT ==="
-          curl -s "https://graph.facebook.com/v21.0/${FB_PAGE_ID}?fields=instagram_business_account&access_token=${FB_PAGE_ACCESS_TOKEN}" | python3 -m json.tool
+          curl -s "https://graph.facebook.com/v21.0/${FB_PAGE_ID}?fields=instagram_business_account{id,username}&access_token=${FB_PAGE_ACCESS_TOKEN}" | python3 -m json.tool
 
-      - name: Try test post (unpublished draft)
+      - name: Get Aviva Spirit Page token
+        if: github.event.inputs.action == 'get_aviva_token'
+        env:
+          FB_PAGE_ACCESS_TOKEN: ${{ secrets.FB_PAGE_ACCESS_TOKEN }}
+        run: |
+          echo "=== FETCHING PAGE TOKENS FOR ALL PAGES ==="
+          curl -s "https://graph.facebook.com/v21.0/me/accounts?fields=id,name,username,access_token&limit=100&access_token=${FB_PAGE_ACCESS_TOKEN}" | python3 -c "
+          import sys, json
+          data = json.load(sys.stdin)
+          for page in data.get('data', []):
+              token = page.get('access_token','')
+              preview = token[:10] + '...' + token[-6:] if len(token) > 16 else token
+              print(f\"{page['id']}  {page.get('name','')} (@{page.get('username','')})  token={preview}\")
+              print(f'  FULL_TOKEN={token}')
+              print()
+          "
+
+      - name: Try test post (published)
         if: github.event.inputs.action == 'test_post'
         env:
           FB_PAGE_ACCESS_TOKEN: ${{ secrets.FB_PAGE_ACCESS_TOKEN }}
-          FB_PAGE_ID: ${{ github.event.inputs.target_page }}
+          FB_PAGE_ID: ${{ github.event.inputs.target_page || '367355370015900' }}
         run: |
-          echo "=== ATTEMPTING DRAFT POST ==="
+          echo "=== ATTEMPTING PUBLISHED POST ==="
           RESULT=$(curl -s -X POST "https://graph.facebook.com/v21.0/${FB_PAGE_ID}/feed" \
-            -d "message=🧪 Test post from Social Content Factory — please ignore" \
-            -d "published=false" \
+            -d "message=🧪 Test post from Social Content Factory — please ignore (will delete)" \
             -d "access_token=${FB_PAGE_ACCESS_TOKEN}")
           echo "$RESULT" | python3 -m json.tool
 
-          # If post was created, delete the draft immediately
           POST_ID=$(echo "$RESULT" | python3 -c "import sys,json; print(json.load(sys.stdin).get('id',''))" 2>/dev/null || true)
           if [ -n "$POST_ID" ]; then
             echo ""
-            echo "✅ Draft created: ${POST_ID} — deleting now..."
+            echo "✅ POST CREATED: ${POST_ID} — deleting now..."
+            sleep 3
             curl -s -X DELETE "https://graph.facebook.com/v21.0/${POST_ID}?access_token=${FB_PAGE_ACCESS_TOKEN}" | python3 -m json.tool
           else
             echo ""
