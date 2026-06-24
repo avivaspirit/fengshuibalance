@@ -1,55 +1,95 @@
-name: Extract all page tokens
+name: Exchange short-lived token → all page tokens
 
 on:
   workflow_dispatch:
+    inputs:
+      short_lived_token:
+        description: 'Short-lived User Access Token from Graph API Explorer'
+        required: true
+        type: string
 
 permissions:
   contents: write
 
 jobs:
-  extract:
+  exchange:
     runs-on: ubuntu-latest
     steps:
-      - name: Get all page tokens via /me/accounts
+      - name: Exchange to long-lived + get all page tokens
         env:
-          FB_PAGE_ACCESS_TOKEN: ${{ secrets.FB_PAGE_ACCESS_TOKEN }}
+          FB_APP_ID: ${{ secrets.FB_APP_ID }}
+          FB_APP_SECRET: ${{ secrets.FB_APP_SECRET }}
+          SHORT_TOKEN: ${{ github.event.inputs.short_lived_token }}
         run: |
-          curl -s "https://graph.facebook.com/v21.0/me/accounts?fields=id,name,username,access_token&limit=100&access_token=${FB_PAGE_ACCESS_TOKEN}" | \
+          echo "=== Step 1: Exchange short-lived → long-lived User token ==="
+          LL=$(curl -s "https://graph.facebook.com/v21.0/oauth/access_token?grant_type=fb_exchange_token&client_id=${FB_APP_ID}&client_secret=${FB_APP_SECRET}&fb_exchange_token=${SHORT_TOKEN}")
+          echo "$LL" | python3 -m json.tool
+          LONG_TOKEN=$(echo "$LL" | python3 -c "import sys,json; print(json.load(sys.stdin).get('access_token',''))")
+          
+          if [ -z "$LONG_TOKEN" ]; then
+            echo "❌ Failed to exchange token"
+            exit 1
+          fi
+          echo "✅ Got long-lived user token"
+          
+          echo ""
+          echo "=== Step 2: Get all Page tokens ==="
+          curl -s "https://graph.facebook.com/v21.0/me/accounts?fields=id,name,username,access_token&limit=100&access_token=${LONG_TOKEN}" | \
           python3 -c "
           import sys, json
           data = json.load(sys.stdin)
+          pages = data.get('data', [])
+          print(f'Found {len(pages)} pages')
+          
           out = {}
-          for p in data.get('data', []):
-              name = (p.get('name','') + ' ' + p.get('username','')).lower()
+          for p in pages:
               pid = p['id']
+              name = p.get('name','')
+              user = p.get('username','')
               tok = p.get('access_token','')
-              if pid == '445083192208430' or 'aviva' in name:
+              combined = (name + ' ' + user).lower()
+              
+              if pid == '445083192208430' or 'aviva' in combined:
                   out['AVIVA_PAGE_ID'] = pid
                   out['AVIVA_PAGE_TOKEN'] = tok
-              elif pid == '367355370015900' or 'fengshui' in name:
+                  out['AVIVA_PAGE_NAME'] = name
+              elif pid == '367355370015900' or 'fengshui' in combined:
                   out['FENGSHUI_PAGE_ID'] = pid
                   out['FENGSHUI_PAGE_TOKEN'] = tok
-              elif pid == '914737241717875' or 'flow' in name:
-                  out['FLOW_PAGE_ID'] = pid
-                  out['FLOW_PAGE_TOKEN'] = tok
-              elif pid == '107760637798012' or 'miracles' in name:
-                  out['MIRACLES_PAGE_ID'] = pid
-                  out['MIRACLES_PAGE_TOKEN'] = tok
+              out[f'PAGE_{pid}'] = tok
+              out[f'NAME_{pid}'] = name
+          
           with open('tokens.env', 'w') as f:
               for k, v in out.items():
                   f.write(f'{k}={v}\n')
+          
+          print()
           for k, v in out.items():
               val = str(v)
-              if 'TOKEN' in k and len(val) > 20:
-                  print(f'{k}={val[:10]}...{val[-6:]}')
+              if 'TOKEN' in k.upper() and len(val) > 20:
+                  print(f'  {k} = {val[:10]}...{val[-6:]}')
               else:
-                  print(f'{k}={val}')
-          print(f'Total pages: {len(out)//2}')
+                  print(f'  {k} = {val}')
           "
+          
+          echo ""
+          echo "=== Step 3: Debug each page token ==="
+          python3 << 'PYEOF'
+          import json, subprocess
+          with open("tokens.env") as f:
+              env = dict(line.strip().split("=", 1) for line in f if "=" in line)
+          
+          for k, v in env.items():
+              if k.endswith("_TOKEN") or k.startswith("PAGE_"):
+                  pid = k.replace("PAGE_","").replace("_TOKEN","")
+                  # Check if it's a page ID (numeric)
+                  if pid.isdigit():
+                      print(f"  {env.get(f'NAME_{pid}', pid)}: has token")
+          PYEOF
 
       - name: Upload tokens as artifact
         uses: actions/upload-artifact@v4
         with:
-          name: page-tokens
+          name: all-page-tokens
           path: tokens.env
           retention-days: 1
