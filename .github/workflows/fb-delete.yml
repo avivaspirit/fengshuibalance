@@ -1,0 +1,43 @@
+name: FB Delete — any brand
+
+on:
+  workflow_dispatch:
+    inputs:
+      brand:
+        description: 'Brand'
+        required: true
+        type: choice
+        options:
+          - aviva
+          - fengshui
+          - flow
+          - miracles
+      post_id:
+        description: 'Post ID (e.g. 445083192208430_1407818614710521)'
+        required: true
+        type: string
+
+permissions:
+  contents: read
+
+jobs:
+  delete:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Delete post
+        env:
+          AVIVA_TOKEN: ${{ secrets.AVIVA_PAGE_ACCESS_TOKEN }}
+          FENGSHUI_TOKEN: ${{ secrets.FB_PAGE_ACCESS_TOKEN }}
+          FLOW_TOKEN: ${{ secrets.FLOW_PAGE_ACCESS_TOKEN }}
+          MIRACLES_TOKEN: ${{ secrets.MIRACLES_PAGE_ACCESS_TOKEN }}
+        run: |
+          BRAND="${{ github.event.inputs.brand }}"
+          POST_ID="${{ github.event.inputs.post_id }}"
+          case $BRAND in
+            aviva) TOKEN="$AVIVA_TOKEN" ;;
+            fengshui) TOKEN="$FENGSHUI_TOKEN" ;;
+            flow) TOKEN="$FLOW_TOKEN" ;;
+            miracles) TOKEN="$MIRACLES_TOKEN" ;;
+          esac
+          echo "Deleting ${POST_ID}..."
+          curl -s -X DELETE "https://graph.facebook.com/v21.0/${POST_ID}?access_token=${TOKEN}" | python3 -m json.tool
