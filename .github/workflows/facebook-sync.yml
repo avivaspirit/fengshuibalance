@@ -50,6 +50,7 @@ jobs:
         run: python scripts/generate-sitemap.py
 
       - name: Commit and push if changed
+        id: commit
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
@@ -60,7 +61,23 @@ jobs:
           git add articles-full.js articles/ scripts/fb-sync-state.json scripts/fb-sync-report.json sitemap.xml sitemap-main.xml sitemap-articles.xml robots.txt page-stats.json
           if git diff --staged --quiet; then
             echo "No sync changes"
+            echo "changed=false" >> $GITHUB_OUTPUT
             exit 0
           fi
           git commit -m "Sync Facebook page content and follower stats from Fengshui Balance"
           git push origin main
+          echo "changed=true" >> $GITHUB_OUTPUT
+
+      - name: Deploy to Vercel
+        if: success()
+        env:
+          VERCEL_TOKEN: ${{ secrets.VERCEL_TOKEN }}
+          VERCEL_ORG_ID: ${{ secrets.VERCEL_ORG_ID }}
+          VERCEL_PROJECT_ID: ${{ secrets.VERCEL_PROJECT_ID }}
+        run: |
+          if [ -z "$VERCEL_TOKEN" ]; then
+            echo "VERCEL_TOKEN not set; skipping deploy. Add it as a GitHub Secret to enable auto-deploy."
+            exit 0
+          fi
+          npm install -g vercel@54
+          vercel deploy --prod --yes --archive=tgz --token "$VERCEL_TOKEN"
