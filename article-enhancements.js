@@ -150,7 +150,8 @@
   var sectionMeta = document.querySelector('meta[property="article:section"]');
   var isSpiritArticle = sectionMeta && sectionMeta.content === "ศาลและตี่จู้";
 
-  if (!isSpiritArticle && !hasAviva && !hasMiracles) return;
+  // Skip brand aside if no relevance (but DON'T return — enhancements below should still run)
+  if (isSpiritArticle || hasAviva || hasMiracles) {
 
   var aside = document.createElement("aside");
   aside.className = "article-related-brand";
@@ -189,6 +190,7 @@
   }
 
   footer.parentNode.insertBefore(aside, footer);
+  } // end brand aside conditional
 
   // --- Related articles navigation ---
   var main = document.querySelector(".article-page-main");
@@ -226,6 +228,171 @@
       scriptEl.textContent = JSON.stringify(breadcrumbLd);
       document.head.appendChild(scriptEl);
     }
+  })();
+
+  // === READING EXPERIENCE ENHANCEMENTS ===
+
+  // 1. Reading time estimate
+  (function() {
+    var meta = document.querySelector(".article-meta");
+    if (!meta) return;
+    var text = (content.textContent || "").trim();
+    var charCount = text.length;
+    // Thai reading speed: ~400 chars/min (slower than English due to script complexity)
+    var minutes = Math.max(1, Math.round(charCount / 400));
+    var timeSpan = document.createElement("span");
+    timeSpan.textContent = "⏱ " + minutes + " นาทีอ่าน";
+    meta.appendChild(timeSpan);
+  })();
+
+  // 2. Reading progress bar
+  (function() {
+    var bar = document.createElement("div");
+    bar.className = "reading-progress";
+    bar.innerHTML = '<div class="reading-progress-fill"></div>';
+    document.body.appendChild(bar);
+    var fill = bar.querySelector(".reading-progress-fill");
+    function updateProgress() {
+      var scrollTop = window.scrollY;
+      var docHeight = document.documentElement.scrollHeight - window.innerHeight;
+      var pct = docHeight > 0 ? (scrollTop / docHeight) * 100 : 0;
+      fill.style.width = Math.min(100, pct) + "%";
+    }
+    window.addEventListener("scroll", updateProgress, { passive: true });
+    updateProgress();
+  })();
+
+  // 3. Back to top button
+  (function() {
+    var btn = document.createElement("button");
+    btn.className = "back-to-top";
+    btn.setAttribute("aria-label", "กลับขึ้นบน");
+    btn.innerHTML = "↑";
+    btn.style.display = "none";
+    document.body.appendChild(btn);
+    window.addEventListener("scroll", function() {
+      btn.style.display = window.scrollY > 600 ? "flex" : "none";
+    }, { passive: true });
+    btn.addEventListener("click", function() {
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    });
+  })();
+
+  // 4. Share button (Facebook)
+  (function() {
+    var article = document.querySelector(".article-card-detail");
+    if (!article) return;
+    var url = window.location.href;
+    var shareWrap = document.createElement("div");
+    shareWrap.className = "article-share";
+    shareWrap.innerHTML =
+      '<span class="article-share-label">แชร์บทความ</span>' +
+      '<a class="article-share-btn article-share-fb" href="https://www.facebook.com/sharer/sharer.php?u=' +
+      encodeURIComponent(url) +
+      '" target="_blank" rel="noopener noreferrer" aria-label="แชร์ไป Facebook">Facebook</a>' +
+      '<a class="article-share-btn article-share-line" href="https://social-plugins.line.me/lineit/share?url=' +
+      encodeURIComponent(url) +
+      '" target="_blank" rel="noopener noreferrer" aria-label="แชร์ไป LINE">LINE</a>' +
+      '<button class="article-share-btn article-share-copy" aria-label="คัดลอกลิงก์">คัดลอกลิงก์</button>';
+    var header = document.querySelector(".article-header");
+    if (header) {
+      header.appendChild(shareWrap);
+    }
+    var copyBtn = shareWrap.querySelector(".article-share-copy");
+    copyBtn.addEventListener("click", function() {
+      navigator.clipboard.writeText(url).then(function() {
+        copyBtn.textContent = "✓ คัดลอกแล้ว";
+        setTimeout(function() { copyBtn.textContent = "คัดลอกลิงก์"; }, 2000);
+      });
+    });
+  })();
+
+  // 5. Related articles by category
+  (function() {
+    var main = document.querySelector(".article-page-main");
+    if (!main) return;
+    if (main.querySelector(".article-related")) return;
+
+    // Extract current article category from the eyebrow
+    var eyebrow = document.querySelector(".article-header .eyebrow");
+    if (!eyebrow) return;
+    var currentCategory = eyebrow.textContent.trim();
+
+    // Extract current article ID from URL
+    var match = window.location.pathname.match(/wei-(\d+)\.html/);
+    if (!match) return;
+    var currentId = "wei-" + match[1];
+
+    // Load articles-full.js data to find related
+    var script = document.createElement("script");
+    script.src = "../articles-full.js";
+    script.onload = function() {
+      if (!window.FENGSHUI_ARTICLES_FULL) return;
+      var all = window.FENGSHUI_ARTICLES_FULL;
+
+      // Find current article to get its category/tags
+      var current = all.find(function(a) { return a.id === currentId; });
+      if (!current) return;
+
+      var cat = current.category || "";
+      var tags = current.tags || [];
+
+      // Score related articles: same category = +2, shared tag = +1 each, high WEI = +1
+      var scored = all
+        .filter(function(a) { return a.id !== currentId && len(a.body) >= 600; })
+        .map(function(a) {
+          var score = 0;
+          if (a.category === cat) score += 2;
+          if (a.tags) {
+            a.tags.forEach(function(t) {
+              if (tags.indexOf(t) !== -1) score += 1;
+            });
+          }
+          var wei = (a.metrics && a.metrics.wei) || 0;
+          if (wei > 1000) score += 1;
+          if (wei > 5000) score += 1;
+          return { a: a, score: score };
+        })
+        .filter(function(x) { return x.score > 0; })
+        .sort(function(x, y) { return y.score - x.score; })
+        .slice(0, 3);
+
+      if (!scored.length) return;
+
+      function len(body) {
+        return (body || "").trim().length;
+      }
+
+      var html = '<div class="article-related">';
+      html += '<p class="article-related__label">บทความที่เกี่ยวข้อง</p>';
+      html += '<div class="article-related__grid">';
+      scored.forEach(function(item) {
+        var a = item.a;
+        var title = (a.title || "").replace(/\s+/g, " ").trim();
+        if (title.length > 70) title = title.substring(0, 68) + "…";
+        var wei = (a.metrics && a.metrics.wei) || 0;
+        var weiLabel = wei >= 1000 ? (wei / 1000).toFixed(1) + "k" : wei;
+        html +=
+          '<a class="article-related__card" href="' + a.id + ".html" + '">' +
+          "<strong>" + escapeHtml(title) + "</strong>" +
+          '<small>📈 ' + weiLabel + " · " + (a.date || "").substring(0, 7) + "</small>" +
+          "</a>";
+      });
+      html += "</div></div>";
+
+      var div = document.createElement("div");
+      div.innerHTML = html;
+      var related = div.firstChild;
+
+      // Insert before the footer CTA
+      var footer = main.querySelector(".article-footer-cta");
+      if (footer) {
+        main.insertBefore(related, footer);
+      } else {
+        main.appendChild(related);
+      }
+    };
+    document.head.appendChild(script);
   })();
 
 })();

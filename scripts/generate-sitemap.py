@@ -28,7 +28,77 @@ STATIC_PAGES = [
     ("en/brand-portfolio.html", "0.6", "monthly"),
 ]
 
-MIN_BODY_CHARS = 200
+MIN_BODY_CHARS = 600
+
+# Feng shui topic signals — used to filter out non-fengshui content
+FENGSHUI_SIGNALS = [
+    r"ฮวงจ", r"ทิศ", r"ตำแหน่ง", r"ฤกษ์", r"ดวงจีน", r"ธาตุ",
+    r"ยุค\s*\d", r"ดาว", r"ราศี", r"ชง",
+    r"บ้าน", r"ออฟฟิศ", r"ร้านค้า", r"โรงงาน",
+    r"ห้อง", r"ประตู", r"หน้าต่าง", r"เตียง", r"ครัว",
+    r"ตี่จู้", r"ศาลพระภูมิ", r"เจ้าที่", r"ศาล",
+    r"เคส", r"วิเคราะห์", r"ปรับแก้", r"ตรวจ",
+    r"ซินแส", r"อาจารย์", r"โชค", r"มงคล",
+    r"เครื่องราง", r"พระ", r"เหรียญ",
+    r"พลังงาน", r"พิธี", r"บุญ", r"สมาธิ", r"จักรวาล", r"วัด",
+    r"ดวงชะตา", r"โหราศาสตร์", r"ชัยภูมิ", r"ช่องลม", r"ทำเล",
+    r"จันทรุปราคา", r"สุริยุปราคา", r"Full Moon", r"Mercury",
+    r"ที่ดิน", r"ก่อสร้าง", r"สถาปัตยกรรม",
+]
+
+JUNK_TITLE_PATTERNS = [
+    r"^รับวิเคราะห์ดวง$",
+    r"^คิวงาน", r"^คิว\s*#", r"^คิว\s*งาน",
+    r"Miracles369|Pyramid\s*(GIZA|Orange|Gold|Blue|Pink)",
+    r"^แท่ง(พลัง|ชมพู|เขียว|ส้ม|ใหญ่)|^Energy Wand|^Coaster|^Abundance",
+    r"เหลือ\s*\d+\s*(แผ่น|ชิ้น|ชุด)",
+    r"^Promotion|^โปรโมชั่น|^ลดราคา|หมดเขต",
+    r"^บริจาค|^ส่ง Slip|^อย่าส่ง Slip",
+    r"งด Share|โพสต์ภายใน",
+]
+
+
+def is_fengshui_content(article: dict) -> bool:
+    """Return True if article is real feng shui content worth indexing."""
+    body = article.get("body", "").strip()
+    title = article.get("title", "").strip()
+    wei = article.get("metrics", {}).get("wei", 0)
+    full_text = title + " " + body
+
+    # Proven heroes always pass
+    if wei >= 5000:
+        return True
+
+    # Check junk title patterns
+    for pat in JUNK_TITLE_PATTERNS:
+        if re.search(pat, title, re.IGNORECASE):
+            # Product promo with low engagement
+            if re.search(r"Card ทอง|เหรียญทอง", title) and wei < 500:
+                return False
+            return False
+
+    # Check admin ratio in body
+    lines = [l.strip() for l in body.split("\n") if l.strip()]
+    if lines:
+        admin_kw = r"ค่าปรึกษา|Inbox|inbox|โอนเงิน|ส่งสลิป|จองล่วงหน้า|พิมพ์.*จอง|EMS|เลขพัสดุ"
+        admin_lines = sum(1 for l in lines if re.search(admin_kw, l, re.IGNORECASE))
+        if len(lines) > 5 and admin_lines / len(lines) > 0.4:
+            return False
+
+    # Need at least 2 feng shui signals
+    signal_count = sum(1 for p in FENGSHUI_SIGNALS if re.search(p, full_text, re.IGNORECASE))
+    if signal_count >= 2:
+        return True
+
+    # WEI override
+    if wei >= 1000:
+        return True
+
+    # Title brand prefix
+    if re.search(r"ฮวงจ|ซินแส|อาจารย์|ปรึกษา", title):
+        return True
+
+    return False
 
 
 def load_articles() -> list[dict]:
@@ -76,10 +146,15 @@ def build_articles_sitemap(articles: list[dict]) -> str:
         a for a in articles
         if len(a.get("body", "").strip()) >= MIN_BODY_CHARS
         and not is_noindexed(a["id"])
+        and is_fengshui_content(a)
     ]
+    total_body_ok = sum(1 for a in articles if len(a.get("body", "").strip()) >= MIN_BODY_CHARS)
     skipped_noindex = sum(1 for a in articles if is_noindexed(a["id"]))
-    print(f"  {len(quality_articles)}/{len(articles)} articles have body >= {MIN_BODY_CHARS} chars")
+    skipped_junk = total_body_ok - len(quality_articles)
+    print(f"  {total_body_ok}/{len(articles)} articles have body >= {MIN_BODY_CHARS} chars")
     print(f"  Skipped {skipped_noindex} noindexed articles")
+    print(f"  Skipped {skipped_junk} non-fengshui/junk articles")
+    print(f"  Final: {len(quality_articles)} quality feng shui articles in sitemap")
 
     lines = [
         '<?xml version="1.0" encoding="UTF-8"?>',

@@ -1429,6 +1429,113 @@ body.article-page .article-page-main .article-content p{
   }
 }
 
+/* === Article reading experience enhancements === */
+
+/* Reading progress bar */
+.reading-progress{
+  position:fixed;top:0;left:0;right:0;
+  height:3px;z-index:100;
+  background:transparent;
+  pointer-events:none;
+}
+.reading-progress-fill{
+  height:100%;width:0;
+  background:linear-gradient(90deg,var(--gold),var(--red));
+  transition:width 80ms linear;
+}
+
+/* Back to top button */
+.back-to-top{
+  position:fixed;bottom:24px;right:24px;
+  width:44px;height:44px;
+  border:0;border-radius:50%;
+  background:var(--ink);color:var(--white);
+  font-size:20px;cursor:pointer;
+  z-index:90;
+  box-shadow:0 8px 24px rgba(26,61,46,0.2);
+  transition:transform 0.2s ease,background 0.2s ease;
+  align-items:center;justify-content:center;
+}
+.back-to-top:hover{
+  transform:translateY(-3px);
+  background:var(--red);
+}
+@media(max-width:768px){
+  .back-to-top{bottom:16px;right:16px;width:40px;height:40px;font-size:18px}
+}
+
+/* Share buttons */
+.article-share{
+  display:flex;align-items:center;flex-wrap:wrap;gap:8px;
+  margin-top:16px;padding-top:16px;
+  border-top:1px solid rgba(26,61,46,0.06);
+}
+.article-share-label{
+  font-size:13px;font-weight:700;
+  color:var(--muted);margin-right:4px;
+}
+.article-share-btn{
+  display:inline-flex;align-items:center;
+  padding:6px 14px;border-radius:999px;
+  font-size:13px;font-weight:700;
+  text-decoration:none;cursor:pointer;
+  border:1px solid rgba(26,61,46,0.1);
+  background:rgba(255,255,255,0.8);
+  color:var(--ink);
+  transition:all 0.2s ease;
+}
+.article-share-btn:hover{
+  transform:translateY(-1px);
+  box-shadow:0 4px 12px rgba(26,61,46,0.08);
+}
+.article-share-fb{background:#1877f2;color:#fff;border-color:#1877f2}
+.article-share-fb:hover{background:#166fe0}
+.article-share-line{background:#06c755;color:#fff;border-color:#06c755}
+.article-share-line:hover{background:#05b54c}
+.article-share-copy{background:var(--paper);color:var(--ink)}
+
+/* Related articles */
+.article-related{
+  margin-top:clamp(28px,5vw,40px);
+  padding:clamp(20px,3vw,28px);
+  border:1px solid rgba(26,61,46,0.08);
+  border-radius:14px;
+  background:linear-gradient(180deg,rgba(255,255,255,0.6),rgba(244,239,228,0.4));
+}
+.article-related__label{
+  margin:0 0 14px;
+  font-size:14px;font-weight:800;
+  letter-spacing:0.08em;text-transform:uppercase;
+  color:var(--red);
+}
+.article-related__grid{
+  display:grid;gap:10px;
+}
+.article-related__card{
+  display:block;
+  padding:14px 16px;
+  border:1px solid rgba(26,61,46,0.06);
+  border-radius:10px;
+  background:rgba(255,255,255,0.7);
+  text-decoration:none;color:var(--ink);
+  transition:all 0.25s ease;
+}
+.article-related__card:hover{
+  border-color:rgba(196,154,67,0.3);
+  box-shadow:0 6px 18px rgba(26,61,46,0.06);
+  transform:translateX(4px);
+}
+.article-related__card strong{
+  display:block;
+  font-size:15px;font-weight:700;
+  line-height:1.45;
+  margin-bottom:4px;
+}
+.article-related__card small{
+  font-size:12px;font-weight:600;
+  color:var(--muted);
+}
+
 /* Subpages — shared editorial layout (matches homepage CI) */
 body.subpage{padding-top:72px;background:linear-gradient(180deg,var(--white) 0%,var(--paper) 100%)}
 .subpage-main{min-height:50vh}
