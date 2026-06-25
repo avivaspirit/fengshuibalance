@@ -95,6 +95,16 @@ def render_article_html(article: dict, enrich) -> str:
         "mainEntityOfPage": {"@type": "WebPage", "@id": article_url},
     }
 
+    breadcrumb_schema = {
+        "@context": "https://schema.org",
+        "@type": "BreadcrumbList",
+        "itemListElement": [
+            {"@type": "ListItem", "position": 1, "name": "Fengshui Balance", "item": f"{BASE_URL}/"},
+            {"@type": "ListItem", "position": 2, "name": "คลังความรู้", "item": f"{BASE_URL}/articles.html"},
+            {"@type": "ListItem", "position": 3, "name": article["title"]},
+        ],
+    }
+
     return f"""<!doctype html>
 <html lang="th">
   <head>
@@ -116,7 +126,7 @@ def render_article_html(article: dict, enrich) -> str:
     <meta property="og:url" content="{article_url}">
     <meta property="article:published_time" content="{date}">
     <script type="application/ld+json">{json.dumps(schema, ensure_ascii=False)}</script>
-    <script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Fengshui Balance","item":"https://fengshuibalance.vercel.app/"},{"@type":"ListItem","position":2,"name":"\u0e04\u0e25\u0e31\u0e07\u0e04\u0e27\u0e32\u0e21\u0e23\u0e39\u0e49","item":"https://fengshuibalance.vercel.app/articles.html"},{"@type":"ListItem","position":3,"name":title}]}</script>
+    <script type="application/ld+json">{json.dumps(breadcrumb_schema, ensure_ascii=False)}</script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=Manrope:wght@400;600;700&family=Noto+Sans+Thai:wght@400;600;700&family=Noto+Serif+Thai:wght@700&display=swap" rel="stylesheet">
