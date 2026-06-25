@@ -1,8 +1,8 @@
 {
-  "added": 0,
-  "skipped_shared": 5,
-  "checked": 50,
-  "pages_scanned": 2,
+  "added": 7,
+  "skipped_shared": 7,
+  "checked": 75,
+  "pages_scanned": 3,
   "backfill": false,
   "token": {
     "page_name": "Fengshui Balance - ฮวงจุ้ย สมดุลแห่งธรรมชาติ",
@@ -10,11 +10,47 @@
     "warning": null
   },
   "page_stats": {
-    "followers": 161187,
+    "followers": 161185,
     "followersK": 161,
-    "updatedAt": "2026-06-22T23:05:51.102397+00:00",
+    "updatedAt": "2026-06-25T19:06:26.609027+00:00",
     "pageId": "367355370015900"
   },
-  "articles": [],
+  "articles": [
+    {
+      "id": "wei-6250",
+      "title": "บทความจาก Fengshui Balance",
+      "url": "https://www.facebook.com/1409584711201780/posts/1428102282683356"
+    },
+    {
+      "id": "wei-6251",
+      "title": "ฤกษ์ขอพรพิเศษ",
+      "url": "https://www.facebook.com/reel/1326788719435340/"
+    },
+    {
+      "id": "wei-6252",
+      "title": "*** ฤกษ์มหามงคล ***",
+      "url": "https://www.facebook.com/1409584711201780/posts/1427779116049006"
+    },
+    {
+      "id": "wei-6253",
+      "title": "เนื่องจากมีคนสอบถาม ขอซื้อแท่งชมพู Rare",
+      "url": "https://www.facebook.com/1409584711201780/posts/1426983822795202"
+    },
+    {
+      "id": "wei-6254",
+      "title": "คิวว่าง งานฮวงจุ้ย ตจว",
+      "url": "https://www.facebook.com/1409584711201780/posts/1426967286130189"
+    },
+    {
+      "id": "wei-6255",
+      "title": "ไม่มีลูก มีลูกยาก ในแง่วิชาฮวงจุ้ย ตอนที่ 1",
+      "url": "https://www.facebook.com/1409584711201780/posts/1426920482801536"
+    },
+    {
+      "id": "wei-6256",
+      "title": "ที่ดิน ( ปักหมุด ) แนวถนนพุ่งชน จะแก้ไข อย่างไร ?",
+      "url": "https://www.facebook.com/1409584711201780/posts/1426108799549371"
+    }
+  ],
   "dry_run": false
 }
