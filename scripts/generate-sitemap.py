@@ -62,12 +62,24 @@ def build_main_sitemap() -> str:
     return "\n".join(lines) + "\n"
 
 
+def is_noindexed(article_id: str) -> bool:
+    """Check if the generated HTML file for this article has a noindex robots tag."""
+    html_path = ROOT / "articles" / f"{article_id}.html"
+    if not html_path.exists():
+        return False
+    head = html_path.read_text(encoding="utf-8", errors="ignore")[:4096]
+    return 'name="robots" content="noindex"' in head
+
+
 def build_articles_sitemap(articles: list[dict]) -> str:
     quality_articles = [
         a for a in articles
         if len(a.get("body", "").strip()) >= MIN_BODY_CHARS
+        and not is_noindexed(a["id"])
     ]
+    skipped_noindex = sum(1 for a in articles if is_noindexed(a["id"]))
     print(f"  {len(quality_articles)}/{len(articles)} articles have body >= {MIN_BODY_CHARS} chars")
+    print(f"  Skipped {skipped_noindex} noindexed articles")
 
     lines = [
         '<?xml version="1.0" encoding="UTF-8"?>',
@@ -142,10 +154,11 @@ def main() -> None:
     (ROOT / "sitemap-articles.xml").write_text(articles_xml, encoding="utf-8", newline="\n")
     (ROOT / "robots.txt").write_text(robots, encoding="utf-8", newline="\n")
 
-    quality_count = len([a for a in articles if len(a.get("body", "").strip()) >= MIN_BODY_CHARS])
+    # quality_count already computed inside build_articles_sitemap as len(quality_articles)
+    article_count = len([a for a in articles if len(a.get("body", "").strip()) >= MIN_BODY_CHARS and not is_noindexed(a["id"])])
     print(f"Wrote sitemap.xml (index)")
     print(f"Wrote sitemap-main.xml ({len(STATIC_PAGES)} URLs, incl. /en/)")
-    print(f"Wrote sitemap-articles.xml ({quality_count} URLs)")
+    print(f"Wrote sitemap-articles.xml ({article_count} URLs)")
     print(f"Wrote robots.txt")
 
 
