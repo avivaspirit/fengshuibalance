@@ -1,8 +1,8 @@
 {
-  "added": 0,
-  "skipped_shared": 5,
-  "checked": 50,
-  "pages_scanned": 2,
+  "added": 1,
+  "skipped_shared": 7,
+  "checked": 75,
+  "pages_scanned": 3,
   "backfill": false,
   "token": {
     "page_name": "Fengshui Balance - ฮวงจุ้ย สมดุลแห่งธรรมชาติ",
@@ -10,11 +10,17 @@
     "warning": null
   },
   "page_stats": {
-    "followers": 161186,
+    "followers": 161190,
     "followersK": 161,
-    "updatedAt": "2026-06-26T00:22:09.514439+00:00",
+    "updatedAt": "2026-06-26T11:56:47.816953+00:00",
     "pageId": "367355370015900"
   },
-  "articles": [],
+  "articles": [
+    {
+      "id": "wei-6257",
+      "title": "ภาพ 1 ที่ดิน ( ปักหมุด ) แนวถนนพุ่งชน จะแก้ไข อย่างไร ?",
+      "url": "https://www.facebook.com/1409584711201780/posts/1428598645967053"
+    }
+  ],
   "dry_run": false
 }
