@@ -1,6 +1,6 @@
 {
-  "added": 1,
-  "skipped_shared": 7,
+  "added": 17,
+  "skipped_shared": 6,
   "checked": 75,
   "pages_scanned": 3,
   "backfill": false,
@@ -10,16 +10,96 @@
     "warning": null
   },
   "page_stats": {
-    "followers": 161190,
+    "followers": 161289,
     "followersK": 161,
-    "updatedAt": "2026-06-26T11:56:47.816953+00:00",
+    "updatedAt": "2026-07-02T11:07:09.575189+00:00",
     "pageId": "367355370015900"
   },
   "articles": [
     {
-      "id": "wei-6257",
-      "title": "ภาพ 1 ที่ดิน ( ปักหมุด ) แนวถนนพุ่งชน จะแก้ไข อย่างไร ?",
-      "url": "https://www.facebook.com/1409584711201780/posts/1428598645967053"
+      "id": "wei-6258",
+      "title": "บทความจาก Fengshui Balance",
+      "url": "https://www.facebook.com/1409584711201780/posts/1433903418769909"
+    },
+    {
+      "id": "wei-6259",
+      "title": "ท่านที่จะไปไหว้ขอพรฟ้าดิน ที่เทียนฐาน สระบุรี",
+      "url": "https://www.facebook.com/1409584711201780/posts/1433808358779415"
+    },
+    {
+      "id": "wei-6260",
+      "title": "บทความจาก Fengshui Balance",
+      "url": "https://www.facebook.com/1409584711201780/posts/1433203542173230"
+    },
+    {
+      "id": "wei-6261",
+      "title": "ฤกษ์ยามประจำเดือน",
+      "url": "https://www.facebook.com/1409584711201780/posts/1432828668877384"
+    },
+    {
+      "id": "wei-6262",
+      "title": "FullMoon Meditation_Quantum Vibration 4 Days Awakening Series (Day 2)",
+      "url": "https://www.facebook.com/1409584711201780/videos/953623651036369"
+    },
+    {
+      "id": "wei-6263",
+      "title": "คืนนี้ พบกันใน Live",
+      "url": "https://www.facebook.com/1409584711201780/posts/1432297755597142"
+    },
+    {
+      "id": "wei-6264",
+      "title": "มี 3 จุดที่ควรปรับปรุง ‼",
+      "url": "https://www.facebook.com/1409584711201780/posts/1431982555628662"
+    },
+    {
+      "id": "wei-6265",
+      "title": "บทความจาก Fengshui Balance",
+      "url": "https://www.facebook.com/1409584711201780/posts/1431492205677697"
+    },
+    {
+      "id": "wei-6266",
+      "title": "บทความจาก Fengshui Balance",
+      "url": "https://www.facebook.com/reel/2006123389994170/"
+    },
+    {
+      "id": "wei-6267",
+      "title": "หากเราไม่สะดวกเปิดตำแหน่ง ลูกศรสีส้ม",
+      "url": "https://www.facebook.com/1409584711201780/posts/1431176169042634"
+    },
+    {
+      "id": "wei-6268",
+      "title": "Quantum Vibration 4 Days Awakening Series_Day 1",
+      "url": "https://www.facebook.com/1409584711201780/videos/1385917296767891"
+    },
+    {
+      "id": "wei-6269",
+      "title": "https://www.facebook.com/KrobkruengJAPAN/posts/pfbid0QDb5zBCa7dx4y9iZUtCcS7E67t4sQkE8DBr…",
+      "url": "https://www.facebook.com/1409584711201780/posts/1430623762431208"
+    },
+    {
+      "id": "wei-6270",
+      "title": "https://www.facebook.com/permalink.php?story_fbid=pfbid02cjwhYu3TGZdMxowa2LjHH2oQQh9jdnf…",
+      "url": "https://www.facebook.com/1409584711201780/posts/1430318829128368"
+    },
+    {
+      "id": "wei-6271",
+      "title": "ด้วยฤกษ์พิเศษ x2",
+      "url": "https://www.facebook.com/1409584711201780/posts/1429769152516669"
+    },
+    {
+      "id": "wei-6272",
+      "title": "@All ตามที่คุยใน Live ว่าการทำบุญจะช่วยส่งเสริมโชคชะตา และเสริมพลัง Manifest ของเรา…",
+      "url": "https://www.facebook.com/1409584711201780/posts/1429603782533206"
+    },
+    {
+      "id": "wei-6273",
+      "title": "Give Before Take ให้ก่อนจึงได้",
+      "url": "https://www.facebook.com/1409584711201780/posts/1429491245877793"
+    },
+    {
+      "id": "wei-6274",
+      "title": "The Last One : เหลืออันสุดท้ายแล้ว",
+      "url": "https://www.facebook.com/1409584711201780/posts/1429069705919947"
     }
   ],
   "dry_run": false
