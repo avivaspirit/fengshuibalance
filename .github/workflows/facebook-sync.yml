@@ -15,6 +15,10 @@ on:
 permissions:
   contents: write
 
+concurrency:
+  group: fengshui-fb-sync
+  cancel-in-progress: false
+
 jobs:
   sync:
     runs-on: ubuntu-latest
@@ -27,13 +31,24 @@ jobs:
         with:
           python-version: "3.11"
 
+      - name: Install dependencies
+        run: pip install requests
+
       - name: Verify Facebook token
+        continue-on-error: true
+        id: token-check
         env:
           FB_PAGE_ACCESS_TOKEN: ${{ secrets.FB_PAGE_ACCESS_TOKEN }}
           FB_PAGE_ID: ${{ secrets.FB_PAGE_ID }}
           FB_APP_ID: ${{ secrets.FB_APP_ID }}
           FB_APP_SECRET: ${{ secrets.FB_APP_SECRET }}
         run: python scripts/sync-facebook-posts.py --verify-token
+
+      - name: Check token result
+        if: steps.token-check.outcome == 'failure'
+        run: |
+          echo "⚠️ Token verification failed — attempting sync anyway (token may still work for reads)."
+          echo "If sync also fails, the FB_PAGE_ACCESS_TOKEN secret needs rotation."
 
       - name: Sync original Facebook posts
         env:
@@ -55,7 +70,6 @@ jobs:
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
           # Defensive: strip any regenerated __pycache__ from the index + worktree
-          # so it can never interfere with the commit/push. (.gitignore also blocks it.)
           git rm -r --cached --ignore-unmatch 'scripts/__pycache__/' >/dev/null 2>&1 || true
           git clean -fdX scripts/ >/dev/null 2>&1 || true
           git add articles-full.js articles/ scripts/fb-sync-state.json scripts/fb-sync-report.json sitemap.xml sitemap-main.xml sitemap-articles.xml robots.txt page-stats.json
@@ -65,8 +79,19 @@ jobs:
             exit 0
           fi
           git commit -m "Sync Facebook page content and follower stats from Fengshui Balance"
-          git push origin main
-          echo "changed=true" >> $GITHUB_OUTPUT
+          # Retry push with rebase — handles race condition when two sync runs overlap
+          for ATTEMPT in 1 2 3; do
+            if git push origin main 2>/dev/null; then
+              echo "Push succeeded on attempt $ATTEMPT"
+              echo "changed=true" >> $GITHUB_OUTPUT
+              exit 0
+            fi
+            echo "Push attempt $ATTEMPT failed — rebasing and retrying..."
+            git pull --rebase origin main 2>/dev/null || true
+            sleep 5
+          done
+          echo "❌ All push attempts failed"
+          exit 1
 
       - name: Deploy to Vercel
         if: success()
