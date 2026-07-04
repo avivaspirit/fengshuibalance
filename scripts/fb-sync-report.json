@@ -1,8 +1,8 @@
 {
-  "added": 0,
-  "skipped_shared": 3,
-  "checked": 50,
-  "pages_scanned": 2,
+  "added": 1,
+  "skipped_shared": 5,
+  "checked": 75,
+  "pages_scanned": 3,
   "backfill": false,
   "token": {
     "page_name": "Fengshui Balance - ฮวงจุ้ย สมดุลแห่งธรรมชาติ",
@@ -10,11 +10,17 @@
     "warning": null
   },
   "page_stats": {
-    "followers": 161525,
+    "followers": 161533,
     "followersK": 161,
-    "updatedAt": "2026-07-04T11:17:44.172346+00:00",
+    "updatedAt": "2026-07-04T12:59:48.832490+00:00",
     "pageId": "367355370015900"
   },
-  "articles": [],
+  "articles": [
+    {
+      "id": "wei-6280",
+      "title": "Day 3_ Quantum Vibration 4 Days Awakening Series",
+      "url": "https://www.facebook.com/1409584711201780/videos/1574025371012318"
+    }
+  ],
   "dry_run": false
 }
