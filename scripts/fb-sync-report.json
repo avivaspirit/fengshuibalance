@@ -1,8 +1,8 @@
 {
-  "added": 0,
-  "skipped_shared": 1,
-  "checked": 50,
-  "pages_scanned": 2,
+  "added": 4,
+  "skipped_shared": 4,
+  "checked": 75,
+  "pages_scanned": 3,
   "backfill": false,
   "token": {
     "page_name": "Fengshui Balance - ฮวงจุ้ย สมดุลแห่งธรรมชาติ",
@@ -10,11 +10,32 @@
     "warning": null
   },
   "page_stats": {
-    "followers": 161602,
+    "followers": 161624,
     "followersK": 161,
-    "updatedAt": "2026-07-05T22:52:30.479965+00:00",
+    "updatedAt": "2026-07-06T08:10:10.489071+00:00",
     "pageId": "367355370015900"
   },
-  "articles": [],
+  "articles": [
+    {
+      "id": "wei-6284",
+      "title": "ฮวงจุ้ย ตี่จู้ เจ้าที่",
+      "url": "https://www.facebook.com/reel/1054440033690529/"
+    },
+    {
+      "id": "wei-6285",
+      "title": "บทความจาก Fengshui Balance",
+      "url": "https://www.facebook.com/reel/1536327574538845/"
+    },
+    {
+      "id": "wei-6286",
+      "title": "วันอาทิตย์ที่ผ่านมา พิธีไหว้ครูที่มูลนิธิฮูลิน แก่งคอย สระบุรี",
+      "url": "https://www.facebook.com/1409584711201780/posts/1437473565079561"
+    },
+    {
+      "id": "wei-6287",
+      "title": "<< เฉลย >> 4 จุดที่ควรปรับปรุง",
+      "url": "https://www.facebook.com/1409584711201780/posts/1437385821755002"
+    }
+  ],
   "dry_run": false
 }
