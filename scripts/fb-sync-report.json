@@ -1,8 +1,8 @@
 {
-  "added": 0,
-  "skipped_shared": 1,
-  "checked": 50,
-  "pages_scanned": 2,
+  "added": 2,
+  "skipped_shared": 4,
+  "checked": 75,
+  "pages_scanned": 3,
   "backfill": false,
   "token": {
     "page_name": "Fengshui Balance - ฮวงจุ้ย สมดุลแห่งธรรมชาติ",
@@ -10,11 +10,22 @@
     "warning": null
   },
   "page_stats": {
-    "followers": 161657,
+    "followers": 161660,
     "followersK": 161,
-    "updatedAt": "2026-07-06T22:58:19.586804+00:00",
+    "updatedAt": "2026-07-07T02:05:07.448875+00:00",
     "pageId": "367355370015900"
   },
-  "articles": [],
+  "articles": [
+    {
+      "id": "wei-6289",
+      "title": "บทความจาก Fengshui Balance",
+      "url": "https://www.facebook.com/reel/1532099184963547/"
+    },
+    {
+      "id": "wei-6290",
+      "title": "ทิศห้ามเฉพาะ 7 กค. - 6 สค. 2569",
+      "url": "https://www.facebook.com/1409584711201780/posts/1438284294998488"
+    }
+  ],
   "dry_run": false
 }
