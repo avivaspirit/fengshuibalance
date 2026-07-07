@@ -1,5 +1,5 @@
 {
-  "added": 2,
+  "added": 1,
   "skipped_shared": 4,
   "checked": 75,
   "pages_scanned": 3,
@@ -10,21 +10,16 @@
     "warning": null
   },
   "page_stats": {
-    "followers": 161660,
+    "followers": 161676,
     "followersK": 161,
-    "updatedAt": "2026-07-07T02:05:07.448875+00:00",
+    "updatedAt": "2026-07-07T07:28:50.647523+00:00",
     "pageId": "367355370015900"
   },
   "articles": [
     {
-      "id": "wei-6289",
-      "title": "บทความจาก Fengshui Balance",
-      "url": "https://www.facebook.com/reel/1532099184963547/"
-    },
-    {
-      "id": "wei-6290",
-      "title": "ทิศห้ามเฉพาะ 7 กค. - 6 สค. 2569",
-      "url": "https://www.facebook.com/1409584711201780/posts/1438284294998488"
+      "id": "wei-6291",
+      "title": "กราบขอบพระคุณ เจ้าแม่จิ่วเทียนเสวียนหนี่",
+      "url": "https://www.facebook.com/1409584711201780/posts/1438380328322218"
     }
   ],
   "dry_run": false
