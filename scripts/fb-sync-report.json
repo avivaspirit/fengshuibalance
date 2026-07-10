@@ -1,6 +1,6 @@
 {
-  "added": 1,
-  "skipped_shared": 4,
+  "added": 2,
+  "skipped_shared": 3,
   "checked": 75,
   "pages_scanned": 3,
   "backfill": false,
@@ -10,16 +10,21 @@
     "warning": null
   },
   "page_stats": {
-    "followers": 161748,
+    "followers": 161750,
     "followersK": 161,
-    "updatedAt": "2026-07-10T09:32:29.176450+00:00",
+    "updatedAt": "2026-07-10T12:19:44.617712+00:00",
     "pageId": "367355370015900"
   },
   "articles": [
     {
-      "id": "wei-6303",
-      "title": "นอกจาก น้ำพุ บ่อปลา กระตุ้นโชคลาภแล้ว",
-      "url": "https://www.facebook.com/1409584711201780/posts/1441099318050319"
+      "id": "wei-6304",
+      "title": "บทความจาก Fengshui Balance",
+      "url": "https://www.facebook.com/reel/1743719206646916/"
+    },
+    {
+      "id": "wei-6305",
+      "title": "พรุ่งนี้  11.00",
+      "url": "https://www.facebook.com/1409584711201780/posts/1441124584714459"
     }
   ],
   "dry_run": false
