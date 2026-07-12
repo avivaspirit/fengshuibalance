@@ -1,8 +1,8 @@
 {
-  "added": 0,
-  "skipped_shared": 2,
-  "checked": 50,
-  "pages_scanned": 2,
+  "added": 2,
+  "skipped_shared": 5,
+  "checked": 75,
+  "pages_scanned": 3,
   "backfill": false,
   "token": {
     "page_name": "Fengshui Balance - ฮวงจุ้ย สมดุลแห่งธรรมชาติ",
@@ -10,11 +10,22 @@
     "warning": null
   },
   "page_stats": {
-    "followers": 161763,
+    "followers": 161762,
     "followersK": 161,
-    "updatedAt": "2026-07-12T11:04:48.271548+00:00",
+    "updatedAt": "2026-07-12T12:56:26.322076+00:00",
     "pageId": "367355370015900"
   },
-  "articles": [],
+  "articles": [
+    {
+      "id": "wei-6310",
+      "title": "รับวิเคราะห์ดวง @ 1000",
+      "url": "https://www.facebook.com/1409584711201780/posts/1442856531207931"
+    },
+    {
+      "id": "wei-6311",
+      "title": "บทความจาก Fengshui Balance",
+      "url": "https://www.facebook.com/1409584711201780/posts/1442819291211655"
+    }
+  ],
   "dry_run": false
 }
