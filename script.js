@@ -384,10 +384,15 @@ function renderRecommendedCard(article, rank, { preview = false } = {}) {
             <a href="articles/${article.id}.html" class="read-more-link" data-open-article="${article.id}">
               <span>${preview ? readLabel : readArticleLabel} &rarr;</span>
             </a>
-            <button class="bookmark-btn ${isBookmarked ? "is-saved" : ""}" data-bookmark="${article.id}" aria-label="${isBookmarked ? "Remove Bookmark" : "Save for Later"}">
-              <span class="bookmark-icon">${isBookmarked ? "🔖" : "🏷️"}</span>
-              <span class="bookmark-text">${isBookmarked ? (activeLang === "en" ? "Saved" : "ที่บันทึกไว้") : (activeLang === "en" ? "Read Later" : "บันทึกไว้อ่าน")}</span>
-            </button>
+            <div class="card-footer-right">
+              <a href="${article.url || "#"}" class="fb-source-link" target="_blank" rel="noreferrer" aria-label="Facebook">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>
+              </a>
+              <button class="bookmark-btn ${isBookmarked ? "is-saved" : ""}" data-bookmark="${article.id}" aria-label="${isBookmarked ? "Remove Bookmark" : "Save for Later"}">
+                <span class="bookmark-icon">${isBookmarked ? "\uD83D\uDD16" : "\uD83C\uDF9F\uFE0F"}</span>
+                <span class="bookmark-text">${isBookmarked ? (activeLang === "en" ? "Saved" : "\u0E17\u0E35\u0E48\u0E1A\u0E31\u0E19\u0E17\u0E36\u0E01\u0E44\u0E27\u0E49") : (activeLang === "en" ? "Read Later" : "\u0E1A\u0E31\u0E19\u0E17\u0E36\u0E01\u0E44\u0E27\u0E49\u0E2D\u0E48\u0E32\u0E19")}</span>
+              </button>
+            </div>
           </div>
         </article>`;
 }
@@ -464,10 +469,16 @@ function renderArticles() {
             <a href="articles/${article.id}.html" class="read-more-link" data-open-article="${article.id}">
               <span>${activeLang === "en" ? "Read Article" : "อ่านบทความ"} &rarr;</span>
             </a>
-            <button class="bookmark-btn ${isBookmarked ? "is-saved" : ""}" data-bookmark="${article.id}" aria-label="${isBookmarked ? "Remove Bookmark" : "Save for Later"}">
-              <span class="bookmark-icon">${isBookmarked ? "🔖" : "🏷️"}</span>
-              <span class="bookmark-text">${isBookmarked ? (activeLang === "en" ? "Saved" : "ที่บันทึกไว้") : (activeLang === "en" ? "Read Later" : "บันทึกไว้อ่าน")}</span>
-            </button>
+            <div class="card-footer-right">
+              <a href="${article.url || "#"}" class="fb-source-link" target="_blank" rel="noreferrer" aria-label="${activeLang === "en" ? "Read on Facebook" : "อ่านบน Facebook"}">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>
+                <span>${activeLang === "en" ? "Facebook" : "Facebook"}</span>
+              </a>
+              <button class="bookmark-btn ${isBookmarked ? "is-saved" : ""}" data-bookmark="${article.id}" aria-label="${isBookmarked ? "Remove Bookmark" : "Save for Later"}">
+                <span class="bookmark-icon">${isBookmarked ? "\uD83D\uDD16" : "\uD83C\uDF9F\uFE0F"}</span>
+                <span class="bookmark-text">${isBookmarked ? (activeLang === "en" ? "Saved" : "\u0E17\u0E35\u0E48\u0E1A\u0E31\u0E19\u0E17\u0E36\u0E01\u0E44\u0E27\u0E49") : (activeLang === "en" ? "Read Later" : "\u0E1A\u0E31\u0E19\u0E17\u0E36\u0E01\u0E44\u0E27\u0E49\u0E2D\u0E48\u0E32\u0E19")}</span>
+              </button>
+            </div>
           </div>
         </article>`;
       }

@@ -6,12 +6,12 @@ Fengshui Balance is a public website for residential, commercial, spirit-house, 
 
 ## Public Pages
 
-- [Home](https://fengshuibalance.vercel.app/): Main page of Fengshui Balance, showing services, methodology, customer reviews, and featured articles.
-- [Projects](https://fengshuibalance.vercel.app/projects.html): Client projects and reference works for homes, offices, and shrines.
-- [Ajarn Suppachai Biography](https://fengshuibalance.vercel.app/ajarn-suppachai.html): Biography, credentials, and lineage of Ajarn Suppachai.
-- [Ajarn Grianggrai Biography](https://fengshuibalance.vercel.app/ajarn-grianggrai.html): Biography of Ajarn Grianggrai Boonthakanon, who is Ajarn Suppachai's mentor.
-- [Brand Portfolio](https://fengshuibalance.vercel.app/brand-portfolio.html): Portfolio of sister brands under Ajarn Suppachai (Aviva Spirit, Miracles369).
-- [Articles](https://fengshuibalance.vercel.app/articles.html): Complete knowledge library of articles and fengshui tips.
+- [Home](https://fengshuibalance.net/): Main page of Fengshui Balance, showing services, methodology, customer reviews, and featured articles.
+- [Projects](https://fengshuibalance.net/projects.html): Client projects and reference works for homes, offices, and shrines.
+- [Ajarn Suppachai Biography](https://fengshuibalance.net/ajarn-suppachai.html): Biography, credentials, and lineage of Ajarn Suppachai.
+- [Ajarn Grianggrai Biography](https://fengshuibalance.net/ajarn-grianggrai.html): Biography of Ajarn Grianggrai Boonthakanon, who is Ajarn Suppachai's mentor.
+- [Brand Portfolio](https://fengshuibalance.net/brand-portfolio.html): Portfolio of sister brands under Ajarn Suppachai (Aviva Spirit, Miracles369).
+- [Articles](https://fengshuibalance.net/articles.html): Complete knowledge library of articles and fengshui tips.
 
 ## Contact & Socials
 
@@ -19,5 +19,5 @@ Fengshui Balance is a public website for residential, commercial, spirit-house, 
 
 ## Meta Resources
 
-- [robots.txt](https://fengshuibalance.vercel.app/robots.txt): Search engine crawler directives.
-- [sitemap.xml](https://fengshuibalance.vercel.app/sitemap.xml): XML sitemap listing all crawlable URLs.
+- [robots.txt](https://fengshuibalance.net/robots.txt): Search engine crawler directives.
+- [sitemap.xml](https://fengshuibalance.net/sitemap.xml): XML sitemap listing all crawlable URLs.

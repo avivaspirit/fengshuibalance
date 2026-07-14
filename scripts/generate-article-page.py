@@ -7,7 +7,16 @@ import json
 import re
 from pathlib import Path
 
-BASE_URL = "https://fengshuibalance.vercel.app"
+BASE_URL = "https://fengshuibalance.net"
+
+GA4_SNIPPET = """<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-30SJEY0LYC"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-30SJEY0LYC');
+</script>"""
 
 TAG_SECTION_TH = {
     "timing": "ฤกษ์มงคลและฤกษ์กระทำการ (Auspicious Timing)",
@@ -114,6 +123,7 @@ def render_article_html(article: dict, enrich) -> str:
     <link rel="apple-touch-icon" href="../assets/favicon.svg">
     <link rel="shortcut icon" href="../assets/favicon.svg">
     <title>{title} | Fengshui Balance</title>
+    <meta name="robots" content="index, follow, max-image-preview:large">
     <meta name="description" content="{description}">
     <link rel="canonical" href="{article_url}">
     <link rel="alternate" hreflang="th" href="{article_url}">
@@ -131,6 +141,7 @@ def render_article_html(article: dict, enrich) -> str:
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=Manrope:wght@400;600;700&family=Noto+Sans+Thai:wght@400;600;700&family=Noto+Serif+Thai:wght@700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="../styles.css">
+    {GA4_SNIPPET}
   </head>
   <body class="article-page">
     <header class="site-header">

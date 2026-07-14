@@ -7,14 +7,14 @@
     <title>404 — ไม่พบหน้า | Fengshui Balance</title>
     <meta name="robots" content="noindex, follow">
     <meta name="description" content="ไม่พบหน้าที่คุณค้นหา กลับสู่หน้าหลัก Fengshui Balance เพื่อดูบริการฮวงจุ้ยและบทความ">
-    <link rel="canonical" href="https://fengshuibalance.vercel.app/">
+    <link rel="canonical" href="https://fengshuibalance.net/">
     <meta property="og:title" content="404 — ไม่พบหน้า | Fengshui Balance">
     <meta property="og:description" content="ไม่พบหน้าที่คุณค้นหา กลับสู่หน้าหลักเพื่อดูบริการฮวงจุ้ยและบทความ">
     <meta property="og:type" content="website">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=Manrope:wght@400;600;700&family=Noto+Sans+Thai:wght@400;600;700&family=Noto+Serif+Thai:wght@400;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="styles.css?v=20260624d">
+    <link rel="stylesheet" href="styles.css?v=20260715a">
     <style>
       .not-found{display:grid;place-items:center;min-height:80vh;text-align:center;padding:40px 24px}
       .not-found h1{font-size:clamp(64px,12vw,120px);color:var(--gold);line-height:1;margin-bottom:12px}
@@ -23,11 +23,36 @@
     </style>
   </head>
   <body>
-    <header class="site-header">
+        <header class="site-header" data-header>
       <a class="brand" href="index.html#top">
         <span class="brand-mark" aria-hidden="true"></span>
-        <span><strong>Fengshui Balance</strong><small>ฮวงจุ้ย สมดุลแห่งธรรมชาติ</small></span>
+        <span>
+          <strong>Fengshui Balance</strong>
+          <small data-en="Nature-balanced Fengshui · Home · Business · Destiny" data-th="ฮวงจุ้ย สมดุลแห่งธรรมชาติ · บ้าน · ธุรกิจ · ดวง · ฤกษ์">ฮวงจุ้ย สมดุลแห่งธรรมชาติ · บ้าน · ธุรกิจ · ดวง · ฤกษ์</small>
+        </span>
       </a>
+
+      <div class="header-tools">
+        <button class="menu-toggle" type="button" aria-expanded="false" aria-controls="site-menu" data-menu-toggle aria-label="Open menu">
+          <span class="menu-toggle-icon" aria-hidden="true"><span></span><span></span><span></span></span>
+          <span class="sr-only" data-en="Menu" data-th="เมนู">เมนู</span>
+        </button>
+      </div>
+
+      <div class="nav-backdrop" data-nav-backdrop hidden></div>
+
+      <nav id="site-menu" class="site-nav" aria-label="Primary navigation" data-menu>
+        <a href="index.html#services" class="site-nav-link"><span class="nav-icon" aria-hidden="true">🏠</span><span data-en="Consulting" data-th="ปรึกษา">ปรึกษา</span></a>
+        <a href="index.html#method" class="site-nav-link"><span class="nav-icon" aria-hidden="true">⚖️</span><span data-en="Method" data-th="วิธีทำงาน">วิธีทำงาน</span></a>
+        <a href="index.html#work" class="site-nav-link"><span class="nav-icon" aria-hidden="true">📐</span><span data-en="Cases" data-th="เคสงาน">เคสงาน</span></a>
+        <a href="projects.html" class="site-nav-link"><span class="nav-icon" aria-hidden="true">✦</span><span data-en="References" data-th="ผลงานอ้างอิง">ผลงานอ้างอิง</span></a>
+        <a href="ajarn-suppachai.html" class="site-nav-link"><span class="nav-icon" aria-hidden="true">📜</span><span data-en="Ajarn" data-th="ประวัติ">ประวัติ</span></a>
+        <a href="articles.html" class="site-nav-link"><span class="nav-icon" aria-hidden="true">📚</span><span data-en="Knowledge" data-th="คลังความรู้">คลังความรู้</span></a>
+        <a class="nav-cta" href="https://m.me/fengshuibalance" target="_blank" rel="noreferrer" data-en="Contact Ajarn" data-th="ติดต่ออาจารย์"><svg class="btn-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2C6.477 2 2 6.145 2 11.259c0 2.824 1.27 5.349 3.293 7.131V22l3.016-1.657A10.56 10.56 0 0 0 12 20.518c5.523 0 10-4.145 10-9.259C22 6.145 17.523 2 12 2zm1.07 12.461L10.96 12.18l-4.082 2.28 4.49-4.762 2.111 2.281 4.082-2.28-4.49 4.762z"/></svg>ติดต่ออาจารย์</a>
+        <button class="language-toggle" type="button" data-lang-toggle aria-label="Change language">
+          <span data-lang-label>TH</span>
+        </button>
+      </nav>
     </header>
     <main class="not-found">
       <h1>404</h1>
@@ -38,5 +63,6 @@
         <a class="button secondary" href="articles.html">คลังความรู้</a>
       </div>
     </main>
+      <script src="script.js?v=20260714b" defer></script>
   </body>
 </html>
