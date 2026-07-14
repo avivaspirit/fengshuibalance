@@ -264,8 +264,9 @@ const articleSearchSubmit = document.querySelector("[data-article-search-submit]
 const articleSearchForm = document.querySelector("[data-article-search-form]");
 
 function filteredArticles() {
-  const q = (articleSearch?.value || "").trim().toLowerCase();
-  let list = articles;
+  var q = (articleSearch ? articleSearch.value : "").trim().toLowerCase();
+  var terms = q ? q.split(/\s+/).filter(Boolean) : [];
+  var list = articles;
   if (activeFilter === "saved") {
     list = articles.filter((article) => bookmarkedIds.includes(article.id));
   } else {
@@ -275,12 +276,34 @@ function filteredArticles() {
         (activeFilter === "all" || articleTags(article).includes(activeFilter))
     );
   }
-  return list
-    .filter((article) => {
-      const haystack = `${article.title} ${article.body} ${articleTags(article).join(" ")}`.toLowerCase();
-      return !q || haystack.includes(q);
-    })
-    .sort((a, b) => (b.metrics?.wei || 0) - (a.metrics?.wei || 0));
+  if (!terms.length) {
+    return list.sort(function (a, b) {
+      return (b.metrics ? b.metrics.wei : 0) - (a.metrics ? a.metrics.wei : 0);
+    });
+  }
+  var scored = [];
+  for (var i = 0; i < list.length; i++) {
+    var article = list[i];
+    var title = (article.title || "").toLowerCase();
+    var body = (article.body || "").toLowerCase();
+    var tagsStr = articleTags(article).join(" ").toLowerCase();
+    var allMatched = true;
+    var score = 0;
+    for (var j = 0; j < terms.length; j++) {
+      var t = terms[j];
+      var matched = false;
+      if (title.indexOf(t) !== -1) { score += 1000; matched = true; }
+      if (tagsStr.indexOf(t) !== -1) { score += 300; matched = true; }
+      if (body.indexOf(t) !== -1) { score += 10; matched = true; }
+      if (!matched) { allMatched = false; break; }
+    }
+    if (allMatched) {
+      score += (article.metrics ? article.metrics.wei || 0 : 0) * 0.001;
+      scored.push({ article: article, score: score });
+    }
+  }
+  scored.sort(function (a, b) { return b.score - a.score; });
+  return scored.map(function (s) { return s.article; });
 }
 
 function recommendedArticles() {
@@ -405,12 +428,23 @@ function renderArticles() {
   }
 
   const visible = list.slice(0, visibleLimit);
-  articleCount.textContent =
-    activeLang === "en" ? `${list.length} published articles` : `${list.length} บทความที่เผยแพร่`;
+  var q = (articleSearch ? articleSearch.value : "").trim().toLowerCase();
+  var terms = q ? q.split(/\s+/).filter(Boolean) : [];
+  if (q && activeFilter !== "saved") {
+    articleCount.textContent = activeLang === "en"
+      ? list.length + " results for \u201C" + articleSearch.value.trim() + "\u201D"
+      : list.length + " \u0e1c\u0e25\u0e25\u0e31\u0e1e\u0e18\u0e4c\u0e2a\u0e33\u0e2b\u0e23\u0e31\u0e1a \u201C" + articleSearch.value.trim() + "\u201D";
+  } else {
+    articleCount.textContent =
+      activeLang === "en" ? `${list.length} published articles` : `${list.length} \u0e1a\u0e17\u0e04\u0e27\u0e32\u0e21\u0e17\u0e35\u0e48\u0e40\u0e1c\u0e22\u0e41\u0e1e\u0e23\u0e48`;
+  }
   articleGrid.innerHTML = visible
     .map(
       (article) => {
         const isBookmarked = bookmarkedIds.includes(article.id);
+        var titleHtml = terms.length ? highlightTerms(article.title, terms) : article.title;
+        var bodyExcerpt = excerpt(article.body, 120);
+        var bodyHtml = terms.length ? highlightTerms(bodyExcerpt, terms) : bodyExcerpt;
         return `
         <article class="article-card ${article.image ? "" : "is-text-only"}">
           <a href="articles/${article.id}.html" class="card-link" data-open-article="${article.id}">
@@ -420,10 +454,10 @@ function renderArticles() {
             </div>` : ""}
             <div class="card-content">
               ${renderArticleChips(article)}
-              <strong>${article.title}</strong>
+              <strong>${titleHtml}</strong>
               ${article.seoKeyword ? `<em class="keyword-tag">${article.seoKeyword}</em>` : ""}
               <small>${article.date || "Fengshui Balance"}${popularityLabel(article)}</small>
-              <p>${excerpt(article.body, 120)}</p>
+              <p>${bodyHtml}</p>
             </div>
           </a>
           <div class="card-footer">
@@ -531,21 +565,75 @@ function runArticleSearch() {
   ensureFullArticles().then(() => {
     visibleLimit = 6;
     renderArticles();
-    articleGrid?.scrollIntoView({ behavior: "smooth", block: "nearest" });
   });
 }
 
+/* Debounced search — 250ms delay so typing long Thai queries doesn't lag */
+var _searchTimer = null;
+function debouncedSearch() {
+  if (_searchTimer) clearTimeout(_searchTimer);
+  _searchTimer = setTimeout(function () {
+    runArticleSearch();
+  }, 250);
+  updateClearButton();
+}
+
+/* Show/hide the clear (X) button based on input content */
+function updateClearButton() {
+  var btn = document.querySelector("[data-search-clear]");
+  if (!btn) return;
+  var hasText = articleSearch && articleSearch.value.trim().length > 0;
+  btn.style.display = hasText ? "flex" : "none";
+}
+
+/* Highlight matched terms in text — returns safe HTML */
+function highlightTerms(text, terms) {
+  if (!terms.length || !text) return text;
+  var html = text;
+  for (var i = 0; i < terms.length; i++) {
+    var t = terms[i];
+    if (!t) continue;
+    var re = new RegExp("(" + t.replace(/[.*+?^${}()|[\]\\]/g, "\\$&") + ")", "gi");
+    html = html.replace(re, "<mark class=\"search-hit\">$1</mark>");
+  }
+  return html;
+}
+
 if (articleSearch) {
-  articleSearch.addEventListener("input", runArticleSearch);
+  articleSearch.addEventListener("input", debouncedSearch);
   articleSearch.addEventListener("keydown", (event) => {
     if (event.key === "Enter") {
       event.preventDefault();
+      if (_searchTimer) clearTimeout(_searchTimer);
       runArticleSearch();
     }
   });
   articleSearch.addEventListener("focus", ensureFullArticles);
   articleSearch.addEventListener("mouseenter", ensureFullArticles);
+
+  /* Keyboard shortcut: "/" focuses search */
+  document.addEventListener("keydown", (event) => {
+    if (event.key === "/" && document.activeElement !== articleSearch) {
+      var tag = document.activeElement ? document.activeElement.tagName : "";
+      if (tag !== "INPUT" && tag !== "TEXTAREA") {
+        event.preventDefault();
+        articleSearch.focus();
+      }
+    }
+  });
 }
+
+/* Clear button */
+document.addEventListener("click", (event) => {
+  var btn = event.target.closest("[data-search-clear]");
+  if (!btn) return;
+  if (articleSearch) {
+    articleSearch.value = "";
+    updateClearButton();
+    runArticleSearch();
+    articleSearch.focus();
+  }
+});
 
 if (articleSearchForm && articleSearch) {
   articleSearchForm.addEventListener("submit", (event) => {

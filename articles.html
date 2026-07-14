@@ -65,8 +65,43 @@
       .articles-archive-page .search-submit-infield:active{
         background:#1a3d2e;
       }
+      .articles-archive-page .search-clear-btn{
+        position:absolute;
+        top:50%;
+        right:52px;
+        transform:translateY(-50%);
+        display:none;
+        align-items:center;
+        justify-content:center;
+        width:32px;
+        height:32px;
+        padding:0;
+        border:0;
+        border-radius:50%;
+        background:rgba(23,63,49,0.1);
+        color:#2d5a47;
+        cursor:pointer;
+        -webkit-tap-highlight-color:transparent;
+      }
+      .articles-archive-page .search-clear-btn:hover{
+        background:rgba(23,63,49,0.2);
+      }
+      mark.search-hit{
+        background:rgba(184,152,110,0.25);
+        color:inherit;
+        border-radius:3px;
+        padding:0 2px;
+      }
     </style>
-  </head>
+  <!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-30SJEY0LYC"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-30SJEY0LYC');
+</script>
+</head>
   <body class="subpage articles-archive-page">
     <header class="site-header" data-header>
       <a class="brand" href="index.html#top">
@@ -112,6 +147,9 @@
                   <button class="search-submit-infield" type="submit" data-article-search-submit aria-label="Search articles" title="Search">
                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="7"></circle><path d="m20 20-3.5-3.5"></path></svg>
                   </button>
+                  <button class="search-clear-btn" type="button" data-search-clear aria-label="ลบคำค้นหา" title="ล้างคำค้นหา" style="display:none">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
+                  </button>
                 </form>
               </div>
               <div class="filter-row" data-article-filters></div>
@@ -130,6 +168,6 @@
     </footer>
 
     <script src="articles.js" defer></script>
-    <script src="script.js?v=20260624d" defer></script>
+    <script src="script.js?v=20260714a" defer></script>
   </body>
 </html>
