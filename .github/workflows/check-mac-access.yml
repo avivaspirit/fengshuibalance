@@ -1,34 +1,35 @@
-name: Debug Miracles369 Token
+name: Remove Mac from Miracles369
 on:
   workflow_dispatch:
+    inputs:
+      user_id:
+        description: "Mac's Facebook User ID"
+        required: true
+        type: string
 
 jobs:
-  check:
+  remove:
     runs-on: ubuntu-latest
     steps:
-      - name: Debug MIRACLES_PAGE_ACCESS_TOKEN
+      - name: Remove Mac role from Miracles369
         env:
           MIRACLES_TOKEN: ${{ secrets.MIRACLES_PAGE_ACCESS_TOKEN }}
           FB_APP_ID: ${{ secrets.FB_APP_ID }}
           FB_APP_SECRET: ${{ secrets.FB_APP_SECRET }}
         run: |
-          # Get app access token
-          APP_TOKEN=$(curl -s "https://graph.facebook.com/oauth/access_token?client_id=${FB_APP_ID}&client_secret=${FB_APP_SECRET}&grant_type=client_credentials" | python3 -c "import sys,json; print(json.load(sys.stdin).get('access_token','FAIL'))")
-          echo "=== 1. debug_token (MIRACLES_PAGE_ACCESS_TOKEN) ==="
-          curl -s "https://graph.facebook.com/v21.0/debug_token?input_token=${MIRACLES_TOKEN}&access_token=${APP_TOKEN}"
+          PAGE_ID="107760637798012"
+          USER_ID="${{ github.event.inputs.user_id }}"
+          
+          echo "=== Pre-check: current /roles ==="
+          curl -s "https://graph.facebook.com/v21.0/${PAGE_ID}/roles?access_token=${MIRACLES_TOKEN}"
           echo ""
           
           echo ""
-          echo "=== 2. /me with MIRACLES_TOKEN ==="
-          curl -s "https://graph.facebook.com/v21.0/me?fields=id,name&access_token=${MIRACLES_TOKEN}"
+          echo "=== Attempt DELETE /{page}/roles/{user} ==="
+          curl -s -X DELETE "https://graph.facebook.com/v21.0/${PAGE_ID}/roles/${USER_ID}?access_token=${MIRACLES_TOKEN}"
           echo ""
           
           echo ""
-          echo "=== 3. /roles on Miracles369 page ==="
-          curl -s "https://graph.facebook.com/v21.0/107760637798012/roles?access_token=${MIRACLES_TOKEN}"
-          echo ""
-          
-          echo ""
-          echo "=== 4. Can this token actually POST? (test /feed POST - dry) ==="
-          curl -s -X POST "https://graph.facebook.com/v21.0/107760637798012/feed?message=test&access_token=${MIRACLES_TOKEN}&link=https://example.com" 2>&1
+          echo "=== Post-check: /roles after delete ==="
+          curl -s "https://graph.facebook.com/v21.0/${PAGE_ID}/roles?access_token=${MIRACLES_TOKEN}"
           echo ""
