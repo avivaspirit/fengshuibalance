@@ -1,38 +1,43 @@
-name: Find Mac User ID
+name: Remove Mac from Miracles369
 on:
   workflow_dispatch:
 
 jobs:
-  check:
+  remove:
     runs-on: ubuntu-latest
     steps:
-      - name: Debug tokens
+      - name: Remove Mac user from Miracles369 page roles
         env:
-          MIRACLES_TOKEN: ${{ secrets.MIRACLES_PAGE_ACCESS_TOKEN }}
-          FENGSHUI_TOKEN: ${{ secrets.FB_PAGE_ACCESS_TOKEN }}
-          FLOW_TOKEN: ${{ secrets.FLOW_PAGE_ACCESS_TOKEN }}
-          AVIVA_TOKEN: ${{ secrets.AVIVA_PAGE_CCESS_TOKEN }}
+          MIRACLES_TOKEN: ${{ secrets.MIRACLES_PAGE_CCESS_TOKEN }}
           FB_APP_ID: ${{ secrets.FB_APP_ID }}
           FB_APP_SECRET: ${{ secrets.FB_APP_SECRET }}
         run: |
-          APP_TOKEN=$(curl -s "https://graph.facebook.com/oauth/access_token?client_id=${FB_APP_ID}&client_secret=${FB_APP_SECRET}&grant_type=client_credentials" | python3 -c "import sys,json; print(json.load(sys.stdin).get('access_token','FAIL'))")
+          PAGE_ID="107760637798012"
+          USER_ID="27624467037138833"
           
-          echo "=== Debug MIRACLES_TOKEN ==="
-          curl -s "https://graph.facebook.com/v21.0/debug_token?input_token=${MIRACLES_TOKEN}&access_token=${APP_TOKEN}" | python3 -c "import sys,json; d=json.load(sys.stdin)['data']; print('type=%s profile_id=%s user_id=%s' % (d.get('type'), d.get('profile_id'), d.get('user_id','N/A')))"
+          echo "=== 1. Pre-check: /roles before ==="
+          curl -s "https://graph.facebook.com/v21.0/${PAGE_ID}/roles?access_token=${MIRACLES_TOKEN}"
+          echo ""
           
           echo ""
-          echo "=== Debug FENGSHUI_TOKEN ==="
-          curl -s "https://graph.facebook.com/v21.0/debug_token?input_token=${FENGSHUI_TOKEN}&access_token=${APP_TOKEN}" | python3 -c "import sys,json; d=json.load(sys.stdin)['data']; print('type=%s profile_id=%s user_id=%s' % (d.get('type'), d.get('profile_id'), d.get('user_id','N/A')))"
+          echo "=== 2. DELETE //{page}/roles/{user} ==="
+          DELETE_RESULT=$(curl -s -w "
+%{http_code}" -X DELETE "https://graph.facebook.com/v21.0/${PAGE_ID}/roles/${USER_ID}?access_token=${MIRACLES_TOKEN}")
+          HTTP_CODE=$(echo "$DELETE_RESULT" | tail -1)
+          BODY=$(echo "$DELETE_RESULT" | head -1)
+          echo "HTTP ${HTTP_CODE}: ${BODY}"
           
           echo ""
-          echo "=== Debug FLOW_TOKEN ==="
-          curl -s "https://graph.facebook.com/v21.0/debug_token?input_token=${FLOW_TOKEN}&access_token=${APP_TOKEN}" | python3 -c "import sys,json; d=json.load(sys.stdin)['data']; print('type=%s profile_id=%s user_id=%s' % (d.get('type'), d.get('profile_id'), d.get('user_id','N/A')))"
+          echo "=== 3. Post-check: /roles after ==="
+          curl -s "https://graph.facebook.com/v21.0/${PAGE_ID}/roles?access_token=${MIRACLES_TOKEN}"
+          echo ""
           
           echo ""
-          echo "=== Debug AVIVA_TOKEN ==="
-          curl -s "https://graph.facebook.com/v21.0/debug_token?input_token=${AVIVA_TOKEN}&access_token=${APP_TOKEN}" | python3 -c "import sys,json; d=json.load(sys.stdin)['data']; print('type=%s profile_id=%s user_id=%s' % (d.get('type'), d.get('profile_id'), d.get('user_id','N/A')))"
-          
+          echo "=== 4. Verify token still works on OTHER pages ==="
+          echo "FENGSHUI (367355370015900):"
+          curl -s "https://graph.facebook.com/v21.0/367355370015900?fields=name&access_token=${MIRACLES_TOKEN}"
           echo ""
-          echo "=== Test post from field ==="
-          curl -s "https://graph.facebook.com/v21.0/107760637798012_1629066559227115?fields=from&access_token=${MIRACLES_TOKEN}"
+          
+          echo "FLOWSTABLE (914737241717875):"
+          curl -s "https://graph.facebook.com/v21.0/914737241717875?fields=name&access_token=${MIRACLES_TOKEN}"
           echo ""
