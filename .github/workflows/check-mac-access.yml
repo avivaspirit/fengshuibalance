@@ -1,0 +1,53 @@
+name: Check Mac Access to All Pages
+on:
+  workflow_dispatch:
+
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check all page tokens and roles
+        env:
+          MIRACLES_TOKEN: ${{ secrets.MIRACLES_PAGE_ACCESS_TOKEN }}
+          FENGSHUI_TOKEN: ${{ secrets.FB_PAGE_ACCESS_TOKEN }}
+          FLOW_TOKEN: ${{ secrets.FLOW_PAGE_ACCESS_TOKEN }}
+          AVIVA_TOKEN: ${{ secrets.AVIVA_PAGE_ACCESS_TOKEN }}
+          FB_APP_ID: ${{ secrets.FB_APP_ID }}
+          FB_APP_SECRET: ${{ secrets.FB_APP_SECRET }}
+          FB_PAGE_ID: ${{ secrets.FB_PAGE_ID }}
+        run: |
+          echo "=== 1. Miracles369 (107760637798012) ==="
+          MT=$(curl -s "https://graph.facebook.com/v21.0/107760637798012?fields=access_token&access_token=${MIRACLES_TOKEN}" | python3 -c "import sys,json; d=json.load(sys.stdin); print(d.get('access_token','FAIL:'+json.dumps(d)))")
+          echo "Token: ${MT:0:15}..."
+          echo "--- /roles with page token ---"
+          curl -s "https://graph.facebook.com/v21.0/107760637798012/roles?access_token=${MT}"
+          echo ""
+          echo "--- Page name ---"
+          curl -s "https://graph.facebook.com/v21.0/107760637798012?fields=name,username,category&access_token=${MT}"
+          echo ""
+          
+          echo ""
+          echo "=== 2. Fengshuibalance ==="
+          FT=$(curl -s "https://graph.facebook.com/v21.0/${FB_PAGE_ID}?fields=access_token&access_token=${FENGSHUI_TOKEN}" | python3 -c "import sys,json; d=json.load(sys.stdin); print(d.get('access_token','FAIL:'+json.dumps(d)))")
+          echo "Token: ${FT:0:15}..."
+          echo "--- /roles ---"
+          curl -s "https://graph.facebook.com/v21.0/${FB_PAGE_ID}/roles?access_token=${FT}"
+          echo ""
+          
+          echo ""
+          echo "=== 3. Flowstable ==="
+          curl -s "https://graph.facebook.com/v21.0/me/accounts?fields=id,name,tasks,access_token&access_token=${FLOW_TOKEN}"
+          echo ""
+          
+          echo ""
+          echo "=== 4. Aviva ==="
+          curl -s "https://graph.facebook.com/v21.0/me/accounts?fields=id,name,tasks,access_token&access_token=${AVIVA_TOKEN}"
+          echo ""
+          
+          echo ""
+          echo "=== 5. Miracles with app token ==="
+          APP_TOKEN=$(curl -s "https://graph.facebook.com/oauth/access_token?client_id=${FB_APP_ID}&client_secret=${FB_APP_SECRET}&grant_type=client_credentials" | python3 -c "import sys,json; print(json.load(sys.stdin).get('access_token','FAIL'))")
+          curl -s "https://graph.facebook.com/v21.0/107760637798012?fields=name&access_token=${APP_TOKEN}"
+          echo ""
+          curl -s "https://graph.facebook.com/v21.0/107760637798012/roles?access_token=${APP_TOKEN}"
+          echo ""
