@@ -1,0 +1,24 @@
+name: Check Miracles369 Page Roles
+on:
+  workflow_dispatch:
+
+jobs:
+  check-roles:
+    runs-on: ubuntu-latest
+    steps:
+      - name: List page roles
+        env:
+          MIRACLES_TOKEN: ${{ secrets.MIRACLES_PAGE_ACCESS_TOKEN }}
+          PAGE_ID: "107760637798012"
+        run: |
+          echo "=== Page Info ==="
+          curl -s "https://graph.facebook.com/v21.0/${PAGE_ID}?fields=id,name,access_token&access_token=${MIRACLES_TOKEN}" | python3 -m json.tool
+          echo ""
+          echo "=== Page Roles ==="
+          curl -s "https://graph.facebook.com/v21.0/${PAGE_ID}/roles?access_token=${MIRACLES_TOKEN}" | python3 -m json.tool
+          echo ""
+          echo "=== /me (token owner) ==="
+          curl -s "https://graph.facebook.com/v21.0/me?access_token=${MIRACLES_TOKEN}" | python3 -m json.tool
+          echo ""
+          echo "=== Token Debug ==="
+          curl -s "https://graph.facebook.com/debug_token?input_token=${MIRACLES_TOKEN}&access_token=${MIRACLES_TOKEN}" | python3 -m json.tool
