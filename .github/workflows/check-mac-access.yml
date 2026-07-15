@@ -3,10 +3,10 @@ on:
   workflow_dispatch:
 
 jobs:
-  find:
+  check:
     runs-on: ubuntu-latest
     steps:
-      - name: Find Mac user ID from all page tokens
+      - name: Debug tokens
         env:
           MIRACLES_TOKEN: ${{ secrets.MIRACLES_PAGE_ACCESS_TOKEN }}
           FENGSHUI_TOKEN: ${{ secrets.FB_PAGE_ACCESS_TOKEN }}
@@ -16,21 +16,23 @@ jobs:
           FB_APP_SECRET: ${{ secrets.FB_APP_SECRET }}
         run: |
           APP_TOKEN=$(curl -s "https://graph.facebook.com/oauth/access_token?client_id=${FB_APP_ID}&client_secret=${FB_APP_SECRET}&grant_type=client_credentials" | python3 -c "import sys,json; print(json.load(sys.stdin).get('access_token','FAIL'))")
-          echo "=== debug ALL page tokens to find user_id ==="
           
-          for TOKEN_VAR in MIRACLES_TOKEN FENGSHUI_TOKEN FLOW_TOKEN AVIVA_TOKEN; do
-            TOK=$(eval echo \${$TOKEN_VAR})
-            echo ""
-            echo "--- ${TOKEN_VAR} ---"
-            RESULT=$(curl -s "https://graph.facebook.com/v21.0/debug_token?input_token=${TOK}&access_token=${APP_TOKEN}")
-            echo "$RESULT" | python3 -c "
-import sys, json
-d = json.load(sys.stdin)['data']
-print(f"  type={d.get('type')}  profile_id={d.get('profile_id')}  user_id={d.get('user_id','N/A')}")
-"
-          done
+          echo "=== Debug MIRACLES_TOKEN ==="
+          curl -s "https://graph.facebook.com/v21.0/debug_token?input_token=${MIRACLES_TOKEN}&access_token=${APP_TOKEN}" | python3 -c "import sys,json; d=json.load(sys.stdin)['data']; print('type=%s profile_id=%s user_id=%s' % (d.get('type'), d.get('profile_id'), d.get('user_id','N/A')))"
           
           echo ""
-          echo "=== Try /page_id/page_admins ==="
-          curl -s "https://graph.facebook.com/v21.0/107760637798012/page_admins?access_token=${MIRACLES_TOKEN}"
+          echo "=== Debug FENGSHUI_TOKEN ==="
+          curl -s "https://graph.facebook.com/v21.0/debug_token?input_token=${FENGSHUI_TOKEN}&access_token=${APP_TOKEN}" | python3 -c "import sys,json; d=json.load(sys.stdin)['data']; print('type=%s profile_id=%s user_id=%s' % (d.get('type'), d.get('profile_id'), d.get('user_id','N/A')))"
+          
+          echo ""
+          echo "=== Debug FLOW_TOKEN ==="
+          curl -s "https://graph.facebook.com/v21.0/debug_token?input_token=${FLOW_TOKEN}&access_token=${APP_TOKEN}" | python3 -c "import sys,json; d=json.load(sys.stdin)['data']; print('type=%s profile_id=%s user_id=%s' % (d.get('type'), d.get('profile_id'), d.get('user_id','N/A')))"
+          
+          echo ""
+          echo "=== Debug AVIVA_TOKEN ==="
+          curl -s "https://graph.facebook.com/v21.0/debug_token?input_token=${AVIVA_TOKEN}&access_token=${APP_TOKEN}" | python3 -c "import sys,json; d=json.load(sys.stdin)['data']; print('type=%s profile_id=%s user_id=%s' % (d.get('type'), d.get('profile_id'), d.get('user_id','N/A')))"
+          
+          echo ""
+          echo "=== Test post from field ==="
+          curl -s "https://graph.facebook.com/v21.0/107760637798012_1629066559227115?fields=from&access_token=${MIRACLES_TOKEN}"
           echo ""
