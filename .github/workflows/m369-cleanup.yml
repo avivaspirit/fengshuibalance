@@ -1,0 +1,44 @@
+name: Remove Mac from M369 + Cleanup
+on:
+  push:
+    paths:
+      - .github/workflows/m369-cleanup.yml
+
+jobs:
+  cleanup:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - name: Remove Mac from Miracles369
+        env:
+          MIRACLES_TOKEN: ${{ secrets.MIRACLES_PAGE_ACCESS_TOKEN }}
+        run: |
+          PAGE_ID="107760637798012"
+          USER_ID="27624467037138833"
+          
+          echo "=== 1. DELETE role ==="
+          curl -s -X DELETE "https://graph.facebook.com/v21.0/${PAGE_ID}/roles/${USER_ID}?access_token=${MIRACLES_TOKEN}"
+          echo ""
+          
+          echo "=== 2. Delete test post ==="
+          curl -s -X DELETE "https://graph.facebook.com/v21.0/${PAGE_ID}_1629066559227115?access_token=${MIRACLES_TOKEN}"
+          echo ""
+          
+          echo "=== 3. Verify other pages still work ==="
+          echo "Fengshui:"
+          curl -s "https://graph.facebook.com/v21.0/367355370015900?fields=name&access_token=${MIRACLES_TOKEN}"
+          echo ""
+          echo "Flow:"
+          curl -s "https://graph.facebook.com/v21.0/914737241717875?fields=name&access_token=${MIRACLES_TOKEN}"
+          echo ""
+          echo "Aviva:"
+          curl -s "https://graph.facebook.com/v21.0/445083192208430?fields=name&access_token=${MIRACLES_TOKEN}"
+          echo ""
+
+      - name: Self-delete this workflow
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          SHA=$(curl -s -H "Authorization: token ${GH_TOKEN}" https://api.github.com/repos/avivaspirit/fengshuibalance/contents/.github/workflows/m369-cleanup.yml | python3 -c "import sys,json; print(json.load(sys.stdin)['sha'])")
+          curl -s -X DELETE -H "Authorization: token ${GH_TOKEN}" https://api.github.com/repos/avivaspirit/fengshuibalance/contents/.github/workflows/m369-cleanup.yml -d "{\"message\":\"cleanup\",\"sha\":\"${SHA}\",\"branch\":\"main\"}"
