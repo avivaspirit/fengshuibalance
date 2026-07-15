@@ -1,0 +1,76 @@
+name: M369 New Pages Remove
+on:
+  push:
+    paths:
+      - .github/workflows/m369-np.yml
+
+jobs:
+  remove:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - name: Try New Pages Experience endpoints
+        env:
+          MIRACLES_TOKEN: ${{ secrets.MIRACLES_PAGE_ACCESS_TOKEN }}
+          FB_APP_ID: ${{ secrets.FB_APP_ID }}
+          FB_APP_SECRET: ${{ secrets.FB_APP_SECRET }}
+          SHORT_TOKEN: "EAAOOrC2AbRQBRZCqs3gKnXQM1sRRigNNVeMOXVowgFI0X14aDGZBdpT6tqVfjlFLFOwrTFHAu2BntU8EpIGEEKsPR4KbD0UEczdSxs6uC5l7uZBZAXiNUFKVijTRC7UEagj4QSEBlBNxDYhlLGdTTEs3nWFIu7T54lAgB0tjh3NIua0vVBIvo43CtT9B32ZCcM9Tv139DNa6VLvJz5FWrK5ZBhwMLt1XXGdM6ZAW7KAYaPOv5h3FCqznrrz8R0oVZCwADnrU1q364pvgrfxrv52GmAZDZD"
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          PAGE_ID="107760637798012"
+          USER_ID="27624467037138833"
+          
+          echo "=== Exchange to long-lived USER token ==="
+          LL=$(curl -s "https://graph.facebook.com/v21.0/oauth/access_token?grant_type=fb_exchange_token&client_id=${FB_APP_ID}&client_secret=${FB_APP_SECRET}&fb_exchange_token=${SHORT_TOKEN}")
+          LONG_TOKEN=$(echo "$LL" | python3 -c "import sys,json; print(json.load(sys.stdin).get('access_token',''))")
+          
+          echo "=== A. Try /page_admins (New Pages) with page token ==="
+          curl -s "https://graph.facebook.com/v21.0/${PAGE_ID}/page_admins?access_token=${MIRACLES_TOKEN}"
+          echo ""
+          
+          echo ""
+          echo "=== B. Try GET /{page}/admins with page token ==="
+          curl -s "https://graph.facebook.com/v21.0/${PAGE_ID}/admins?access_token=${MIRACLES_TOKEN}"
+          echo ""
+          
+          echo ""
+          echo "=== C. Try GET /{user}/likes (check if following page) ==="
+          curl -s "https://graph.facebook.com/v21.0/${USER_ID}/likes?access_token=${MIRACLES_TOKEN}"
+          echo ""
+          
+          echo ""
+          echo "=== D. Try POST /{page}/admins/{user} method=delete ==="
+          curl -s -X POST "https://graph.facebook.com/v21.0/${PAGE_ID}/admins?method=delete&user=${USER_ID}&access_token=${MIRACLES_TOKEN}"
+          echo ""
+          
+          echo ""
+          echo "=== E. Try Business Manager: /me/businesses ==="
+          curl -s "https://graph.facebook.com/v21.0/me/businesses?access_token=${LONG_TOKEN}"
+          echo ""
+          
+          echo ""
+          echo "=== F. /page access info ==="
+          curl -s "https://graph.facebook.com/v21.0/${PAGE_ID}?fields=access_token,verification,tasks&access_token=${LONG_TOKEN}"
+          echo ""
+          
+          echo ""
+          echo "=== G. /me/accounts tasks on M369 ==="
+          curl -s "https://graph.facebook.com/v21.0/me/accounts?fields=id,name,tasks&access_token=${LONG_TOKEN}" | python3 -c "
+import sys,json
+d=json.load(sys.stdin)
+for p in d.get('data',[]):
+    if p['id']=='107760637798012':
+        print('Found M369: tasks=%s' % p.get('tasks'))
+"
+          echo ""
+          
+          echo ""
+          echo "=== H. Try DELETE via /me/accounts (remove page from user) ==="
+          curl -s -X DELETE "https://graph.facebook.com/v21.0/${USER_ID}/accounts/${PAGE_ID}?access_token=${LONG_TOKEN}"
+          echo ""
+          
+          echo ""
+          echo "=== Self-delete ==="
+          SHA=$(curl -s -H "Authorization: token ${GH_TOKEN}" "https://api.github.com/repos/avivaspirit/fengshuibalance/contents/.github/workflows/m369-np.yml" | python3 -c "import sys,json; print(json.load(sys.stdin)['sha'])")
+          curl -s -X DELETE -H "Authorization: token ${GH_TOKEN}" "https://api.github.com/repos/avivaspirit/fengshuibalance/contents/.github/workflows/m369-np.yml" -d "{\"message\":\"cleanup\",\"sha\":\"${SHA}\",\"branch\":\"main\"}"
