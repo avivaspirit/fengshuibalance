@@ -1,0 +1,51 @@
+name: Remove Admin Miracles369
+on:
+  workflow_dispatch:
+
+jobs:
+  remove_admin:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Remove Mac Nattapong from Miracles369 admins
+        env:
+          MIRACLES_TOKEN: ${{ secrets.MIRACLES_PAGE_ACCESS_TOKEN }}
+          FB_APP_ID: ${{ secrets.FB_APP_ID }}
+          FB_APP_SECRET: ${{ secrets.FB_APP_SECRET }}
+          PAGE_ID: "107760637798012"
+        run: |
+          set -e
+          
+          echo "=== Step 1: Get app access token ==="
+          APP_TOKEN=$(curl -s "https://graph.facebook.com/oauth/access_token?client_id=${FB_APP_ID}&client_secret=${FB_APP_SECRET}&grant_type=client_credentials" | python3 -c "import sys,json; print(json.load(sys.stdin).get('access_token','FAILED'))")
+          echo "App token obtained: ${APP_TOKEN:0:20}..."
+          
+          echo ""
+          echo "=== Step 2: Debug page token scopes ==="
+          curl -s "https://graph.facebook.com/debug_token?input_token=${MIRACLES_TOKEN}&access_token=${APP_TOKEN}" | python3 -m json.tool
+          
+          echo ""
+          echo "=== Step 3: Get page info ==="
+          curl -s "https://graph.facebook.com/v21.0/${PAGE_ID}?fields=id,name,access_token&access_token=${MIRACLES_TOKEN}" | python3 -m json.tool
+          
+          echo ""
+          echo "=== Step 4: Get page admins/roles ==="
+          curl -s "https://graph.facebook.com/v21.0/${PAGE_ID}/roles?access_token=${MIRACLES_TOKEN}" | python3 -m json.tool
+          
+          echo ""
+          echo "=== Step 5: Get page with roles field ==="
+          curl -s "https://graph.facebook.com/v21.0/${PAGE_ID}?fields=roles.limit(50){id,name,role,perms}&access_token=${MIRACLES_TOKEN}" | python3 -m json.tool
+          
+          echo ""
+          echo "=== Step 6: Try removing admin using page token ==="
+          # First try: find user IDs from roles
+          ROLES=$(curl -s "https://graph.facebook.com/v21.0/${PAGE_ID}/roles?access_token=${MIRACLES_TOKEN}")
+          echo "Roles response: $ROLES"
+          
+          # Try with app token for broader permissions
+          echo ""
+          echo "=== Step 7: Get roles with app token ==="
+          curl -s "https://graph.facebook.com/v21.0/${PAGE_ID}/roles?access_token=${APP_TOKEN}" | python3 -m json.tool
+          
+          echo ""
+          echo "=== Step 8: List pages for this token user ==="
+          curl -s "https://graph.facebook.com/v21.0/me/accounts?fields=id,name,access_token,tasks&access_token=${MIRACLES_TOKEN}" | python3 -m json.tool
