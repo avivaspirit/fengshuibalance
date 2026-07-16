@@ -1,5 +1,5 @@
 {
-  "added": 2,
+  "added": 1,
   "skipped_shared": 5,
   "checked": 75,
   "pages_scanned": 3,
@@ -10,21 +10,16 @@
     "warning": null
   },
   "page_stats": {
-    "followers": 161763,
+    "followers": 161764,
     "followersK": 161,
-    "updatedAt": "2026-07-16T11:38:38.734592+00:00",
+    "updatedAt": "2026-07-16T13:20:08.282181+00:00",
     "pageId": "367355370015900"
   },
   "articles": [
     {
-      "id": "wei-6327",
-      "title": "ความรับผิดชอบ รอนาน 4 เดือนแล้ว ยังไม่จบ ‼",
-      "url": "https://www.facebook.com/1409584711201780/posts/1446057600887824"
-    },
-    {
-      "id": "wei-6328",
+      "id": "wei-6329",
       "title": "รับวิเคราะห์ดวง @ 1000",
-      "url": "https://www.facebook.com/1409584711201780/posts/1446054860888098"
+      "url": "https://www.facebook.com/1409584711201780/posts/1446153367544914"
     }
   ],
   "dry_run": false
