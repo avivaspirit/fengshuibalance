@@ -1,5 +1,5 @@
 {
-  "added": 2,
+  "added": 1,
   "skipped_shared": 5,
   "checked": 75,
   "pages_scanned": 3,
@@ -10,21 +10,16 @@
     "warning": null
   },
   "page_stats": {
-    "followers": 161762,
+    "followers": 161763,
     "followersK": 161,
-    "updatedAt": "2026-07-17T04:54:33.628792+00:00",
+    "updatedAt": "2026-07-17T07:52:40.296235+00:00",
     "pageId": "367355370015900"
   },
   "articles": [
     {
-      "id": "wei-6330",
-      "title": "แจกรางวัลแล้ว แค่เห็นด้านหลัง คนยังจำได้",
-      "url": "https://www.facebook.com/1409584711201780/posts/1446699154157002"
-    },
-    {
-      "id": "wei-6331",
-      "title": "โปรดระวัง‼",
-      "url": "https://www.facebook.com/1409584711201780/posts/1446655734161344"
+      "id": "wei-6332",
+      "title": "ใครเจอ Bug / ข้อผิดพลาดร้ายแรง Website",
+      "url": "https://www.facebook.com/1409584711201780/posts/1446740227486228"
     }
   ],
   "dry_run": false
