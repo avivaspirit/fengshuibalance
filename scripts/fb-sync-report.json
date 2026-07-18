@@ -1,8 +1,8 @@
 {
-  "added": 0,
+  "added": 2,
   "skipped_shared": 4,
-  "checked": 50,
-  "pages_scanned": 2,
+  "checked": 75,
+  "pages_scanned": 3,
   "backfill": false,
   "token": {
     "page_name": "Fengshui Balance - ฮวงจุ้ย สมดุลแห่งธรรมชาติ",
@@ -10,11 +10,22 @@
     "warning": null
   },
   "page_stats": {
-    "followers": 161760,
+    "followers": 161761,
     "followersK": 161,
-    "updatedAt": "2026-07-18T01:27:34.764542+00:00",
+    "updatedAt": "2026-07-18T04:39:06.303830+00:00",
     "pageId": "367355370015900"
   },
-  "articles": [],
+  "articles": [
+    {
+      "id": "wei-6335",
+      "title": "วันนี้ ไปจัดฮวงจุ้ยโครงการใหญ่ที่โคราช",
+      "url": "https://www.facebook.com/1409584711201780/posts/1447506924076225"
+    },
+    {
+      "id": "wei-6336",
+      "title": "พบกัน คืนนี้ เพื่อจิตที่เบาสบาย",
+      "url": "https://www.facebook.com/1409584711201780/posts/1447439797416271"
+    }
+  ],
   "dry_run": false
 }
