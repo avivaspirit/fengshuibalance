@@ -1,8 +1,8 @@
 {
-  "added": 0,
+  "added": 1,
   "skipped_shared": 4,
-  "checked": 50,
-  "pages_scanned": 2,
+  "checked": 75,
+  "pages_scanned": 3,
   "backfill": false,
   "token": {
     "page_name": "Fengshui Balance - ฮวงจุ้ย สมดุลแห่งธรรมชาติ",
@@ -10,11 +10,17 @@
     "warning": null
   },
   "page_stats": {
-    "followers": 161756,
+    "followers": 161757,
     "followersK": 161,
-    "updatedAt": "2026-07-18T12:51:48.993552+00:00",
+    "updatedAt": "2026-07-18T16:43:44.726049+00:00",
     "pageId": "367355370015900"
   },
-  "articles": [],
+  "articles": [
+    {
+      "id": "wei-6337",
+      "title": "New Moon Meditation (Jul 2026)",
+      "url": "https://www.facebook.com/1409584711201780/videos/1118083507293778"
+    }
+  ],
   "dry_run": false
 }
