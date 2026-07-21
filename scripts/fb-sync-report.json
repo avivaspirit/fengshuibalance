@@ -1,8 +1,8 @@
 {
-  "added": 1,
+  "added": 0,
   "skipped_shared": 4,
-  "checked": 75,
-  "pages_scanned": 3,
+  "checked": 50,
+  "pages_scanned": 2,
   "backfill": false,
   "token": {
     "page_name": "Fengshui Balance - ฮวงจุ้ย สมดุลแห่งธรรมชาติ",
@@ -10,17 +10,11 @@
     "warning": null
   },
   "page_stats": {
-    "followers": 161768,
+    "followers": 161767,
     "followersK": 161,
-    "updatedAt": "2026-07-21T13:16:24.322778+00:00",
+    "updatedAt": "2026-07-21T15:28:42.927323+00:00",
     "pageId": "367355370015900"
   },
-  "articles": [
-    {
-      "id": "wei-6346",
-      "title": "โพสสาระ สุขภาพ พัฒนาตนเอง",
-      "url": "https://www.facebook.com/1409584711201780/posts/1450194180474166"
-    }
-  ],
+  "articles": [],
   "dry_run": false
 }
