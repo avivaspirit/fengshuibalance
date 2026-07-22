@@ -1,5 +1,5 @@
 {
-  "added": 1,
+  "added": 3,
   "skipped_shared": 4,
   "checked": 75,
   "pages_scanned": 3,
@@ -10,16 +10,26 @@
     "warning": null
   },
   "page_stats": {
-    "followers": 161771,
+    "followers": 161768,
     "followersK": 161,
-    "updatedAt": "2026-07-22T04:58:53.764936+00:00",
+    "updatedAt": "2026-07-22T08:08:07.718800+00:00",
     "pageId": "367355370015900"
   },
   "articles": [
     {
-      "id": "wei-6348",
-      "title": "ใกล้ฤกษ์งาม ยามมงคล",
-      "url": "https://www.facebook.com/1409584711201780/posts/1450705847089666"
+      "id": "wei-6349",
+      "title": "อร่อยมาก Highly Recommend",
+      "url": "https://www.facebook.com/1409584711201780/posts/1450759033751014"
+    },
+    {
+      "id": "wei-6350",
+      "title": "ใครได้ยินเสียงนกร้อง",
+      "url": "https://www.facebook.com/1409584711201780/posts/1450732780420306"
+    },
+    {
+      "id": "wei-6351",
+      "title": "Meditation ฤกษ์พิเศษ",
+      "url": "https://www.facebook.com/1409584711201780/videos/1056867080222553"
     }
   ],
   "dry_run": false
