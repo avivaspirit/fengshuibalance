@@ -1,8 +1,8 @@
 {
-  "added": 0,
+  "added": 2,
   "skipped_shared": 6,
-  "checked": 50,
-  "pages_scanned": 2,
+  "checked": 75,
+  "pages_scanned": 3,
   "backfill": false,
   "token": {
     "page_name": "Fengshui Balance - ฮวงจุ้ย สมดุลแห่งธรรมชาติ",
@@ -12,9 +12,20 @@
   "page_stats": {
     "followers": 161732,
     "followersK": 161,
-    "updatedAt": "2026-07-29T11:54:05.039747+00:00",
+    "updatedAt": "2026-07-29T13:45:17.681278+00:00",
     "pageId": "367355370015900"
   },
-  "articles": [],
+  "articles": [
+    {
+      "id": "wei-6369",
+      "title": "ฟังธรรมวันอาสาฬหบูชา Full Moon Meditation",
+      "url": "https://www.facebook.com/1409584711201780/videos/924146090731666"
+    },
+    {
+      "id": "wei-6370",
+      "title": "วัดพระอาจารย์ไฟดับ",
+      "url": "https://www.facebook.com/1409584711201780/posts/1456804619813122"
+    }
+  ],
   "dry_run": false
 }
