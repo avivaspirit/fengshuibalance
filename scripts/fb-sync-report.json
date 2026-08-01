@@ -1,8 +1,8 @@
 {
-  "added": 1,
-  "skipped_shared": 6,
-  "checked": 75,
-  "pages_scanned": 3,
+  "added": 0,
+  "skipped_shared": 3,
+  "checked": 50,
+  "pages_scanned": 2,
   "backfill": false,
   "token": {
     "page_name": "Fengshui Balance - ฮวงจุ้ย สมดุลแห่งธรรมชาติ",
@@ -10,17 +10,11 @@
     "warning": null
   },
   "page_stats": {
-    "followers": 161722,
+    "followers": 161725,
     "followersK": 161,
-    "updatedAt": "2026-08-01T08:03:25.247288+00:00",
+    "updatedAt": "2026-08-01T11:11:06.890639+00:00",
     "pageId": "367355370015900"
   },
-  "articles": [
-    {
-      "id": "wei-6378",
-      "title": "องค์เจ้าแม่กวนอิม",
-      "url": "https://www.facebook.com/1409584711201780/posts/1459218846238366"
-    }
-  ],
+  "articles": [],
   "dry_run": false
 }
