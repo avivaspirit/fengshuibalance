@@ -1,8 +1,8 @@
 {
-  "added": 0,
-  "skipped_shared": 4,
-  "checked": 50,
-  "pages_scanned": 2,
+  "added": 1,
+  "skipped_shared": 7,
+  "checked": 75,
+  "pages_scanned": 3,
   "backfill": false,
   "token": {
     "page_name": "Fengshui Balance - ฮวงจุ้ย สมดุลแห่งธรรมชาติ",
@@ -12,9 +12,15 @@
   "page_stats": {
     "followers": 161742,
     "followersK": 161,
-    "updatedAt": "2026-08-03T05:32:28.904078+00:00",
+    "updatedAt": "2026-08-03T09:21:36.005276+00:00",
     "pageId": "367355370015900"
   },
-  "articles": [],
+  "articles": [
+    {
+      "id": "wei-6383",
+      "title": "Protomotion วันนี้ วันสุดท้าย",
+      "url": "https://www.facebook.com/1409584711201780/posts/1461017119391872"
+    }
+  ],
   "dry_run": false
 }
