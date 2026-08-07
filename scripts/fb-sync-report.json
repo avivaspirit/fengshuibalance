@@ -1,8 +1,8 @@
 {
-  "added": 2,
-  "skipped_shared": 7,
-  "checked": 75,
-  "pages_scanned": 3,
+  "added": 0,
+  "skipped_shared": 4,
+  "checked": 50,
+  "pages_scanned": 2,
   "backfill": false,
   "token": {
     "page_name": "Fengshui Balance - ฮวงจุ้ย สมดุลแห่งธรรมชาติ",
@@ -10,22 +10,11 @@
     "warning": null
   },
   "page_stats": {
-    "followers": 161759,
+    "followers": 161757,
     "followersK": 161,
-    "updatedAt": "2026-08-07T14:44:35.937987+00:00",
+    "updatedAt": "2026-08-07T16:41:37.373888+00:00",
     "pageId": "367355370015900"
   },
-  "articles": [
-    {
-      "id": "wei-6394",
-      "title": "อีกราย บอกให้บูชาท้าวเวส",
-      "url": "https://www.facebook.com/1409584711201780/posts/1464805969012987"
-    },
-    {
-      "id": "wei-6395",
-      "title": "อ.อยู่บ้านหนูรึเปล่าทำไมถึงรู้",
-      "url": "https://www.facebook.com/1409584711201780/posts/1464802489013335"
-    }
-  ],
+  "articles": [],
   "dry_run": false
 }
