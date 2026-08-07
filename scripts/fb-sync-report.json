@@ -1,5 +1,5 @@
 {
-  "added": 1,
+  "added": 2,
   "skipped_shared": 7,
   "checked": 75,
   "pages_scanned": 3,
@@ -10,16 +10,21 @@
     "warning": null
   },
   "page_stats": {
-    "followers": 161761,
+    "followers": 161759,
     "followersK": 161,
-    "updatedAt": "2026-08-07T12:39:45.829991+00:00",
+    "updatedAt": "2026-08-07T14:44:35.937987+00:00",
     "pageId": "367355370015900"
   },
   "articles": [
     {
-      "id": "wei-6393",
-      "title": "เฉพาะผู้มี ขาล ในดวง ( ชง ประจำเดือน )",
-      "url": "https://www.facebook.com/1409584711201780/posts/1464702539023330"
+      "id": "wei-6394",
+      "title": "อีกราย บอกให้บูชาท้าวเวส",
+      "url": "https://www.facebook.com/1409584711201780/posts/1464805969012987"
+    },
+    {
+      "id": "wei-6395",
+      "title": "อ.อยู่บ้านหนูรึเปล่าทำไมถึงรู้",
+      "url": "https://www.facebook.com/1409584711201780/posts/1464802489013335"
     }
   ],
   "dry_run": false
