@@ -1,8 +1,8 @@
 {
-  "added": 0,
-  "skipped_shared": 4,
-  "checked": 50,
-  "pages_scanned": 2,
+  "added": 1,
+  "skipped_shared": 6,
+  "checked": 75,
+  "pages_scanned": 3,
   "backfill": false,
   "token": {
     "page_name": "Fengshui Balance - ฮวงจุ้ย สมดุลแห่งธรรมชาติ",
@@ -10,11 +10,17 @@
     "warning": null
   },
   "page_stats": {
-    "followers": 161741,
+    "followers": 161738,
     "followersK": 161,
-    "updatedAt": "2026-08-10T00:58:01.861551+00:00",
+    "updatedAt": "2026-08-10T03:43:18.060148+00:00",
     "pageId": "367355370015900"
   },
-  "articles": [],
+  "articles": [
+    {
+      "id": "wei-6402",
+      "title": "ทิศห้ามประจำเดือน",
+      "url": "https://www.facebook.com/1409584711201780/posts/1466912118802372"
+    }
+  ],
   "dry_run": false
 }
