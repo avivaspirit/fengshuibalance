@@ -1,8 +1,8 @@
 {
-  "added": 0,
-  "skipped_shared": 6,
-  "checked": 50,
-  "pages_scanned": 2,
+  "added": 2,
+  "skipped_shared": 7,
+  "checked": 75,
+  "pages_scanned": 3,
   "backfill": false,
   "token": {
     "page_name": "Fengshui Balance - ฮวงจุ้ย สมดุลแห่งธรรมชาติ",
@@ -10,11 +10,22 @@
     "warning": null
   },
   "page_stats": {
-    "followers": 161735,
+    "followers": 161734,
     "followersK": 161,
-    "updatedAt": "2026-08-11T00:57:20.780280+00:00",
+    "updatedAt": "2026-08-11T03:26:05.974706+00:00",
     "pageId": "367355370015900"
   },
-  "articles": [],
+  "articles": [
+    {
+      "id": "wei-6405",
+      "title": "*** แจ้งล่วงหน้า ***",
+      "url": "https://www.facebook.com/1409584711201780/posts/1467816278711956"
+    },
+    {
+      "id": "wei-6406",
+      "title": "บทความจาก Fengshui Balance",
+      "url": "https://www.facebook.com/reel/2153888028888454/"
+    }
+  ],
   "dry_run": false
 }
