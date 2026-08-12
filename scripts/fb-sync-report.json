@@ -1,8 +1,8 @@
 {
-  "added": 1,
-  "skipped_shared": 7,
-  "checked": 75,
-  "pages_scanned": 3,
+  "added": 0,
+  "skipped_shared": 6,
+  "checked": 50,
+  "pages_scanned": 2,
   "backfill": false,
   "token": {
     "page_name": "Fengshui Balance - ฮวงจุ้ย สมดุลแห่งธรรมชาติ",
@@ -10,17 +10,11 @@
     "warning": null
   },
   "page_stats": {
-    "followers": 161732,
+    "followers": 161734,
     "followersK": 161,
-    "updatedAt": "2026-08-12T09:01:03.489272+00:00",
+    "updatedAt": "2026-08-12T10:51:22.985556+00:00",
     "pageId": "367355370015900"
   },
-  "articles": [
-    {
-      "id": "wei-6410",
-      "title": "ดร. ชิง ลี่ (Dr. Qing Li) และทีมวิจัยจากโรงเรียนแพทย์นิปปอน (Nippon Medical School)…",
-      "url": "https://www.facebook.com/1409584711201780/posts/1468845995275651"
-    }
-  ],
+  "articles": [],
   "dry_run": false
 }
