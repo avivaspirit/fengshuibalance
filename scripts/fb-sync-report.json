@@ -1,8 +1,8 @@
 {
-  "added": 0,
-  "skipped_shared": 7,
-  "checked": 50,
-  "pages_scanned": 2,
+  "added": 1,
+  "skipped_shared": 8,
+  "checked": 75,
+  "pages_scanned": 3,
   "backfill": false,
   "token": {
     "page_name": "Fengshui Balance - ฮวงจุ้ย สมดุลแห่งธรรมชาติ",
@@ -12,9 +12,15 @@
   "page_stats": {
     "followers": 161735,
     "followersK": 161,
-    "updatedAt": "2026-08-13T03:59:46.968379+00:00",
+    "updatedAt": "2026-08-13T05:41:38.715556+00:00",
     "pageId": "367355370015900"
   },
-  "articles": [],
+  "articles": [
+    {
+      "id": "wei-6412",
+      "title": "ได้ ฤกษ์มงคล แล้ว",
+      "url": "https://www.facebook.com/1409584711201780/posts/1469614328532151"
+    }
+  ],
   "dry_run": false
 }
