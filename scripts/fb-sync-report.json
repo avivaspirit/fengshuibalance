@@ -1,8 +1,8 @@
 {
-  "added": 0,
-  "skipped_shared": 7,
-  "checked": 50,
-  "pages_scanned": 2,
+  "added": 1,
+  "skipped_shared": 8,
+  "checked": 75,
+  "pages_scanned": 3,
   "backfill": false,
   "token": {
     "page_name": "Fengshui Balance - ฮวงจุ้ย สมดุลแห่งธรรมชาติ",
@@ -10,11 +10,17 @@
     "warning": null
   },
   "page_stats": {
-    "followers": 161729,
+    "followers": 161728,
     "followersK": 161,
-    "updatedAt": "2026-08-14T10:48:55.271308+00:00",
+    "updatedAt": "2026-08-14T12:41:02.950369+00:00",
     "pageId": "367355370015900"
   },
-  "articles": [],
+  "articles": [
+    {
+      "id": "wei-6415",
+      "title": "รับวิเคราะห์ดวงเด็ก 8-17",
+      "url": "https://www.facebook.com/1409584711201780/posts/1470757401751177"
+    }
+  ],
   "dry_run": false
 }
