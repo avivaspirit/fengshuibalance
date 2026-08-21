@@ -1,8 +1,8 @@
 {
-  "added": 1,
-  "skipped_shared": 11,
-  "checked": 75,
-  "pages_scanned": 3,
+  "added": 0,
+  "skipped_shared": 8,
+  "checked": 50,
+  "pages_scanned": 2,
   "backfill": false,
   "token": {
     "page_name": "Fengshui Balance - ฮวงจุ้ย สมดุลแห่งธรรมชาติ",
@@ -10,17 +10,11 @@
     "warning": null
   },
   "page_stats": {
-    "followers": 161678,
+    "followers": 161677,
     "followersK": 161,
-    "updatedAt": "2026-08-21T08:27:01.546501+00:00",
+    "updatedAt": "2026-08-21T10:19:26.404646+00:00",
     "pageId": "367355370015900"
   },
-  "articles": [
-    {
-      "id": "wei-6427",
-      "title": "10 สัญญาณ บ่งบอกความเสี่ยงโรคหัวใจและหลอดเลือด",
-      "url": "https://www.facebook.com/1409584711201780/posts/1476993464460904"
-    }
-  ],
+  "articles": [],
   "dry_run": false
 }
