@@ -1,8 +1,8 @@
 {
-  "added": 0,
-  "skipped_shared": 9,
-  "checked": 50,
-  "pages_scanned": 2,
+  "added": 1,
+  "skipped_shared": 11,
+  "checked": 75,
+  "pages_scanned": 3,
   "backfill": false,
   "token": {
     "page_name": "Fengshui Balance - ฮวงจุ้ย สมดุลแห่งธรรมชาติ",
@@ -10,11 +10,17 @@
     "warning": null
   },
   "page_stats": {
-    "followers": 161644,
+    "followers": 161643,
     "followersK": 161,
-    "updatedAt": "2026-08-26T19:29:44.063760+00:00",
+    "updatedAt": "2026-08-26T22:35:10.108133+00:00",
     "pageId": "367355370015900"
   },
-  "articles": [],
+  "articles": [
+    {
+      "id": "wei-6443",
+      "title": "*** วันนี้ อย่ากลับบ้านดึก / ระมัดระวังตัวกันด้วย ***",
+      "url": "https://www.facebook.com/1409584711201780/posts/1482160400610877"
+    }
+  ],
   "dry_run": false
 }
