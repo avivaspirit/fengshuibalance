@@ -1,5 +1,5 @@
 {
-  "added": 2,
+  "added": 1,
   "skipped_shared": 10,
   "checked": 75,
   "pages_scanned": 3,
@@ -10,21 +10,16 @@
     "warning": null
   },
   "page_stats": {
-    "followers": 161654,
+    "followers": 161658,
     "followersK": 161,
-    "updatedAt": "2026-08-27T17:04:46.378709+00:00",
+    "updatedAt": "2026-08-28T01:53:59.628818+00:00",
     "pageId": "367355370015900"
   },
   "articles": [
     {
-      "id": "wei-6444",
-      "title": "FULL MOON MEDITATION | คืนพระจันทร์เต็มดวง",
-      "url": "https://www.facebook.com/1409584711201780/posts/1482582307235353"
-    },
-    {
-      "id": "wei-6445",
-      "title": "วันนี้ วันสารทจีน",
-      "url": "https://www.facebook.com/1409584711201780/posts/1482446073915643"
+      "id": "wei-6446",
+      "title": "พระแม่ลักษมี เทวีแห่งความรัก และความอุดมสมบูรณ์",
+      "url": "https://www.facebook.com/1409584711201780/posts/1483176407175943"
     }
   ],
   "dry_run": false
