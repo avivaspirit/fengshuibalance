@@ -1,6 +1,6 @@
 {
-  "added": 1,
-  "skipped_shared": 12,
+  "added": 2,
+  "skipped_shared": 13,
   "checked": 75,
   "pages_scanned": 3,
   "backfill": false,
@@ -10,16 +10,21 @@
     "warning": null
   },
   "page_stats": {
-    "followers": 161703,
+    "followers": 161697,
     "followersK": 161,
-    "updatedAt": "2026-09-01T08:59:56.922080+00:00",
+    "updatedAt": "2026-09-01T14:23:49.752253+00:00",
     "pageId": "367355370015900"
   },
   "articles": [
     {
-      "id": "wei-6457",
-      "title": "ไปจัดฮวงจุ้ยโรงงานที่โคราช",
-      "url": "https://www.facebook.com/1409584711201780/posts/1486908760136041"
+      "id": "wei-6458",
+      "title": "รับวิเคราะห์ดวง @ 1000",
+      "url": "https://www.facebook.com/1409584711201780/posts/1487150050111912"
+    },
+    {
+      "id": "wei-6459",
+      "title": "20.00 เชิญรับพลัง Abundance",
+      "url": "https://www.facebook.com/1409584711201780/posts/1487095230117394"
     }
   ],
   "dry_run": false
