@@ -1,8 +1,8 @@
 {
-  "added": 0,
-  "skipped_shared": 9,
-  "checked": 50,
-  "pages_scanned": 2,
+  "added": 1,
+  "skipped_shared": 12,
+  "checked": 75,
+  "pages_scanned": 3,
   "backfill": false,
   "token": {
     "page_name": "Fengshui Balance - ฮวงจุ้ย สมดุลแห่งธรรมชาติ",
@@ -10,11 +10,17 @@
     "warning": null
   },
   "page_stats": {
-    "followers": 161696,
+    "followers": 161700,
     "followersK": 161,
-    "updatedAt": "2026-09-01T22:10:58.132877+00:00",
+    "updatedAt": "2026-09-02T01:58:13.304049+00:00",
     "pageId": "367355370015900"
   },
-  "articles": [],
+  "articles": [
+    {
+      "id": "wei-6460",
+      "title": "เฮกันทั้งโรงงาน ได้ลาภกันไปหลายคน",
+      "url": "https://www.facebook.com/1409584711201780/posts/1487567156736868"
+    }
+  ],
   "dry_run": false
 }
