@@ -1,8 +1,8 @@
 {
-  "added": 1,
-  "skipped_shared": 11,
-  "checked": 75,
-  "pages_scanned": 3,
+  "added": 0,
+  "skipped_shared": 7,
+  "checked": 50,
+  "pages_scanned": 2,
   "backfill": false,
   "token": {
     "page_name": "Fengshui Balance - ฮวงจุ้ย สมดุลแห่งธรรมชาติ",
@@ -10,17 +10,11 @@
     "warning": null
   },
   "page_stats": {
-    "followers": 161713,
+    "followers": 161712,
     "followersK": 161,
-    "updatedAt": "2026-09-05T06:45:09.768126+00:00",
+    "updatedAt": "2026-09-05T11:28:40.605622+00:00",
     "pageId": "367355370015900"
   },
-  "articles": [
-    {
-      "id": "wei-6470",
-      "title": "ลูกค้าเติบโตมาก สวนกระแส ยินดีด้วย",
-      "url": "https://www.facebook.com/1409584711201780/posts/1490348186458765"
-    }
-  ],
+  "articles": [],
   "dry_run": false
 }
