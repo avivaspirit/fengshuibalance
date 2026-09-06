@@ -1,5 +1,5 @@
 {
-  "added": 3,
+  "added": 1,
   "skipped_shared": 11,
   "checked": 75,
   "pages_scanned": 3,
@@ -12,24 +12,14 @@
   "page_stats": {
     "followers": 161716,
     "followersK": 161,
-    "updatedAt": "2026-09-06T06:39:03.750823+00:00",
+    "updatedAt": "2026-09-06T11:49:33.086222+00:00",
     "pageId": "367355370015900"
   },
   "articles": [
     {
-      "id": "wei-6471",
-      "title": "มาหาความรู้​ ประสบการณ์",
-      "url": "https://www.facebook.com/1409584711201780/posts/1491260573034193"
-    },
-    {
-      "id": "wei-6472",
+      "id": "wei-6474",
       "title": "บทความจาก Fengshui Balance",
-      "url": "https://www.facebook.com/1409584711201780/posts/1491231699703747"
-    },
-    {
-      "id": "wei-6473",
-      "title": "บทความจาก Fengshui Balance",
-      "url": "https://www.facebook.com/1409584711201780/posts/1491187823041468"
+      "url": "https://www.facebook.com/1409584711201780/posts/1491439013016349"
     }
   ],
   "dry_run": false
