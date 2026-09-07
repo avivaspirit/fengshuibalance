@@ -1,6 +1,6 @@
 {
   "added": 1,
-  "skipped_shared": 10,
+  "skipped_shared": 11,
   "checked": 75,
   "pages_scanned": 3,
   "backfill": false,
@@ -12,14 +12,14 @@
   "page_stats": {
     "followers": 161719,
     "followersK": 161,
-    "updatedAt": "2026-09-07T01:51:53.479597+00:00",
+    "updatedAt": "2026-09-07T06:47:08.180338+00:00",
     "pageId": "367355370015900"
   },
   "articles": [
     {
-      "id": "wei-6475",
-      "title": "ทิศห้ามประจำเดือน",
-      "url": "https://www.facebook.com/1409584711201780/posts/1491931989633718"
+      "id": "wei-6476",
+      "title": "Western Astrology ปิดรับชั่วคราว",
+      "url": "https://www.facebook.com/1409584711201780/posts/1492093236284260"
     }
   ],
   "dry_run": false
