@@ -1,8 +1,8 @@
 {
-  "added": 0,
-  "skipped_shared": 6,
-  "checked": 50,
-  "pages_scanned": 2,
+  "added": 1,
+  "skipped_shared": 12,
+  "checked": 75,
+  "pages_scanned": 3,
   "backfill": false,
   "token": {
     "page_name": "Fengshui Balance - ฮวงจุ้ย สมดุลแห่งธรรมชาติ",
@@ -10,11 +10,17 @@
     "warning": null
   },
   "page_stats": {
-    "followers": 161721,
+    "followers": 161717,
     "followersK": 161,
-    "updatedAt": "2026-09-08T02:03:04.407447+00:00",
+    "updatedAt": "2026-09-08T08:25:17.914422+00:00",
     "pageId": "367355370015900"
   },
-  "articles": [],
+  "articles": [
+    {
+      "id": "wei-6478",
+      "title": "ท่านใด เป็นแพทย์แผนจีน บ้างครับ",
+      "url": "https://www.facebook.com/1409584711201780/posts/1492984472861803"
+    }
+  ],
   "dry_run": false
 }
