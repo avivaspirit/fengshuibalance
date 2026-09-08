@@ -1,5 +1,5 @@
 {
-  "added": 1,
+  "added": 2,
   "skipped_shared": 12,
   "checked": 75,
   "pages_scanned": 3,
@@ -10,16 +10,21 @@
     "warning": null
   },
   "page_stats": {
-    "followers": 161717,
+    "followers": 161714,
     "followersK": 161,
-    "updatedAt": "2026-09-08T08:25:17.914422+00:00",
+    "updatedAt": "2026-09-08T17:47:21.018316+00:00",
     "pageId": "367355370015900"
   },
   "articles": [
     {
-      "id": "wei-6478",
-      "title": "ท่านใด เป็นแพทย์แผนจีน บ้างครับ",
-      "url": "https://www.facebook.com/1409584711201780/posts/1492984472861803"
+      "id": "wei-6479",
+      "title": "Save ภาพเก็บไปไว้ศึกษาครับ",
+      "url": "https://www.facebook.com/1409584711201780/posts/1493257002834550"
+    },
+    {
+      "id": "wei-6480",
+      "title": "ยินดีที่ได้เจอทุกท่านครับ",
+      "url": "https://www.facebook.com/1409584711201780/posts/1493207746172809"
     }
   ],
   "dry_run": false
