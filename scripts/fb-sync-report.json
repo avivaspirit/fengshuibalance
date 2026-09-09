@@ -1,8 +1,8 @@
 {
-  "added": 0,
-  "skipped_shared": 7,
-  "checked": 50,
-  "pages_scanned": 2,
+  "added": 1,
+  "skipped_shared": 12,
+  "checked": 75,
+  "pages_scanned": 3,
   "backfill": false,
   "token": {
     "page_name": "Fengshui Balance - ฮวงจุ้ย สมดุลแห่งธรรมชาติ",
@@ -12,9 +12,15 @@
   "page_stats": {
     "followers": 161714,
     "followersK": 161,
-    "updatedAt": "2026-09-08T23:44:58.745437+00:00",
+    "updatedAt": "2026-09-09T02:07:43.586482+00:00",
     "pageId": "367355370015900"
   },
-  "articles": [],
+  "articles": [
+    {
+      "id": "wei-6481",
+      "title": "แม่หนูมาเข้าห้องน้ำที่บ้าน ด่าหนูแรงมาก",
+      "url": "https://www.facebook.com/1409584711201780/posts/1493701446123439"
+    }
+  ],
   "dry_run": false
 }
