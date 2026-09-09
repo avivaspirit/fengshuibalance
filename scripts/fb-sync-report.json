@@ -1,8 +1,8 @@
 {
-  "added": 1,
-  "skipped_shared": 12,
-  "checked": 75,
-  "pages_scanned": 3,
+  "added": 0,
+  "skipped_shared": 5,
+  "checked": 50,
+  "pages_scanned": 2,
   "backfill": false,
   "token": {
     "page_name": "Fengshui Balance - ฮวงจุ้ย สมดุลแห่งธรรมชาติ",
@@ -10,17 +10,11 @@
     "warning": null
   },
   "page_stats": {
-    "followers": 161707,
+    "followers": 161705,
     "followersK": 161,
-    "updatedAt": "2026-09-09T14:01:30.516682+00:00",
+    "updatedAt": "2026-09-09T18:55:37.216972+00:00",
     "pageId": "367355370015900"
   },
-  "articles": [
-    {
-      "id": "wei-6483",
-      "title": "*** เปลี่ยนจากเสาร์ เป็น อา 4 ตค. 69 ***",
-      "url": "https://www.facebook.com/1409584711201780/posts/1493997902760460"
-    }
-  ],
+  "articles": [],
   "dry_run": false
 }
