@@ -1,8 +1,8 @@
 {
-  "added": 0,
-  "skipped_shared": 6,
-  "checked": 50,
-  "pages_scanned": 2,
+  "added": 3,
+  "skipped_shared": 11,
+  "checked": 75,
+  "pages_scanned": 3,
   "backfill": false,
   "token": {
     "page_name": "Fengshui Balance - ฮวงจุ้ย สมดุลแห่งธรรมชาติ",
@@ -10,11 +10,27 @@
     "warning": null
   },
   "page_stats": {
-    "followers": 161688,
+    "followers": 161683,
     "followersK": 161,
-    "updatedAt": "2026-09-11T02:02:18.801796+00:00",
+    "updatedAt": "2026-09-11T08:24:11.285350+00:00",
     "pageId": "367355370015900"
   },
-  "articles": [],
+  "articles": [
+    {
+      "id": "wei-6486",
+      "title": "มีคนอยากไปร่วม แต่ติดงาน",
+      "url": "https://www.facebook.com/1409584711201780/posts/1495686292591621"
+    },
+    {
+      "id": "wei-6487",
+      "title": "บทความจาก Fengshui Balance",
+      "url": "https://www.facebook.com/reel/1102471162223024/"
+    },
+    {
+      "id": "wei-6488",
+      "title": "จันทร์ 14 กย. 2569 เป็นวันคเณศจตุรถี",
+      "url": "https://www.facebook.com/1409584711201780/posts/1495536115939972"
+    }
+  ],
   "dry_run": false
 }
