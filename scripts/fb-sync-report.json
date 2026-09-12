@@ -1,5 +1,5 @@
 {
-  "added": 2,
+  "added": 1,
   "skipped_shared": 10,
   "checked": 75,
   "pages_scanned": 3,
@@ -10,21 +10,16 @@
     "warning": null
   },
   "page_stats": {
-    "followers": 161670,
+    "followers": 161669,
     "followersK": 161,
-    "updatedAt": "2026-09-12T08:13:02.306039+00:00",
+    "updatedAt": "2026-09-12T13:14:22.622914+00:00",
     "pageId": "367355370015900"
   },
   "articles": [
     {
-      "id": "wei-6490",
-      "title": "บทความจาก Fengshui Balance",
-      "url": "https://www.facebook.com/reel/28415088861479303/"
-    },
-    {
-      "id": "wei-6491",
-      "title": "กำลังทำเอกสาร ปรับสุขภาพให้สมดุล ด้วยดวงจีน",
-      "url": "https://www.facebook.com/1409584711201780/posts/1496516335841950"
+      "id": "wei-6492",
+      "title": "เหลือ 15 ที่นั่ง",
+      "url": "https://www.facebook.com/1409584711201780/posts/1496714352488815"
     }
   ],
   "dry_run": false
