@@ -1,5 +1,5 @@
 {
-  "added": 1,
+  "added": 2,
   "skipped_shared": 10,
   "checked": 75,
   "pages_scanned": 3,
@@ -10,16 +10,21 @@
     "warning": null
   },
   "page_stats": {
-    "followers": 161670,
+    "followers": 161667,
     "followersK": 161,
-    "updatedAt": "2026-09-13T02:03:28.784963+00:00",
+    "updatedAt": "2026-09-13T08:37:22.623922+00:00",
     "pageId": "367355370015900"
   },
   "articles": [
     {
-      "id": "wei-6494",
-      "title": "อันนี้ทำประจำ ตั้งแต่เรียนโท",
-      "url": "https://www.facebook.com/1409584711201780/posts/1497297082430542"
+      "id": "wei-6495",
+      "title": "บทความจาก Fengshui Balance",
+      "url": "https://www.facebook.com/1409584711201780/posts/1497510949075822"
+    },
+    {
+      "id": "wei-6496",
+      "title": "บทความจาก Fengshui Balance",
+      "url": "https://www.facebook.com/1409584711201780/posts/1497483525745231"
     }
   ],
   "dry_run": false
