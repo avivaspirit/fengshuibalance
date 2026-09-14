@@ -1,6 +1,6 @@
 {
-  "added": 2,
-  "skipped_shared": 10,
+  "added": 1,
+  "skipped_shared": 9,
   "checked": 75,
   "pages_scanned": 3,
   "backfill": false,
@@ -10,21 +10,16 @@
     "warning": null
   },
   "page_stats": {
-    "followers": 161662,
+    "followers": 161659,
     "followersK": 161,
-    "updatedAt": "2026-09-14T09:22:19.159496+00:00",
+    "updatedAt": "2026-09-14T16:03:00.085749+00:00",
     "pageId": "367355370015900"
   },
   "articles": [
     {
-      "id": "wei-6499",
-      "title": "ซินแสฮวงจุ้ย — บันทึกฮวงจุ้ย",
-      "url": "https://www.facebook.com/reel/2158842662178075/"
-    },
-    {
-      "id": "wei-6500",
-      "title": "มหัศจรรย์พลันบังเกิด ให้เห็นทันตา",
-      "url": "https://www.facebook.com/1409584711201780/posts/1498332245660359"
+      "id": "wei-6501",
+      "title": "ใครที่ลงทะเบียนไว้ เข้าห้องได้เลย",
+      "url": "https://www.facebook.com/1409584711201780/posts/1498582998968617"
     }
   ],
   "dry_run": false
