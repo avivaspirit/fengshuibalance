@@ -1,5 +1,5 @@
 {
-  "added": 1,
+  "added": 2,
   "skipped_shared": 10,
   "checked": 75,
   "pages_scanned": 3,
@@ -10,16 +10,21 @@
     "warning": null
   },
   "page_stats": {
-    "followers": 161667,
+    "followers": 161662,
     "followersK": 161,
-    "updatedAt": "2026-09-14T02:21:25.074567+00:00",
+    "updatedAt": "2026-09-14T09:22:19.159496+00:00",
     "pageId": "367355370015900"
   },
   "articles": [
     {
-      "id": "wei-6498",
-      "title": "วันคเณศชยันตี 11.00 ตรงเวลา ที่วัดวิษณุ แต่งกายสุภาพ",
-      "url": "https://www.facebook.com/1409584711201780/posts/1498118509015066"
+      "id": "wei-6499",
+      "title": "ซินแสฮวงจุ้ย — บันทึกฮวงจุ้ย",
+      "url": "https://www.facebook.com/reel/2158842662178075/"
+    },
+    {
+      "id": "wei-6500",
+      "title": "มหัศจรรย์พลันบังเกิด ให้เห็นทันตา",
+      "url": "https://www.facebook.com/1409584711201780/posts/1498332245660359"
     }
   ],
   "dry_run": false
