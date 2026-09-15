@@ -1,8 +1,8 @@
 {
-  "added": 0,
-  "skipped_shared": 5,
-  "checked": 50,
-  "pages_scanned": 2,
+  "added": 2,
+  "skipped_shared": 10,
+  "checked": 75,
+  "pages_scanned": 3,
   "backfill": false,
   "token": {
     "page_name": "Fengshui Balance - ฮวงจุ้ย สมดุลแห่งธรรมชาติ",
@@ -10,11 +10,22 @@
     "warning": null
   },
   "page_stats": {
-    "followers": 161653,
+    "followers": 161652,
     "followersK": 161,
-    "updatedAt": "2026-09-15T00:04:42.720130+00:00",
+    "updatedAt": "2026-09-15T06:57:15.276910+00:00",
     "pageId": "367355370015900"
   },
-  "articles": [],
+  "articles": [
+    {
+      "id": "wei-6502",
+      "title": "สุขภาพ ดวงจีน",
+      "url": "https://www.facebook.com/reel/2180787672863215/"
+    },
+    {
+      "id": "wei-6503",
+      "title": "ไม้ กะ - ไม้ใหญ่ ยืนตรง - เป็นที่พึ่ง",
+      "url": "https://www.facebook.com/1409584711201780/posts/1499012872258963"
+    }
+  ],
   "dry_run": false
 }
