@@ -1,8 +1,8 @@
 {
-  "added": 0,
-  "skipped_shared": 7,
-  "checked": 50,
-  "pages_scanned": 2,
+  "added": 3,
+  "skipped_shared": 9,
+  "checked": 75,
+  "pages_scanned": 3,
   "backfill": false,
   "token": {
     "page_name": "Fengshui Balance - ฮวงจุ้ย สมดุลแห่งธรรมชาติ",
@@ -10,11 +10,27 @@
     "warning": null
   },
   "page_stats": {
-    "followers": 161647,
+    "followers": 161642,
     "followersK": 161,
-    "updatedAt": "2026-09-16T02:20:39.134770+00:00",
+    "updatedAt": "2026-09-16T08:55:39.697925+00:00",
     "pageId": "367355370015900"
   },
-  "articles": [],
+  "articles": [
+    {
+      "id": "wei-6504",
+      "title": "หลังพาไปไหว้พระเคณศ",
+      "url": "https://www.facebook.com/1409584711201780/posts/1500175448809372"
+    },
+    {
+      "id": "wei-6505",
+      "title": "ซินแสฮวงจุ้ย — บันทึกฮวงจุ้ย",
+      "url": "https://www.facebook.com/reel/2009073339810141/"
+    },
+    {
+      "id": "wei-6506",
+      "title": "กรุณาวิเคราะห์ด้วยความสุภาพ",
+      "url": "https://www.facebook.com/1409584711201780/posts/1499972915496292"
+    }
+  ],
   "dry_run": false
 }
