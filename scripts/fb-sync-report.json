@@ -1,5 +1,5 @@
 {
-  "added": 3,
+  "added": 1,
   "skipped_shared": 9,
   "checked": 75,
   "pages_scanned": 3,
@@ -10,26 +10,16 @@
     "warning": null
   },
   "page_stats": {
-    "followers": 161642,
+    "followers": 161643,
     "followersK": 161,
-    "updatedAt": "2026-09-16T08:55:39.697925+00:00",
+    "updatedAt": "2026-09-16T14:27:28.910468+00:00",
     "pageId": "367355370015900"
   },
   "articles": [
     {
-      "id": "wei-6504",
-      "title": "หลังพาไปไหว้พระเคณศ",
-      "url": "https://www.facebook.com/1409584711201780/posts/1500175448809372"
-    },
-    {
-      "id": "wei-6505",
-      "title": "ซินแสฮวงจุ้ย — บันทึกฮวงจุ้ย",
-      "url": "https://www.facebook.com/reel/2009073339810141/"
-    },
-    {
-      "id": "wei-6506",
-      "title": "กรุณาวิเคราะห์ด้วยความสุภาพ",
-      "url": "https://www.facebook.com/1409584711201780/posts/1499972915496292"
+      "id": "wei-6507",
+      "title": "วันนี้ วันสุดท้าย สำหรับ Early Bird 1999",
+      "url": "https://www.facebook.com/1409584711201780/posts/1500335868793330"
     }
   ],
   "dry_run": false
