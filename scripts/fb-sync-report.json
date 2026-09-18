@@ -1,8 +1,8 @@
 {
-  "added": 0,
-  "skipped_shared": 6,
-  "checked": 50,
-  "pages_scanned": 2,
+  "added": 3,
+  "skipped_shared": 8,
+  "checked": 75,
+  "pages_scanned": 3,
   "backfill": false,
   "token": {
     "page_name": "Fengshui Balance - ฮวงจุ้ย สมดุลแห่งธรรมชาติ",
@@ -10,11 +10,27 @@
     "warning": null
   },
   "page_stats": {
-    "followers": 161643,
+    "followers": 161642,
     "followersK": 161,
-    "updatedAt": "2026-09-18T02:10:08.681281+00:00",
+    "updatedAt": "2026-09-18T08:35:24.566812+00:00",
     "pageId": "367355370015900"
   },
-  "articles": [],
+  "articles": [
+    {
+      "id": "wei-6512",
+      "title": "บทความจาก Fengshui Balance",
+      "url": "https://www.facebook.com/reel/2549868648787993/"
+    },
+    {
+      "id": "wei-6513",
+      "title": "ดวงจีน สายจื่อผิง จะเน้น 8 อักษรหลัก",
+      "url": "https://www.facebook.com/1409584711201780/posts/1501827378644179"
+    },
+    {
+      "id": "wei-6514",
+      "title": "แจ้งล่วงหน้า",
+      "url": "https://www.facebook.com/1409584711201780/posts/1501700298656887"
+    }
+  ],
   "dry_run": false
 }
