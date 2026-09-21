@@ -1,8 +1,8 @@
 {
-  "added": 0,
-  "skipped_shared": 8,
-  "checked": 50,
-  "pages_scanned": 2,
+  "added": 2,
+  "skipped_shared": 10,
+  "checked": 75,
+  "pages_scanned": 3,
   "backfill": false,
   "token": {
     "page_name": "Fengshui Balance - ฮวงจุ้ย สมดุลแห่งธรรมชาติ",
@@ -10,11 +10,22 @@
     "warning": null
   },
   "page_stats": {
-    "followers": 161629,
+    "followers": 161628,
     "followersK": 161,
-    "updatedAt": "2026-09-20T22:11:00.543990+00:00",
+    "updatedAt": "2026-09-21T02:20:29.950720+00:00",
     "pageId": "367355370015900"
   },
-  "articles": [],
+  "articles": [
+    {
+      "id": "wei-6518",
+      "title": "ไปจัดฮวงจุ้ย โครงการใหญ่",
+      "url": "https://www.facebook.com/1409584711201780/posts/1504300831730167"
+    },
+    {
+      "id": "wei-6519",
+      "title": "2 วันเต็มกับการค้นคว้าเรื่องนี้",
+      "url": "https://www.facebook.com/1409584711201780/posts/1504244128402504"
+    }
+  ],
   "dry_run": false
 }
