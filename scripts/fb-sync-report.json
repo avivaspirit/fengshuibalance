@@ -1,8 +1,8 @@
 {
-  "added": 0,
-  "skipped_shared": 8,
-  "checked": 50,
-  "pages_scanned": 2,
+  "added": 1,
+  "skipped_shared": 10,
+  "checked": 75,
+  "pages_scanned": 3,
   "backfill": false,
   "token": {
     "page_name": "Fengshui Balance - ฮวงจุ้ย สมดุลแห่งธรรมชาติ",
@@ -10,11 +10,17 @@
     "warning": null
   },
   "page_stats": {
-    "followers": 161607,
+    "followers": 161608,
     "followersK": 161,
-    "updatedAt": "2026-09-23T08:55:33.986469+00:00",
+    "updatedAt": "2026-09-23T14:32:05.265205+00:00",
     "pageId": "367355370015900"
   },
-  "articles": [],
+  "articles": [
+    {
+      "id": "wei-6523",
+      "title": "滴天髓 ตำรา ตีเทียนสุ่ย",
+      "url": "https://www.facebook.com/1409584711201780/posts/1506412714852312"
+    }
+  ],
   "dry_run": false
 }
