@@ -1,8 +1,8 @@
 {
-  "added": 0,
-  "skipped_shared": 8,
-  "checked": 50,
-  "pages_scanned": 2,
+  "added": 3,
+  "skipped_shared": 11,
+  "checked": 75,
+  "pages_scanned": 3,
   "backfill": false,
   "token": {
     "page_name": "Fengshui Balance - ฮวงจุ้ย สมดุลแห่งธรรมชาติ",
@@ -10,11 +10,27 @@
     "warning": null
   },
   "page_stats": {
-    "followers": 161589,
+    "followers": 161578,
     "followersK": 161,
-    "updatedAt": "2026-09-28T00:07:04.361393+00:00",
+    "updatedAt": "2026-09-28T07:57:00.674059+00:00",
     "pageId": "367355370015900"
   },
-  "articles": [],
+  "articles": [
+    {
+      "id": "wei-6532",
+      "title": "คืนนี้ 20.30 พบกัน",
+      "url": "https://www.facebook.com/1409584711201780/posts/1511032411057009"
+    },
+    {
+      "id": "wei-6533",
+      "title": "บทความจาก Fengshui Balance",
+      "url": "https://www.facebook.com/reel/980553715087919/"
+    },
+    {
+      "id": "wei-6534",
+      "title": "มีผู้ถามว่า คุณพ่อสร้างชั้นใต้ดิน",
+      "url": "https://www.facebook.com/1409584711201780/posts/1510915757735341"
+    }
+  ],
   "dry_run": false
 }
