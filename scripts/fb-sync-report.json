@@ -1,5 +1,5 @@
 {
-  "added": 3,
+  "added": 1,
   "skipped_shared": 11,
   "checked": 75,
   "pages_scanned": 3,
@@ -12,24 +12,14 @@
   "page_stats": {
     "followers": 161578,
     "followersK": 161,
-    "updatedAt": "2026-09-28T07:57:00.674059+00:00",
+    "updatedAt": "2026-09-28T16:22:47.552181+00:00",
     "pageId": "367355370015900"
   },
   "articles": [
     {
-      "id": "wei-6532",
-      "title": "คืนนี้ 20.30 พบกัน",
-      "url": "https://www.facebook.com/1409584711201780/posts/1511032411057009"
-    },
-    {
-      "id": "wei-6533",
-      "title": "บทความจาก Fengshui Balance",
-      "url": "https://www.facebook.com/reel/980553715087919/"
-    },
-    {
-      "id": "wei-6534",
-      "title": "มีผู้ถามว่า คุณพ่อสร้างชั้นใต้ดิน",
-      "url": "https://www.facebook.com/1409584711201780/posts/1510915757735341"
+      "id": "wei-6535",
+      "title": "Harvest Full Moon Meditation",
+      "url": "https://www.facebook.com/1409584711201780/videos/2201764474102121"
     }
   ],
   "dry_run": false
