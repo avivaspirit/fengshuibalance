@@ -1,5 +1,5 @@
 {
-  "added": 2,
+  "added": 1,
   "skipped_shared": 8,
   "checked": 75,
   "pages_scanned": 3,
@@ -12,19 +12,14 @@
   "page_stats": {
     "followers": 161627,
     "followersK": 161,
-    "updatedAt": "2026-10-09T08:09:30.961575+00:00",
+    "updatedAt": "2026-10-09T16:42:10.498412+00:00",
     "pageId": "367355370015900"
   },
   "articles": [
     {
-      "id": "wei-6556",
+      "id": "wei-6558",
       "title": "งานฮวงจุ้ยเชียงใหม่",
-      "url": "https://www.facebook.com/1409584711201780/posts/1521666663326917"
-    },
-    {
-      "id": "wei-6557",
-      "title": "ก่อนมี AI ทางเพจเคยมีแนวคิดจะจัดทำ",
-      "url": "https://www.facebook.com/1409584711201780/posts/1521499143343669"
+      "url": "https://www.facebook.com/1409584711201780/posts/1521910683302515"
     }
   ],
   "dry_run": false
