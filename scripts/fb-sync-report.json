@@ -1,8 +1,8 @@
 {
-  "added": 0,
-  "skipped_shared": 5,
-  "checked": 50,
-  "pages_scanned": 2,
+  "added": 2,
+  "skipped_shared": 8,
+  "checked": 75,
+  "pages_scanned": 3,
   "backfill": false,
   "token": {
     "page_name": "Fengshui Balance - ฮวงจุ้ย สมดุลแห่งธรรมชาติ",
@@ -10,11 +10,22 @@
     "warning": null
   },
   "page_stats": {
-    "followers": 161622,
+    "followers": 161627,
     "followersK": 161,
-    "updatedAt": "2026-10-09T00:02:21.383859+00:00",
+    "updatedAt": "2026-10-09T08:09:30.961575+00:00",
     "pageId": "367355370015900"
   },
-  "articles": [],
+  "articles": [
+    {
+      "id": "wei-6556",
+      "title": "งานฮวงจุ้ยเชียงใหม่",
+      "url": "https://www.facebook.com/1409584711201780/posts/1521666663326917"
+    },
+    {
+      "id": "wei-6557",
+      "title": "ก่อนมี AI ทางเพจเคยมีแนวคิดจะจัดทำ",
+      "url": "https://www.facebook.com/1409584711201780/posts/1521499143343669"
+    }
+  ],
   "dry_run": false
 }
