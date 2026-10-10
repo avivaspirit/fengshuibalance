@@ -1,8 +1,8 @@
 {
-  "added": 1,
-  "skipped_shared": 8,
-  "checked": 75,
-  "pages_scanned": 3,
+  "added": 0,
+  "skipped_shared": 5,
+  "checked": 50,
+  "pages_scanned": 2,
   "backfill": false,
   "token": {
     "page_name": "Fengshui Balance - ฮวงจุ้ย สมดุลแห่งธรรมชาติ",
@@ -10,17 +10,11 @@
     "warning": null
   },
   "page_stats": {
-    "followers": 161624,
+    "followers": 161625,
     "followersK": 161,
-    "updatedAt": "2026-10-10T01:34:12.840669+00:00",
+    "updatedAt": "2026-10-10T07:54:08.866805+00:00",
     "pageId": "367355370015900"
   },
-  "articles": [
-    {
-      "id": "wei-6559",
-      "title": "ให้ Ai ช่วยทำ Model วิเคราะห์อุณภูมิของดวง",
-      "url": "https://www.facebook.com/1409584711201780/posts/1522436649916585"
-    }
-  ],
+  "articles": [],
   "dry_run": false
 }
