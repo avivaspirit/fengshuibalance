@@ -1,8 +1,8 @@
 {
-  "added": 0,
-  "skipped_shared": 5,
-  "checked": 50,
-  "pages_scanned": 2,
+  "added": 2,
+  "skipped_shared": 8,
+  "checked": 75,
+  "pages_scanned": 3,
   "backfill": false,
   "token": {
     "page_name": "Fengshui Balance - ฮวงจุ้ย สมดุลแห่งธรรมชาติ",
@@ -10,11 +10,22 @@
     "warning": null
   },
   "page_stats": {
-    "followers": 161622,
+    "followers": 161619,
     "followersK": 161,
-    "updatedAt": "2026-10-12T00:49:18.776361+00:00",
+    "updatedAt": "2026-10-12T08:16:30.531419+00:00",
     "pageId": "367355370015900"
   },
-  "articles": [],
+  "articles": [
+    {
+      "id": "wei-6562",
+      "title": "**New Moon Meditation – Special Event for Three Goddess Energy**",
+      "url": "https://www.facebook.com/1409584711201780/posts/1524532573040326"
+    },
+    {
+      "id": "wei-6563",
+      "title": "ตู้พระ มีกระจกเงาด้านข้างได้",
+      "url": "https://www.facebook.com/1409584711201780/posts/1524485819711668"
+    }
+  ],
   "dry_run": false
 }
