@@ -1,8 +1,8 @@
 {
-  "added": 3,
-  "skipped_shared": 8,
-  "checked": 75,
-  "pages_scanned": 3,
+  "added": 0,
+  "skipped_shared": 6,
+  "checked": 50,
+  "pages_scanned": 2,
   "backfill": false,
   "token": {
     "page_name": "Fengshui Balance - ฮวงจุ้ย สมดุลแห่งธรรมชาติ",
@@ -12,25 +12,9 @@
   "page_stats": {
     "followers": 161621,
     "followersK": 161,
-    "updatedAt": "2026-10-12T19:30:03.157931+00:00",
+    "updatedAt": "2026-10-13T01:43:26.575596+00:00",
     "pageId": "367355370015900"
   },
-  "articles": [
-    {
-      "id": "wei-6564",
-      "title": "New Moon Meditation + Navratri Oct 2026",
-      "url": "https://www.facebook.com/1409584711201780/videos/4490667767858982"
-    },
-    {
-      "id": "wei-6565",
-      "title": "ครูรัตน์ เพิ่งถึงบ้าน",
-      "url": "https://www.facebook.com/1409584711201780/posts/1524899949670255"
-    },
-    {
-      "id": "wei-6566",
-      "title": "จากหอสมุดแห่งชาติจีน (NLC), หอสมุดกลางแห่งชาติไต้หวัน (NCL) และหอสมุดแห่งชาติเกาหลี…",
-      "url": "https://www.facebook.com/1409584711201780/posts/1524769689683281"
-    }
-  ],
+  "articles": [],
   "dry_run": false
 }
