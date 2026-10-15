@@ -1,6 +1,6 @@
 {
-  "added": 2,
-  "skipped_shared": 8,
+  "added": 1,
+  "skipped_shared": 9,
   "checked": 75,
   "pages_scanned": 3,
   "backfill": false,
@@ -12,19 +12,14 @@
   "page_stats": {
     "followers": 161613,
     "followersK": 161,
-    "updatedAt": "2026-10-15T02:21:08.094873+00:00",
+    "updatedAt": "2026-10-15T08:41:09.198050+00:00",
     "pageId": "367355370015900"
   },
   "articles": [
     {
-      "id": "wei-6572",
-      "title": "วันนี้ อยู่นครศรี",
-      "url": "https://www.facebook.com/1409584711201780/posts/1527490236077893"
-    },
-    {
-      "id": "wei-6573",
-      "title": "นั่งอ่านตำรา 8 เล่ม บางเล่ม หน้าไม่ครบ",
-      "url": "https://www.facebook.com/1409584711201780/posts/1527425992750984"
+      "id": "wei-6574",
+      "title": "ร้านสวย ร่มรื่น",
+      "url": "https://www.facebook.com/1409584711201780/posts/1527524786074438"
     }
   ],
   "dry_run": false
