@@ -1,6 +1,6 @@
 {
   "added": 0,
-  "skipped_shared": 4,
+  "skipped_shared": 5,
   "checked": 50,
   "pages_scanned": 2,
   "backfill": false,
@@ -10,9 +10,9 @@
     "warning": null
   },
   "page_stats": {
-    "followers": 161612,
+    "followers": 161609,
     "followersK": 161,
-    "updatedAt": "2026-10-16T22:19:02.080115+00:00",
+    "updatedAt": "2026-10-17T02:07:02.187153+00:00",
     "pageId": "367355370015900"
   },
   "articles": [],
