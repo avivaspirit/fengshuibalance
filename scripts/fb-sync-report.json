@@ -1,6 +1,6 @@
 {
   "added": 1,
-  "skipped_shared": 10,
+  "skipped_shared": 9,
   "checked": 75,
   "pages_scanned": 3,
   "backfill": false,
@@ -10,16 +10,16 @@
     "warning": null
   },
   "page_stats": {
-    "followers": 161591,
+    "followers": 161596,
     "followersK": 161,
-    "updatedAt": "2026-10-20T00:48:39.038680+00:00",
+    "updatedAt": "2026-10-20T06:50:59.098492+00:00",
     "pageId": "367355370015900"
   },
   "articles": [
     {
-      "id": "wei-6578",
-      "title": "ให้ดูใหม่อีกที เกี่ยวกับดาว 9 ยุค",
-      "url": "https://www.facebook.com/1409584711201780/posts/1532215365605380"
+      "id": "wei-6579",
+      "title": "ขอบคุณทุกท่านที่ส่งกำลังใจมาให้ครับ",
+      "url": "https://www.facebook.com/1409584711201780/posts/1532344595592457"
     }
   ],
   "dry_run": false
