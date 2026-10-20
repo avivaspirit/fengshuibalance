@@ -11,16 +11,13 @@ const articleFilters = document.querySelector("[data-article-filters]");
 const articleCount = document.querySelector("[data-article-count]");
 const loadMore = document.querySelector("[data-load-more]");
 const articleDialog = document.querySelector("[data-article-dialog]");
-const adminDialog = document.querySelector("[data-admin-dialog]");
-const adminForm = document.querySelector("[data-admin-form]");
 const counters = document.querySelectorAll("[data-counter]");
 
-let activeLang = window.__forceLang || (location.pathname.startsWith("/en") ? "en" : localStorage.getItem("fengshui-balance-lang")) || "th";
+let activeLang = window.__forceLang || (location.pathname.startsWith("/en") ? "en" : "th");
 let activeFilter = "all";
 let visibleLimit = 6;
 let activeArticleId = null;
 let bookmarkedIds = JSON.parse(localStorage.getItem("fengshui-read-later") || "[]");
-let editorMode = new URLSearchParams(location.search).has("edit") || location.hash === "#edit";
 const articleVersion = "titles-readable-2026-06-06";
 const savedVersion = localStorage.getItem("fengshui-balance-articles-version");
 const savedArticles = JSON.parse(localStorage.getItem("fengshui-balance-articles") || "null");
@@ -508,25 +505,7 @@ function openArticle(id) {
   const source = articleDialog.querySelector("[data-dialog-source]");
   source.href = article.url || "#";
   source.hidden = !article.url;
-  articleDialog.querySelector("[data-edit-actions]").hidden = !editorMode;
   articleDialog.showModal();
-}
-
-function openAdminFor(id) {
-  const article = articles.find((item) => item.id === id);
-  if (!article) return;
-  adminForm.elements.id.value = article.id;
-  adminForm.elements.title.value = article.title;
-  adminForm.elements.category.value = article.category;
-  adminForm.elements.url.value = article.url || "";
-  adminForm.elements.body.value = article.body;
-  adminDialog.showModal();
-}
-
-function enableEditorMode() {
-  editorMode = true;
-  document.body.classList.add("editor-mode");
-  articleDialog?.querySelector("[data-edit-actions]")?.removeAttribute("hidden");
 }
 
 langToggle?.addEventListener("click", () => {
@@ -565,10 +544,6 @@ menu?.querySelectorAll("a").forEach((link) => {
 document.addEventListener("keydown", (event) => {
   if (event.key === "Escape") {
     closeMenu();
-  }
-  if (event.ctrlKey && event.shiftKey && event.key.toLowerCase() === "e") {
-    enableEditorMode();
-    adminDialog.showModal();
   }
 });
 
@@ -717,50 +692,6 @@ if (loadMore) {
 }
 
 document.querySelector("[data-dialog-close]")?.addEventListener("click", () => articleDialog?.close());
-document.querySelector("[data-admin-close]")?.addEventListener("click", () => adminDialog?.close());
-document.querySelector("[data-admin-open]")?.addEventListener("click", () => {
-  enableEditorMode();
-  adminDialog?.showModal();
-});
-
-document.querySelector("[data-edit-article]")?.addEventListener("click", () => openAdminFor(activeArticleId));
-document.querySelector("[data-delete-article]")?.addEventListener("click", () => {
-  if (!activeArticleId) return;
-  articles = articles.filter((article) => article.id !== activeArticleId);
-  saveArticles();
-  articleDialog?.close();
-  renderArticles();
-});
-
-adminForm?.addEventListener("submit", (event) => {
-  event.preventDefault();
-  const id = adminForm.elements.id.value || `custom-${Date.now()}`;
-  const existing = articles.find((article) => article.id === id);
-  const updated = {
-    id,
-    title: adminForm.elements.title.value,
-    category: adminForm.elements.category.value,
-    image: existing?.image || "assets/images/fengshui-home-layout-consultation.jpg",
-    alt: existing?.alt || "Fengshui Balance article image",
-    date: existing?.date || new Date().toISOString().slice(0, 10),
-    url: adminForm.elements.url.value,
-    body: adminForm.elements.body.value,
-  };
-  articles = existing ? articles.map((article) => (article.id === id ? { ...article, ...updated } : article)) : [updated, ...articles];
-  saveArticles();
-  adminDialog.close();
-  renderArticles();
-});
-
-document.querySelector("[data-export-articles]")?.addEventListener("click", () => {
-  const blob = new Blob([JSON.stringify(articles, null, 2)], { type: "application/json" });
-  const url = URL.createObjectURL(blob);
-  const link = document.createElement("a");
-  link.href = url;
-  link.download = "fengshui-balance-articles.json";
-  link.click();
-  URL.revokeObjectURL(url);
-});
 
 let fullArticlesLoaded = false;
 let loadingFullArticlesPromise = null;

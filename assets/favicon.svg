@@ -3,9 +3,9 @@
   <g clip-path="url(#clip)">
     <clipPath id="clip"><circle cx="50" cy="50" r="47"/></clipPath>
     <rect x="50" y="3" width="47" height="94" fill="#1B4332"/>
-    <circle cx="50" cy="27" r="23.5" fill="#1B4332"/>
-    <circle cx="50" cy="73" r="23.5" fill="#F2EBDF"/>
-    <circle cx="50" cy="27" r="7.5" fill="#F2EBDF"/>
-    <circle cx="50" cy="73" r="7.5" fill="#2A5C4C"/>
+    <circle cx="50" cy="27" r="23.5" fill="#F2EBDF"/>
+    <circle cx="50" cy="73" r="23.5" fill="#1B4332"/>
+    <circle cx="50" cy="27" r="7.5" fill="#1B4332"/>
+    <circle cx="50" cy="73" r="7.5" fill="#F2EBDF"/>
   </g>
 </svg>

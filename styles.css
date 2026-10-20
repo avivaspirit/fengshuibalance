@@ -47,7 +47,7 @@ body.nav-open{overflow:hidden}
   display:block;
   width:28px;
   height:28px;
-  background:center/contain no-repeat url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ccircle cx='50' cy='50' r='47' fill='%23F2EBDF' stroke='%23B8986E' stroke-width='2.5'/%3E%3Cg clip-path='url(%23clip)'%3E%3CclipPath id='clip'%3E%3Ccircle cx='50' cy='50' r='47'/%3E%3C/clipPath%3E%3Crect x='50' y='3' width='47' height='94' fill='%231B4332'/%3E%3Ccircle cx='50' cy='27' r='23.5' fill='%231B4332'/%3E%3Ccircle cx='50' cy='73' r='23.5' fill='%23F2EBDF'/%3E%3Ccircle cx='50' cy='27' r='7.5' fill='%23F2EBDF'/%3E%3Ccircle cx='50' cy='73' r='7.5' fill='%232A5C4C'/%3E%3C/g%3E%3C/svg%3E");
+  background:center/contain no-repeat url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ccircle cx='50' cy='50' r='47' fill='%23F2EBDF' stroke='%23B8986E' stroke-width='2.5'/%3E%3Cg clip-path='url(%23clip)'%3E%3CclipPath id='clip'%3E%3Ccircle cx='50' cy='50' r='47'/%3E%3C/clipPath%3E%3Crect x='50' y='3' width='47' height='94' fill='%231B4332'/%3E%3Ccircle cx='50' cy='27' r='23.5' fill='%23F2EBDF'/%3E%3Ccircle cx='50' cy='73' r='23.5' fill='%231B4332'/%3E%3Ccircle cx='50' cy='27' r='7.5' fill='%231B4332'/%3E%3Ccircle cx='50' cy='73' r='7.5' fill='%23F2EBDF'/%3E%3C/g%3E%3C/svg%3E");
 }
 
 /* Banyan Tree–inspired luxury wellness CI */
