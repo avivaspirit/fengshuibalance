@@ -106,4 +106,4 @@ jobs:
           npm install -g vercel@54
           mkdir -p .vercel
           printf '{"projectId":"prj_yDmivj5MDauFZKteiSEY1JARtSfv","orgId":"team_8uqgWTBz1wwwzzkN0sTWCahx","projectName":"fengshuibalance"}' > .vercel/project.json
-          VERCEL_TOKEN="$VERCEL_TOKEN" vercel deploy --prod --yes --force
+          VERCEL_TOKEN="$VERCEL_TOKEN" vercel deploy --prod --yes --force --archive=tgz
