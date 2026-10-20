@@ -107,5 +107,5 @@ jobs:
           fi
           npm install -g vercel@54
           mkdir -p .vercel
-          printf '{"projectId":"%s","orgId":"%s"}' "$VERCEL_PROJECT_ID" "$VERCEL_ORG_ID" > .vercel/project.json
+          printf '{"projectId":"prj_yDmivj5MDauFZKteiSEY1JARtSfv","orgId":"team_8uqgWTBz1wwwzzkN0sTWCahx"}' > .vercel/project.json
           VERCEL_TOKEN="$VERCEL_TOKEN" vercel deploy --prod --yes --force
