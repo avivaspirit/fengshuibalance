@@ -14,10 +14,11 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
 ARTICLES_JS = ROOT / "articles-full.js"
+ARTICLES_PREVIEW_JS = ROOT / "articles.js"
 ARTICLES_DIR = ROOT / "articles"
 STATE_FILE = ROOT / "scripts" / "fb-sync-state.json"
 PAGE_STATS_FILE = ROOT / "page-stats.json"
-DEFAULT_IMAGE = "assets/images/modern-chinese-spirit-house-teeju.jpg"
+DEFAULT_IMAGE = "assets/images/modern-chinese-spirit-house-teeju.webp"
 DEFAULT_ALT = "บทความฮวงจุ้ยจาก Fengshui Balance"
 GRAPH_VERSION = "v21.0"
 
@@ -65,9 +66,49 @@ def load_articles() -> list[dict]:
     return json.loads(match.group(1))
 
 
+def _article_num(article: dict) -> int:
+    m = re.fullmatch(r"wei-(\d+)", article.get("id", ""))
+    return int(m.group(1)) if m else 0
+
+
+def build_preview_articles(articles: list[dict], limit: int = 30) -> list[dict]:
+    """Build lightweight initial bundle with recommended picks, newest synced posts, and top popular posts."""
+    recommended = sorted(
+        [a for a in articles if a.get("recommended")],
+        key=lambda a: a.get("recommendedRank", 999),
+    )
+    newest = sorted(
+        articles,
+        key=lambda a: (a.get("date") or "", _article_num(a)),
+        reverse=True,
+    )[:12]
+    popular = sorted(
+        articles,
+        key=lambda a: (a.get("metrics") or {}).get("wei", 0),
+        reverse=True,
+    )
+    preview: list[dict] = []
+    seen: set[str] = set()
+    for group in (recommended, newest, popular):
+        for item in group:
+            aid = item.get("id")
+            if not aid or aid in seen:
+                continue
+            seen.add(aid)
+            copy_item = dict(item)
+            if isinstance(copy_item.get("image"), str):
+                copy_item["image"] = re.sub(r"\.(jpe?g|png)$", ".webp", copy_item["image"], flags=re.I)
+            preview.append(copy_item)
+            if len(preview) >= limit:
+                return preview
+    return preview
+
+
 def save_articles(articles: list[dict]) -> None:
     payload = json.dumps(articles, ensure_ascii=False, separators=(",", ":"))
     ARTICLES_JS.write_text(f"window.FENGSHUI_ARTICLES_FULL = {payload};\n", encoding="utf-8", newline="\n")
+    preview_payload = json.dumps(build_preview_articles(articles), ensure_ascii=False, separators=(",", ":"))
+    ARTICLES_PREVIEW_JS.write_text(f"window.FENGSHUI_ARTICLES = {preview_payload};\n", encoding="utf-8", newline="\n")
 
 
 def next_article_id(articles: list[dict]) -> str:
@@ -124,6 +165,14 @@ def sync_page_stats(page_id: str, token: str, dry_run: bool = False) -> dict:
     """Write homepage follower stats from the live Facebook page."""
     fan_count = fetch_page_fan_count(page_id, token)
     followers_k = max(1, fan_count // 1000)
+    existing: dict = {}
+    if PAGE_STATS_FILE.exists():
+        try:
+            existing = json.loads(PAGE_STATS_FILE.read_text(encoding="utf-8"))
+        except Exception:
+            existing = {}
+    if existing.get("followers") == fan_count and existing.get("followersK") == followers_k and existing.get("pageId") == page_id:
+        return existing
     stats = {
         "followers": fan_count,
         "followersK": followers_k,
@@ -364,7 +413,7 @@ def sync_new_posts(
     )
 
     added: list[dict] = []
-    for post in candidates:
+    for post in reversed(candidates):
         article_id = next_article_id(articles)
         article = build_article(post, article_id, enrich)
         added.append(article)

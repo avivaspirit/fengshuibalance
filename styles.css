@@ -768,14 +768,14 @@ h1,h2,h3,.brand-promise p,.section-heading h2,.service-grid h3,.gallery figcapti
   margin-top:36px;
 }
 .brand-family__cta{
-  border-color:rgba(184,152,110,0.45);
-  background:transparent;
-  color:var(--gold-light);
+  border-color:rgba(26,61,46,0.22);
+  background:var(--white);
+  color:var(--ink);
 }
 .brand-family__cta:hover{
-  border-color:var(--gold);
-  background:rgba(184,152,110,0.12);
-  color:var(--white);
+  border-color:var(--ink);
+  background:var(--jade);
+  color:var(--ink);
 }
 
 .portfolio-hero--brand{
@@ -2259,3 +2259,10 @@ body.subpage{background:linear-gradient(180deg,var(--white) 0%,var(--paper) 100%
 /* Article page: more articles navigation */
 .article-more-links{display:flex;flex-wrap:wrap;gap:12px;justify-content:center;max-width:600px;margin:32px auto 0;padding:0 24px}
 .article-more-links .button{width:auto;flex:0 1 auto}
+
+/* Article sort toggle (Popular / Latest) */
+.article-meta-row{display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:12px}
+.article-sort-group{display:inline-flex;align-items:center;gap:4px;padding:3px;border:1px solid rgba(23,63,49,0.12);border-radius:999px;background:rgba(255,255,255,0.85)}
+.article-sort-group .sort-btn{border:0;border-radius:999px;padding:5px 12px;background:transparent;color:var(--muted);font:inherit;font-size:13px;font-weight:700;cursor:pointer;transition:all 0.18s ease}
+.article-sort-group .sort-btn:hover{color:var(--ink)}
+.article-sort-group .sort-btn.is-active{background:var(--leaf);color:var(--white);box-shadow:0 2px 8px rgba(23,63,49,0.18)}

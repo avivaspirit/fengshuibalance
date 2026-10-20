@@ -72,7 +72,7 @@ jobs:
           # Defensive: strip any regenerated __pycache__ from the index + worktree
           git rm -r --cached --ignore-unmatch 'scripts/__pycache__/' >/dev/null 2>&1 || true
           git clean -fdX scripts/ >/dev/null 2>&1 || true
-          git add articles-full.js articles/ scripts/fb-sync-state.json scripts/fb-sync-report.json sitemap.xml sitemap-main.xml sitemap-articles.xml robots.txt page-stats.json
+          git add articles-full.js articles.js articles/ scripts/fb-sync-state.json scripts/fb-sync-report.json sitemap.xml sitemap-main.xml sitemap-articles.xml robots.txt page-stats.json
           if git diff --staged --quiet; then
             echo "No sync changes"
             echo "changed=false" >> $GITHUB_OUTPUT
@@ -94,7 +94,7 @@ jobs:
           exit 1
 
       - name: Deploy to Vercel
-        if: success()
+        if: success() && (steps.commit.outputs.changed == 'true' || github.event_name == 'workflow_dispatch')
         continue-on-error: true
         env:
           VERCEL_TOKEN: ${{ secrets.VERCEL_TOKEN }}

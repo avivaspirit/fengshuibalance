@@ -80,9 +80,13 @@ def render_article_html(article: dict, enrich) -> str:
     eyebrow = html.escape(eyebrow_for(article))
     tag_row = html.escape(tag_label_row(article, enrich))
     popularity = format_popularity(article)
-    body_html = render_body(article.get("body", ""))
-    summary_text = html.escape(meta_description(article.get("body", ""), limit=180))
+    raw_body = article.get("body", "")
+    body_html = render_body(raw_body)
+    clean_body = re.sub(r"\s+", " ", (raw_body or "").strip())
+    summary_text = html.escape(meta_description(raw_body, limit=180)) if len(clean_body) > 220 else ""
     summary_html = f'<p class="article-callout">💡 สรุปใจความสำคัญ: {summary_text}</p>\n' if summary_text else ""
+    tags = article.get("tags") or [article.get("category", "general")]
+    section_th = html.escape(enrich.TAG_META.get(tags[0], enrich.TAG_META["general"])["th"])
 
     schema = {
         "@context": "https://schema.org",
@@ -135,6 +139,7 @@ def render_article_html(article: dict, enrich) -> str:
     <meta property="og:image" content="{html.escape(og_image)}">
     <meta property="og:url" content="{article_url}">
     <meta property="article:published_time" content="{date}">
+    <meta property="article:section" content="{section_th}">
     <script type="application/ld+json">{json.dumps(schema, ensure_ascii=False)}</script>
     <script type="application/ld+json">{json.dumps(breadcrumb_schema, ensure_ascii=False)}</script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -144,7 +149,7 @@ def render_article_html(article: dict, enrich) -> str:
     {GA4_SNIPPET}
   </head>
   <body class="article-page">
-    <header class="site-header">
+    <header class="site-header" data-header>
       <a class="brand" href="../index.html#top">
         <span class="brand-mark" aria-hidden="true"></span>
         <span>
@@ -152,14 +157,21 @@ def render_article_html(article: dict, enrich) -> str:
           <small>ฮวงจุ้ย สมดุลแห่งธรรมชาติ</small>
         </span>
       </a>
-      <nav class="site-nav" aria-label="Primary navigation">
+      <div class="header-tools">
+        <button class="menu-toggle" type="button" aria-expanded="false" aria-controls="site-menu" data-menu-toggle aria-label="Open menu">
+          <span class="menu-toggle-icon" aria-hidden="true"><span></span><span></span><span></span></span>
+          <span class="sr-only">เมนู</span>
+        </button>
+      </div>
+      <div class="nav-backdrop" data-nav-backdrop hidden></div>
+      <nav id="site-menu" class="site-nav" aria-label="Primary navigation" data-menu>
         <a href="../index.html#services">ปรึกษา</a>
         <a href="../index.html#method">วิธีทำงาน</a>
         <a href="../index.html#work">เคสงาน</a>
         <a href="../projects.html">ผลงานอ้างอิง</a>
-        <a href="../ajarn-suppachai.html">สายวิชา</a>
+        <a href="../ajarn-suppachai.html">ประวัติ</a>
         <a href="../articles.html">คลังความรู้</a>
-        <a class="nav-cta" href="https://www.facebook.com/fengshuibalance" target="_blank" rel="noreferrer">ติดต่ออาจารย์</a>
+        <a class="nav-cta" href="https://m.me/fengshuibalance" target="_blank" rel="noreferrer">ติดต่ออาจารย์</a>
       </nav>
     </header>
     <main class="article-page-main">

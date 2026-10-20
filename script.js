@@ -15,10 +15,11 @@ const counters = document.querySelectorAll("[data-counter]");
 
 let activeLang = window.__forceLang || (location.pathname.startsWith("/en") ? "en" : "th");
 let activeFilter = "all";
+let activeSort = "popular";
 let visibleLimit = 6;
 let activeArticleId = null;
 let bookmarkedIds = JSON.parse(localStorage.getItem("fengshui-read-later") || "[]");
-const articleVersion = "titles-readable-2026-06-06";
+const articleVersion = "titles-readable-2026-10-21";
 const savedVersion = localStorage.getItem("fengshui-balance-articles-version");
 const savedArticles = JSON.parse(localStorage.getItem("fengshui-balance-articles") || "null");
 const sourceArticles = window.FENGSHUI_ARTICLES_FULL || window.FENGSHUI_ARTICLES || [];
@@ -26,6 +27,21 @@ let articles =
   savedVersion === articleVersion && Array.isArray(savedArticles) && savedArticles.length >= sourceArticles.length
     ? savedArticles
     : sourceArticles;
+
+function normalizeAssetPath(rawPath) {
+  if (!rawPath) return "";
+  if (/^https?:\/\//i.test(rawPath) || rawPath.startsWith("/")) return rawPath;
+  return "/" + rawPath.replace(/^(\.\.\/)+/, "").replace(/^\/+/, "");
+}
+
+function normalizeWebpImage(rawPath) {
+  return normalizeAssetPath(rawPath).replace(/\.(jpe?g|png)$/i, ".webp");
+}
+
+function articleIdNum(article) {
+  const m = /^wei-(\d+)$/.exec(article?.id || "");
+  return m ? Number(m[1]) : 0;
+}
 
 function applyLanguage(lang) {
   activeLang = lang;
@@ -36,6 +52,10 @@ function applyLanguage(lang) {
     node.innerHTML = node.dataset[lang];
     if (icon) node.prepend(icon);
   });
+  if (articleSearch) {
+    articleSearch.placeholder =
+      lang === "en" ? "Search Fengshui, home, spirit house, BaZi…" : "ฮวงจุ้ย บ้าน ศาล ดวงจีน…";
+  }
   updateCounterSuffixes();
   langLabel && (langLabel.textContent = lang === "en" ? "TH" : "EN");
   // Keep the keyword-rich title on the homepage; only swap when the user changes language.
@@ -121,7 +141,7 @@ async function refreshFollowerCounter() {
   const followerCounter = document.querySelector("[data-followers-counter]");
   if (!followerCounter) return;
   try {
-    const response = await fetch("page-stats.json?v=" + Date.now(), { cache: "no-store" });
+    const response = await fetch("/page-stats.json?v=" + Date.now(), { cache: "no-store" });
     if (!response.ok) return;
     const stats = await response.json();
     const followersK = Number(stats.followersK);
@@ -153,6 +173,7 @@ function excerpt(text, length = 120) {
 
 const CATEGORY_META = {
   all: { en: "All", th: "ทั้งหมด" },
+  latest: { en: "Latest", th: "ใหม่ล่าสุด" },
   saved: { en: "Saved", th: "ที่บันทึกไว้" },
   timing: { en: "Auspicious Timing", th: "ฤกษ์ยาม" },
   spirit: { en: "Spirit House", th: "ศาลและตี่จู้" },
@@ -184,6 +205,7 @@ const CHIP_ICONS = {
   energy: "M8 2v6l4 2",
   interactive: "M3 8c0-2.8 2.2-5 5-5s5 2.2 5 5",
   saved: "M4 3.5h8v9l-4-2.5-4 2.5z",
+  latest: "M8 3.5v4.5l3 1.5M14 8a6 6 0 1 1-12 0 6 6 0 0 1 12 0z",
   all: "M8 3v10",
 };
 
@@ -207,9 +229,8 @@ function categoryChipHtml(category) {
 
 function articlePictureHtml(article, width, height) {
   // Every article image has a .webp twin (scripts/generate-article-webp.py).
-  const webp = article.image.replace(/\.(jpe?g|png)$/i, ".webp");
-  const source = webp === article.image ? "" : `<source type="image/webp" srcset="${webp}">`;
-  return `<picture>${source}<img src="${article.image}" alt="${article.alt}" loading="lazy" decoding="async" width="${width}" height="${height}"></picture>`;
+  const webp = normalizeWebpImage(article.image);
+  return `<picture><source type="image/webp" srcset="${webp}"><img src="${webp}" alt="${article.alt}" loading="lazy" decoding="async" width="${width}" height="${height}"></picture>`;
 }
 
 function articleTags(article) {
@@ -264,17 +285,28 @@ function filteredArticles() {
   var q = (articleSearch ? articleSearch.value : "").trim().toLowerCase();
   var terms = q ? q.split(/\s+/).filter(Boolean) : [];
   var list = articles;
+  // Only hide recommended picks when a dedicated recommendedGrid exists on the same page and not searching
+  var hideRecommended = Boolean(recommendedGrid) && !terms.length && activeFilter !== "latest";
   if (activeFilter === "saved") {
     list = articles.filter((article) => bookmarkedIds.includes(article.id));
+  } else if (activeFilter === "latest") {
+    list = articles.filter((article) => !hideRecommended || !article.recommended);
   } else {
     list = articles.filter(
       (article) =>
-        !article.recommended &&
+        (!hideRecommended || !article.recommended) &&
         (activeFilter === "all" || articleTags(article).includes(activeFilter))
     );
   }
   if (!terms.length) {
-    return list.sort(function (a, b) {
+    if (activeFilter === "latest" || activeSort === "latest") {
+      return [...list].sort(function (a, b) {
+        var dc = (b.date || "").localeCompare(a.date || "");
+        if (dc !== 0) return dc;
+        return articleIdNum(b) - articleIdNum(a);
+      });
+    }
+    return [...list].sort(function (a, b) {
       return (b.metrics ? b.metrics.wei : 0) - (a.metrics ? a.metrics.wei : 0);
     });
   }
@@ -313,6 +345,7 @@ function renderFilters() {
   if (!articleFilters) return;
   const categories = [
     "all",
+    "latest",
     "saved",
     ...new Set(articles.flatMap((article) => articleTags(article))),
   ];
@@ -364,7 +397,7 @@ function renderRecommendedCard(article, rank, { preview = false } = {}) {
 
   return `
         <article class="recommended-card${preview ? " recommended-card--preview" : ""}">
-          <a href="articles/${article.id}.html" class="card-link" data-open-article="${article.id}" aria-label="${article.title}">
+          <a href="/articles/${article.id}.html" class="card-link" data-open-article="${article.id}" aria-label="${article.title}">
             ${displayRank ? `<span class="recommend-rank">No. ${displayRank}</span>` : ""}
             <div class="card-image-wrapper">
               ${articlePictureHtml(article, 960, 540)}
@@ -378,7 +411,7 @@ function renderRecommendedCard(article, rank, { preview = false } = {}) {
             </div>
           </a>
           <div class="card-footer">
-            <a href="articles/${article.id}.html" class="read-more-link" data-open-article="${article.id}">
+            <a href="/articles/${article.id}.html" class="read-more-link" data-open-article="${article.id}">
               <span>${preview ? readLabel : readArticleLabel} &rarr;</span>
             </a>
             <div class="card-footer-right">
@@ -402,10 +435,41 @@ function renderRecommendedGrid() {
     .join("");
 }
 
+function renderSortToggle() {
+  if (!articleCount) return;
+  const metaRow = articleCount.closest(".article-meta-row");
+  if (!metaRow) return;
+  let sortGroup = metaRow.querySelector("[data-sort-group]");
+  if (!sortGroup) {
+    sortGroup = document.createElement("span");
+    sortGroup.className = "article-sort-group";
+    sortGroup.setAttribute("data-sort-group", "");
+    metaRow.appendChild(sortGroup);
+    sortGroup.addEventListener("click", (e) => {
+      const btn = e.target.closest("[data-sort]");
+      if (!btn) return;
+      activeSort = btn.dataset.sort;
+      if (activeSort === "popular" && activeFilter === "latest") {
+        activeFilter = "all";
+      }
+      visibleLimit = document.body.classList.contains("articles-archive-page") ? 12 : 6;
+      ensureFullArticles().then(() => renderArticles());
+    });
+  }
+  const effectiveSort = activeFilter === "latest" ? "latest" : activeSort;
+  const popLabel = activeLang === "en" ? "Popular" : "ยอดนิยม";
+  const latestLabel = activeLang === "en" ? "Latest" : "ใหม่ล่าสุด";
+  sortGroup.innerHTML = `
+    <button type="button" class="sort-btn ${effectiveSort === "popular" ? "is-active" : ""}" data-sort="popular">${popLabel}</button>
+    <button type="button" class="sort-btn ${effectiveSort === "latest" ? "is-active" : ""}" data-sort="latest">${latestLabel}</button>
+  `;
+}
+
 function renderArticles() {
   renderFilters();
   renderRecommendedGrid();
   if (!hasArticleArchive) return;
+  renderSortToggle();
 
   const list = filteredArticles();
   
@@ -449,7 +513,7 @@ function renderArticles() {
         var bodyHtml = terms.length ? highlightTerms(bodyExcerpt, terms) : bodyExcerpt;
         return `
         <article class="article-card ${article.image ? "" : "is-text-only"}">
-          <a href="articles/${article.id}.html" class="card-link" data-open-article="${article.id}">
+          <a href="/articles/${article.id}.html" class="card-link" data-open-article="${article.id}">
             ${article.image ? `
             <div class="card-image-wrapper">
               ${articlePictureHtml(article, 640, 480)}
@@ -463,12 +527,12 @@ function renderArticles() {
             </div>
           </a>
           <div class="card-footer">
-            <a href="articles/${article.id}.html" class="read-more-link" data-open-article="${article.id}">
+            <a href="/articles/${article.id}.html" class="read-more-link" data-open-article="${article.id}">
               <span>${activeLang === "en" ? "Read Article" : "อ่านบทความ"} &rarr;</span>
             </a>
             <div class="card-footer-right">
               <a href="${article.url || "#"}" class="fb-source-link" target="_blank" rel="noreferrer" aria-label="${activeLang === "en" ? "Read on Facebook" : "อ่านบน Facebook"}">
-                <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 10.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>
                 <span>${activeLang === "en" ? "Facebook" : "Facebook"}</span>
               </a>
               <button class="bookmark-btn ${isBookmarked ? "is-saved" : ""}" data-bookmark="${article.id}" aria-label="${isBookmarked ? "Remove Bookmark" : "Save for Later"}">
@@ -491,7 +555,7 @@ function openArticle(id) {
   const dialogImage = articleDialog.querySelector("[data-dialog-image]");
   dialogImage.hidden = !article.image;
   if (article.image) {
-    dialogImage.src = article.image;
+    dialogImage.src = normalizeWebpImage(article.image);
     dialogImage.alt = article.alt;
   } else {
     dialogImage.removeAttribute("src");
@@ -641,7 +705,10 @@ if (articleFilters) {
     const button = event.target.closest("[data-filter]");
     if (!button) return;
     activeFilter = button.dataset.filter;
-    visibleLimit = 6;
+    if (activeFilter === "latest") {
+      activeSort = "latest";
+    }
+    visibleLimit = document.body.classList.contains("articles-archive-page") ? 12 : 6;
     ensureFullArticles().then(() => {
       renderArticles();
     });
@@ -707,7 +774,7 @@ function ensureFullArticles() {
 
   loadingFullArticlesPromise = new Promise((resolve) => {
     const script = document.createElement("script");
-    script.src = "articles-full.js";
+    script.src = "/articles-full.js";
     script.defer = true;
     script.onload = () => {
       if (Array.isArray(window.FENGSHUI_ARTICLES_FULL)) {

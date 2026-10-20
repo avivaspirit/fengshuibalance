@@ -4,6 +4,58 @@
 
   document.body.classList.add("article-page");
 
+  // Inject mobile menu toggle on article pages that lack one
+  (function () {
+    var siteHeader = document.querySelector(".site-header");
+    var siteNav = siteHeader ? siteHeader.querySelector(".site-nav") : null;
+    if (!siteHeader || !siteNav) return;
+    siteNav.id = siteNav.id || "site-menu";
+    var toggle = siteHeader.querySelector("[data-menu-toggle]");
+    var backdrop = siteHeader.querySelector("[data-nav-backdrop]");
+    if (!toggle) {
+      var tools = document.createElement("div");
+      tools.className = "header-tools";
+      tools.innerHTML =
+        '<button class="menu-toggle" type="button" aria-expanded="false" aria-controls="site-menu" data-menu-toggle aria-label="Open menu">' +
+        '<span class="menu-toggle-icon" aria-hidden="true"><span></span><span></span><span></span></span>' +
+        '<span class="sr-only">เมนู</span></button>';
+      siteHeader.insertBefore(tools, siteNav);
+      toggle = tools.querySelector("[data-menu-toggle]");
+    }
+    if (!backdrop) {
+      backdrop = document.createElement("div");
+      backdrop.className = "nav-backdrop";
+      backdrop.setAttribute("data-nav-backdrop", "");
+      backdrop.hidden = true;
+      siteHeader.insertBefore(backdrop, siteNav);
+    }
+    function closeNav() {
+      siteNav.classList.remove("is-open");
+      toggle.classList.remove("is-open");
+      toggle.setAttribute("aria-expanded", "false");
+      document.body.classList.remove("nav-open");
+      backdrop.hidden = true;
+    }
+    function openNav() {
+      siteNav.classList.add("is-open");
+      toggle.classList.add("is-open");
+      toggle.setAttribute("aria-expanded", "true");
+      document.body.classList.add("nav-open");
+      backdrop.hidden = false;
+    }
+    toggle.addEventListener("click", function () {
+      if (siteNav.classList.contains("is-open")) closeNav();
+      else openNav();
+    });
+    backdrop.addEventListener("click", closeNav);
+    siteNav.querySelectorAll("a").forEach(function (a) {
+      a.addEventListener("click", closeNav);
+    });
+    document.addEventListener("keydown", function (e) {
+      if (e.key === "Escape") closeNav();
+    });
+  })();
+
   function escapeHtml(str) {
     return str
       .replace(/&/g, "&amp;")
@@ -207,19 +259,21 @@
   (function() {
     var existingSchemas = document.querySelectorAll('script[type="application/ld+json"]');
     var articleSchema = null;
+    var hasBreadcrumb = false;
     existingSchemas.forEach(function(s) {
       try {
         var d = JSON.parse(s.textContent);
         if (d["@type"] === "Article") articleSchema = d;
+        if (d["@type"] === "BreadcrumbList") hasBreadcrumb = true;
       } catch(e) {}
     });
-    if (articleSchema) {
+    if (articleSchema && !hasBreadcrumb) {
       var breadcrumbLd = {
         "@context": "https://schema.org",
         "@type": "BreadcrumbList",
         "itemListElement": [
-          {"@type": "ListItem", "position": 1, "name": "Fengshui Balance", "item": "https://fengshuibalance.vercel.app/"},
-          {"@type": "ListItem", "position": 2, "name": "คลังความรู้", "item": "https://fengshuibalance.vercel.app/articles.html"},
+          {"@type": "ListItem", "position": 1, "name": "Fengshui Balance", "item": "https://fengshuibalance.net/"},
+          {"@type": "ListItem", "position": 2, "name": "คลังความรู้", "item": "https://fengshuibalance.net/articles.html"},
           {"@type": "ListItem", "position": 3, "name": articleSchema.headline || "บทความ"}
         ]
       };

@@ -193,7 +193,9 @@ def refine_title(article: dict) -> str:
     for pattern, repl in replacements.items():
         t = re.sub(pattern, repl, t, flags=re.I)
 
-    if len(t) < 10 or t.lower() in {"...", "inbox", "update", "updated"}:
+    t = re.sub(r"\s+", " ", t).strip(" .…-–—:：")
+
+    if len(t) < 12 or t.lower() in {"...", "inbox", "update", "updated", "เฉลยครบทุกประเด็น", "สรุปครบทุกประเด็น"}:
         derived = first_meaningful_line(body)
         if derived:
             t = derived
@@ -220,31 +222,34 @@ def tag_label_th(tag: str) -> str:
 
 
 def update_html(article: dict) -> bool:
+    import html as html_lib
     path = ARTICLES_DIR / f"{article['id']}.html"
     if not path.exists():
         return False
 
     html = path.read_text(encoding="utf-8")
-    title = article["title"]
+    raw_title = article["title"]
+    esc_title = html_lib.escape(raw_title)
+    json_title = json.dumps(raw_title, ensure_ascii=False)[1:-1]
     tags = article["tags"]
-    tag_text = " · ".join(tag_label_th(t) for t in tags)
-    page_title = f"{title} | Fengshui Balance"
-    section = TAG_META.get(tags[0], TAG_META["general"])["th"]
+    tag_text = html_lib.escape(" · ".join(tag_label_th(t) for t in tags))
+    page_title = f"{esc_title} | Fengshui Balance"
+    section = html_lib.escape(TAG_META.get(tags[0], TAG_META["general"])["th"])
 
     html = re.sub(r"<title>.*?</title>", lambda _m: f"<title>{page_title}</title>", html, count=1)
     html = re.sub(
         r'(<meta property="og:title" content=")(.*?)(")',
-        lambda m: f"{m.group(1)}{title}{m.group(3)}",
+        lambda m: f"{m.group(1)}{esc_title}{m.group(3)}",
         html,
         count=1,
     )
     html = re.sub(
-        r'("headline"\s*:\s*")(.*?)(")',
-        lambda m: f'{m.group(1)}{title}{m.group(3)}',
+        r'("headline"\s*:\s*")((?:\\.|[^"\\])*)(")',
+        lambda m: f'{m.group(1)}{json_title}{m.group(3)}',
         html,
         count=1,
     )
-    html = re.sub(r"(<h1>)(.*?)(</h1>)", lambda m: f"{m.group(1)}{title}{m.group(3)}", html, count=1)
+    html = re.sub(r"(<h1>)(.*?)(</h1>)", lambda m: f"{m.group(1)}{esc_title}{m.group(3)}", html, count=1)
     html = re.sub(
         r"(<span>📂 หมวดหมู่: ).*?(</span>)",
         lambda m: f"{m.group(1)}{tag_text}{m.group(2)}",
