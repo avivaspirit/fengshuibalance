@@ -98,8 +98,6 @@ jobs:
         continue-on-error: true
         env:
           VERCEL_TOKEN: ${{ secrets.VERCEL_TOKEN }}
-          VERCEL_ORG_ID: ${{ secrets.VERCEL_ORG_ID }}
-          VERCEL_PROJECT_ID: ${{ secrets.VERCEL_PROJECT_ID }}
         run: |
           if [ -z "$VERCEL_TOKEN" ]; then
             echo "VERCEL_TOKEN not set; skipping deploy."
@@ -107,5 +105,5 @@ jobs:
           fi
           npm install -g vercel@54
           mkdir -p .vercel
-          printf '{"projectId":"prj_yDmivj5MDauFZKteiSEY1JARtSfv","orgId":"team_8uqgWTBz1wwwzzkN0sTWCahx"}' > .vercel/project.json
+          printf '{"projectId":"prj_yDmivj5MDauFZKteiSEY1JARtSfv","orgId":"team_8uqgWTBz1wwwzzkN0sTWCahx","projectName":"fengshuibalance"}' > .vercel/project.json
           VERCEL_TOKEN="$VERCEL_TOKEN" vercel deploy --prod --yes --force
