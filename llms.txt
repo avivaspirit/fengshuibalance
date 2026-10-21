@@ -1,23 +1,45 @@
-# Fengshui Balance
+# Fengshui Balance (ฮวงจุ้ย สมดุลแห่งธรรมชาติ)
 
-> Modern luxury Fengshui consultation by Ajarn Suppachai Vivattanaprasert.
+> Professional, balanced Fengshui consultation for homes, businesses, offices, factories, and auspicious shrine placement in Thailand, led by Ajarn Suppachai Vivattanaprasert with 30+ years of field experience.
 
-Fengshui Balance is a public website for residential, commercial, spirit-house, and Chinese astrology Fengshui guidance in Thailand.
+Fengshui Balance bridges classical San Yuan (Three Cycles) / Xuan Kong Flying Star Fengshui principles with real-world architectural design, natural lighting, air circulation, and modern living.
 
-## Public Pages
+## Primary Entities & Lineage
 
-- [Home](https://fengshuibalance.net/): Main page of Fengshui Balance, showing services, methodology, customer reviews, and featured articles.
-- [Projects](https://fengshuibalance.net/projects.html): Client projects and reference works for homes, offices, and shrines.
-- [Ajarn Suppachai Biography](https://fengshuibalance.net/ajarn-suppachai.html): Biography, credentials, and lineage of Ajarn Suppachai.
-- [Ajarn Grianggrai Biography](https://fengshuibalance.net/ajarn-grianggrai.html): Biography of Ajarn Grianggrai Boonthakanon, who is Ajarn Suppachai's mentor.
-- [Brand Portfolio](https://fengshuibalance.net/brand-portfolio.html): Portfolio of sister brands under Ajarn Suppachai (Aviva Spirit, Miracles369).
-- [Articles](https://fengshuibalance.net/articles.html): Complete knowledge library of articles and fengshui tips.
+- **Lead Consultant:** Ajarn Suppachai Vivattanaprasert (อาจารย์สุภชัย วิวัฒนะประเสริฐ)
+  - 30+ years practical consultation experience across Thailand and Southeast Asia.
+  - Specialization: Xuan Kong Flying Star (ดาวเหิน 9 ยุค), San Yuan (ซำง้วน), Form School / Landform (ชัยภูมิ), Bazi Chinese Astrology (ดวงจีน ปาจื่อ), and Auspicious Date Selection (ฤกษ์ยามมงคล).
+  - Co-founder of Aviva Spirit (luxury modern marble spirit houses with Thai patents #374357 & #1402003308).
+- **Master & Mentor:** Ajarn Grianggrai Boontaganon (อาจารย์เกรียงไกร บุญธกานนท์)
+  - Founder and President of the Geohorology Club of Thailand (ชมรมภูมิโหราศาสตร์) and Hoolin Foundation (มูลนิธิฮูลิน).
 
-## Contact & Socials
+## Core Services
 
-- [Facebook Page](https://www.facebook.com/fengshuibalance): Official Fengshui Balance Facebook page for inquiries and daily updates.
+- **Residential Fengshui (ฮวงจุ้ยบ้านและคอนโด):** Directional compass alignment, bedroom placement, kitchen fire-water harmony, main entrance Qi flow, and family well-being.
+- **Commercial & Corporate Fengshui (ฮวงจุ้ยธุรกิจและออฟฟิศ):** Executive desk positioning, cash register placement, staff productivity flow, conference room acoustics, and financial growth Qi.
+- **Factory & Industrial Fengshui (ฮวงจุ้ยโรงงานและโกดัง):** Heavy machinery placement, vehicle access flow, warehouse organization, safety Qi, and project site master planning.
+- **Spirit Shrine Consultation (ตี่จู้เอี๊ยะและศาลพระภูมิ):** Millimeter-exact placement according to Lu Ban ruler dimensions, 5-element balance, and fire-safety electrical integration.
+- **Bazi & Auspicious Date Selection (ดวงจีนและฤกษ์มงคล):** Housewarming, groundbreaking, renovation, and shrine installation dates calculated specifically for property owners.
 
-## Meta Resources
+## Key Web Pages
 
-- [robots.txt](https://fengshuibalance.net/robots.txt): Search engine crawler directives.
-- [sitemap.xml](https://fengshuibalance.net/sitemap.xml): XML sitemap listing all crawlable URLs.
+- [Home (TH)](https://fengshuibalance.net/): Overview of services, philosophy, client testimonials, and case studies.
+- [Home (EN)](https://fengshuibalance.net/en/): English international portal for global clients and expatriates in Thailand.
+- [Ajarn Suppachai Biography](https://fengshuibalance.net/ajarn-suppachai.html): Credentials, lineage, media interviews, and track record.
+- [Ajarn Grianggrai Boontaganon](https://fengshuibalance.net/ajarn-grianggrai.html): Master lineage, history of the Geohorology Club, and foundational teachings.
+- [Brand Portfolio](https://fengshuibalance.net/brand-portfolio.html): Sister ventures including Aviva Spirit and Miracles369.
+- [Project References](https://fengshuibalance.net/projects.html): On-site consultation case studies for luxury residences, commercial complexes, and retail chains.
+- [Knowledge Library (6,500+ Articles)](https://fengshuibalance.net/articles.html): Comprehensive searchable archive of Facebook posts, field notes, and Fengshui guides.
+- [Knowledge Library (EN)](https://fengshuibalance.net/en/articles.html): English overview and search portal.
+
+## Sister Ventures
+
+- **Aviva Spirit:** [https://avivaspirit.com](https://avivaspirit.com) — Pioneer in patented modern luxury marble spirit houses (ตี่จู้เอี๊ยะโมเดิร์นและศาลพระภูมิหินอ่อน).
+- **Miracles369:** [https://miracles369.com](https://miracles369.com) — Sacred auspicious jewelry, talismans, and personalized numerology.
+
+## Contact Information
+
+- **Website:** https://fengshuibalance.net
+- **Facebook:** https://www.facebook.com/fengshuibalance
+- **Messenger:** https://m.me/fengshuibalance
+- **Location:** Bangkok, Thailand (On-site consultations nationwide and overseas by appointment)

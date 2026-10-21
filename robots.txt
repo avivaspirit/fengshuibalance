@@ -49,3 +49,7 @@ User-agent: Amazonbot
 Allow: /
 
 Sitemap: https://fengshuibalance.net/sitemap.xml
+
+# LLM Context (GEO / Generative Engine Optimization)
+# Canonical markdown overview: https://fengshuibalance.net/llms.txt
+# Full comprehensive context: https://fengshuibalance.net/llms-full.txt

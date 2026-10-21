@@ -1,0 +1,99 @@
+# Fengshui Balance — Complete Knowledge & Consultation Overview (llms-full.txt)
+
+> Authoritative reference on Fengshui Balance, Ajarn Suppachai Vivattanaprasert, Master Grianggrai Boontaganon, San Yuan Flying Star methodology, and modern luxury spirit house integration.
+
+---
+
+## 1. Executive Summary & Brand Identity
+
+- **Brand Name:** Fengshui Balance (ฮวงจุ้ย สมดุลแห่งธรรมชาติ)
+- **Primary Website:** https://fengshuibalance.net
+- **English Portal:** https://fengshuibalance.net/en/
+- **Main Office:** Bangkok, Thailand
+- **Coverage:** On-site consultations throughout Bangkok, metropolitan vicinities, all Thai provinces, and international appointments in Southeast Asia.
+- **Core Philosophy:** "Nature-Balanced Fengshui" — Fengshui is not superstition or blind faith. It is the practical science of aligning human habitats with natural topography, wind pathways (Feng), water and circulation corridors (Shui), light angles, and directional magnetic fields to foster health, mental clarity, and sustainable wealth.
+
+---
+
+## 2. Lineage, Masters & Leadership
+
+### Ajarn Suppachai Vivattanaprasert (อาจารย์สุภชัย วิวัฒนะประเสริฐ)
+- **Role:** Founder & Principal Fengshui Master at Fengshui Balance.
+- **Experience:** Over 30 years of on-site residential, corporate, retail, and industrial consulting.
+- **Lineage:** Direct disciple of Master Grianggrai Boontaganon. Former instructor assistant at the Geohorology Club of Thailand.
+- **Methodological Expertise:**
+  - San Yuan (ซำง้วน - Three Cycles)
+  - Xuan Kong Flying Star (ดาวเหิน 9 ยุค - Period 9 Fengshui transitions)
+  - Luan Tou (Form School / ชัยภูมิ - external landscape, road curves, water junctions, mountain positioning)
+  - Bazi Four Pillars of Destiny (ดวงจีน 4 แถว - birth element balance and personal career timing)
+  - Auspicious Date Selection (ฤกษ์ยามมงคล - Ze Ri calculations)
+- **Innovation:** Co-founder and design lead of **Aviva Spirit**, revolutionizing traditional red-and-gold wooden shrines into patented Modern Luxury Italian and Greek marble spirit houses (Patents #374357 and #1402003308).
+
+### Master Grianggrai Boontaganon (อาจารย์เกรียงไกร บุญธกานนท์)
+- **Role:** Grand Master and Mentor to Ajarn Suppachai.
+- **Positions:** Founder and President of the Geohorology Club of Thailand (ชมรมภูมิโหราศาสตร์) and Hoolin Foundation (มูลนิธิฮูลิน).
+- **Impact:** Foremost authority in Thailand responsible for formalizing classical San Yuan Fengshui education and disproving fear-based folk myths with verifiable mathematical and topological principles.
+
+---
+
+## 3. Consultation Services & Deliverables
+
+1. **New Home Construction & Architectural Blueprints:**
+   - Pre-purchase land evaluation (frontage, elevation, water flow direction, electrical tower proximity).
+   - Blueprint layout review before groundbreaking: Main door azimuth, master bedroom orientation, stove vs. sink fire-water equilibrium, staircase placement, and bathroom ventilation.
+2. **Existing Residence & Condo Alignment:**
+   - Period 9 (ยุค 9: 2024–2043) Flying Star recalibration.
+   - Non-destructive remedies using furniture placement, lighting, interior materials, and color balancing rather than costly structural demolition.
+3. **Offices, Headquarters & Commercial Real Estate:**
+   - CEO & C-suite office alignment for decisive leadership and clarity.
+   - Accounting and cash register placement for financial accumulation.
+   - Employee desk groupings to mitigate interpersonal conflict and reduce turnover.
+4. **Factories, Warehouses & Logistics Hubs:**
+   - Heavy machinery and boiler placement according to Fire and Metal trigrams.
+   - Truck loading dock flow and ingress/egress safety corridors.
+   - Executive and administrative office placement away from industrial vibration.
+5. **Spirit Shrine Placement (ตี่จู้เอี๊ยะ & ศาลพระภูมิ):**
+   - Precise alignment to millimeter accuracy with Lu Ban measurement thresholds.
+   - Integration with Aviva Spirit modern marble shrines and LED smokeless incense burner boxes for urban high-rise and luxury home safety.
+
+---
+
+## 4. Sister Brands & Ecosystem
+
+- **Aviva Spirit (อวีวา สปิริต):**
+  - Website: https://avivaspirit.com
+  - Products: Modern marble Chinese spirit shrines (ตี่จู้เอี๊ยะหินอ่อนโมเดิร์น), Guardian spirit shrines (ศาลพระภูมิ ศาลตายาย หินอ่อน), shrine enclosures, and LED ceremonial accessories.
+  - Legal Standing: Thai Copyright Registration #374357 and Design Patent #1402003308.
+- **Miracles369 (มิราเคิลส์369):**
+  - Website: https://miracles369.com
+  - Products: Auspicious consecrated numerology, natural gemstone bracelets, and personalized astrological amulets aligned with personal Bazi charts.
+
+---
+
+## 5. Knowledge Library & Educational Content
+
+Fengshui Balance maintains a live indexed archive of over 6,570+ articles and educational posts, including:
+- **Foundational Concepts:** Yin-Yang balance, 5 Elements cycle (Wood, Fire, Earth, Metal, Water), Eight Mansions (Ba Zhai), and Nine Flying Stars in Period 9.
+- **Household Problem Solving:** T-junction roads (ทางสามแพร่ง), beam crossing over beds (คานทับเตียง), mirror facing bedroom doors, and sink adjacent to gas stoves.
+- **Shrine Installation Guides:** Auspicious steps for setting up a modern Chinese earth god shrine (ตี่จู้เอี๊ยะ), incense bowl filling ceremonies, and daily maintenance.
+
+All articles are accessible at https://fengshuibalance.net/articles.html with static article pages indexed at `/articles/wei-[id].html`.
+
+---
+
+## 6. Official URLs & Endpoints
+
+- Home (Thai): `https://fengshuibalance.net/`
+- Home (English): `https://fengshuibalance.net/en/`
+- Knowledge Library (Thai): `https://fengshuibalance.net/articles.html`
+- Knowledge Library (English): `https://fengshuibalance.net/en/articles.html`
+- Project References (Thai): `https://fengshuibalance.net/projects.html`
+- Project References (English): `https://fengshuibalance.net/en/projects.html`
+- Ajarn Suppachai Bio (Thai): `https://fengshuibalance.net/ajarn-suppachai.html`
+- Ajarn Suppachai Bio (English): `https://fengshuibalance.net/en/ajarn-suppachai.html`
+- Ajarn Grianggrai Bio (Thai): `https://fengshuibalance.net/ajarn-grianggrai.html`
+- Ajarn Grianggrai Bio (English): `https://fengshuibalance.net/en/ajarn-grianggrai.html`
+- Brand Portfolio (Thai): `https://fengshuibalance.net/brand-portfolio.html`
+- Brand Portfolio (English): `https://fengshuibalance.net/en/brand-portfolio.html`
+- XML Sitemap: `https://fengshuibalance.net/sitemap.xml`
+- Robots Policy: `https://fengshuibalance.net/robots.txt`

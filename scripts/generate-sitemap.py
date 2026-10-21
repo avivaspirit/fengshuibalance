@@ -231,6 +231,10 @@ def build_robots() -> str:
         "Allow: /\n"
         "\n"
         f"Sitemap: {BASE_URL}/sitemap.xml\n"
+        "\n"
+        "# LLM Context (GEO / Generative Engine Optimization)\n"
+        f"# Canonical markdown overview: {BASE_URL}/llms.txt\n"
+        f"# Full comprehensive context: {BASE_URL}/llms-full.txt\n"
     )
 
 
