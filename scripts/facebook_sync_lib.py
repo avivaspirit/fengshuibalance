@@ -261,7 +261,13 @@ def pick_image(post: dict) -> str:
         media = attachment.get("media") or {}
         image = media.get("image") or {}
         if image.get("src"):
-            break
+            return image.get("src")
+        for sub in (attachment.get("subattachments") or {}).get("data", []):
+            sub_img = (sub.get("media") or {}).get("image") or {}
+            if sub_img.get("src"):
+                return sub_img.get("src")
+    if post.get("full_picture"):
+        return post.get("full_picture")
     return DEFAULT_IMAGE
 
 
