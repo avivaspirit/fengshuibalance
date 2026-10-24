@@ -1,8 +1,8 @@
 {
-  "added": 1,
-  "skipped_shared": 12,
-  "checked": 75,
-  "pages_scanned": 3,
+  "added": 0,
+  "skipped_shared": 7,
+  "checked": 50,
+  "pages_scanned": 2,
   "backfill": false,
   "token": {
     "page_name": "Fengshui Balance - ฮวงจุ้ย สมดุลแห่งธรรมชาติ",
@@ -10,17 +10,11 @@
     "warning": null
   },
   "page_stats": {
-    "followers": 161585,
+    "followers": 161581,
     "followersK": 161,
-    "updatedAt": "2026-10-24T08:29:12.322091+00:00",
+    "updatedAt": "2026-10-24T13:43:06.464502+00:00",
     "pageId": "367355370015900"
   },
-  "articles": [
-    {
-      "id": "wei-6587",
-      "title": "แจกฟรี Report ศาสตร์ดวงชะตาแบบอินเดีย ( เน้นสุขภาพ )",
-      "url": "https://www.facebook.com/1409584711201780/posts/1536291565197760"
-    }
-  ],
+  "articles": [],
   "dry_run": false
 }
