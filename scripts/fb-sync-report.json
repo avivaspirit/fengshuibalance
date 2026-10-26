@@ -1,6 +1,6 @@
 {
   "added": 1,
-  "skipped_shared": 12,
+  "skipped_shared": 11,
   "checked": 75,
   "pages_scanned": 3,
   "backfill": false,
@@ -10,16 +10,16 @@
     "warning": null
   },
   "page_stats": {
-    "followers": 161567,
+    "followers": 161565,
     "followersK": 161,
-    "updatedAt": "2026-10-26T02:17:34.428012+00:00",
+    "updatedAt": "2026-10-26T16:21:55.481907+00:00",
     "pageId": "367355370015900"
   },
   "articles": [
     {
-      "id": "wei-6589",
-      "title": "จันทร์ซ้อนจันทร์ 19.00 Live",
-      "url": "https://www.facebook.com/1409584711201780/posts/1538070371686546"
+      "id": "wei-6590",
+      "title": "Hunter Full Moon Meditation",
+      "url": "https://www.facebook.com/1409584711201780/videos/4633124823630102"
     }
   ],
   "dry_run": false
