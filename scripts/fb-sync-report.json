@@ -1,8 +1,8 @@
 {
-  "added": 0,
-  "skipped_shared": 10,
-  "checked": 50,
-  "pages_scanned": 2,
+  "added": 2,
+  "skipped_shared": 12,
+  "checked": 75,
+  "pages_scanned": 3,
   "backfill": false,
   "token": {
     "page_name": "Fengshui Balance - ฮวงจุ้ย สมดุลแห่งธรรมชาติ",
@@ -10,11 +10,22 @@
     "warning": null
   },
   "page_stats": {
-    "followers": 161559,
+    "followers": 161604,
     "followersK": 161,
-    "updatedAt": "2026-10-29T01:23:08.409018+00:00",
+    "updatedAt": "2026-10-29T07:47:41.841095+00:00",
     "pageId": "367355370015900"
   },
-  "articles": [],
+  "articles": [
+    {
+      "id": "wei-6596",
+      "title": "อาจารย์แม่ ( ภรรยา อ.เกรียงไกร ) ท่านเป็นผู้มี Sense",
+      "url": "https://www.facebook.com/1409584711201780/posts/1541165768043673"
+    },
+    {
+      "id": "wei-6597",
+      "title": "เพจ Block ผู้มีพฤติกรรมน่าสงสัย",
+      "url": "https://www.facebook.com/1409584711201780/posts/1541203144706602"
+    }
+  ],
   "dry_run": false
 }
