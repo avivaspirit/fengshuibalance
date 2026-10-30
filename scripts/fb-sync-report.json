@@ -1,8 +1,8 @@
 {
-  "added": 1,
-  "skipped_shared": 12,
-  "checked": 75,
-  "pages_scanned": 3,
+  "added": 0,
+  "skipped_shared": 11,
+  "checked": 50,
+  "pages_scanned": 2,
   "backfill": false,
   "token": {
     "page_name": "Fengshui Balance - ฮวงจุ้ย สมดุลแห่งธรรมชาติ",
@@ -10,17 +10,11 @@
     "warning": null
   },
   "page_stats": {
-    "followers": 161842,
+    "followers": 161846,
     "followersK": 161,
-    "updatedAt": "2026-10-30T14:41:24.032485+00:00",
+    "updatedAt": "2026-10-30T20:15:42.896438+00:00",
     "pageId": "367355370015900"
   },
-  "articles": [
-    {
-      "id": "wei-6600",
-      "title": "ท่านที่จะเข้างาน Miracle369",
-      "url": "https://www.facebook.com/1409584711201780/posts/1542722144554702"
-    }
-  ],
+  "articles": [],
   "dry_run": false
 }
