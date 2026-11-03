@@ -1,8 +1,8 @@
 {
-  "added": 0,
+  "added": 1,
   "skipped_shared": 14,
-  "checked": 50,
-  "pages_scanned": 2,
+  "checked": 75,
+  "pages_scanned": 3,
   "backfill": false,
   "token": {
     "page_name": "Fengshui Balance - ฮวงจุ้ย สมดุลแห่งธรรมชาติ",
@@ -10,11 +10,17 @@
     "warning": null
   },
   "page_stats": {
-    "followers": 161909,
+    "followers": 161924,
     "followersK": 161,
-    "updatedAt": "2026-11-03T01:55:07.819940+00:00",
+    "updatedAt": "2026-11-03T08:49:10.972199+00:00",
     "pageId": "367355370015900"
   },
-  "articles": [],
+  "articles": [
+    {
+      "id": "wei-6603",
+      "title": "ไฉ่โข่ว - บทสุดท้าย",
+      "url": "https://www.facebook.com/1409584711201780/posts/1546493617510888"
+    }
+  ],
   "dry_run": false
 }
