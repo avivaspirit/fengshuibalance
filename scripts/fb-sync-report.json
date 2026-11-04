@@ -1,8 +1,8 @@
 {
-  "added": 3,
-  "skipped_shared": 14,
-  "checked": 75,
-  "pages_scanned": 3,
+  "added": 0,
+  "skipped_shared": 13,
+  "checked": 50,
+  "pages_scanned": 2,
   "backfill": false,
   "token": {
     "page_name": "Fengshui Balance - ฮวงจุ้ย สมดุลแห่งธรรมชาติ",
@@ -10,27 +10,11 @@
     "warning": null
   },
   "page_stats": {
-    "followers": 161989,
+    "followers": 161999,
     "followersK": 161,
-    "updatedAt": "2026-11-04T11:44:34.631610+00:00",
+    "updatedAt": "2026-11-04T19:03:45.209233+00:00",
     "pageId": "367355370015900"
   },
-  "articles": [
-    {
-      "id": "wei-6605",
-      "title": "*** ขุมคลัง ชงแล้ว *** ไม่ได้ดี เสมอไป",
-      "url": "https://www.facebook.com/1409584711201780/posts/1547441614082755"
-    },
-    {
-      "id": "wei-6606",
-      "title": "ท่านที่สนใจไปงานกฐิน 4 วัด 2 โรงเรียน ทักมาได้เลยครับ",
-      "url": "https://www.facebook.com/1409584711201780/posts/1547547587405491"
-    },
-    {
-      "id": "wei-6607",
-      "title": "ร่วมบุญกัน : ค่าปรึกษาฮวงจุ้ย 50% ร่วมบุญงานกฐิน",
-      "url": "https://www.facebook.com/1409584711201780/posts/1547737307386519"
-    }
-  ],
+  "articles": [],
   "dry_run": false
 }
