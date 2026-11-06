@@ -1,8 +1,8 @@
 {
-  "added": 2,
-  "skipped_shared": 14,
-  "checked": 75,
-  "pages_scanned": 3,
+  "added": 0,
+  "skipped_shared": 13,
+  "checked": 50,
+  "pages_scanned": 2,
   "backfill": false,
   "token": {
     "page_name": "Fengshui Balance - ฮวงจุ้ย สมดุลแห่งธรรมชาติ",
@@ -10,22 +10,11 @@
     "warning": null
   },
   "page_stats": {
-    "followers": 162000,
+    "followers": 162004,
     "followersK": 162,
-    "updatedAt": "2026-11-06T13:26:33.980150+00:00",
+    "updatedAt": "2026-11-06T20:09:31.726511+00:00",
     "pageId": "367355370015900"
   },
-  "articles": [
-    {
-      "id": "wei-6611",
-      "title": "ของเล่นเพื่อพัฒนาการเด็ก",
-      "url": "https://www.facebook.com/1409584711201780/posts/1549571120536471"
-    },
-    {
-      "id": "wei-6612",
-      "title": "บทความจาก Fengshui Balance",
-      "url": "https://www.facebook.com/reel/1603254200917921/"
-    }
-  ],
+  "articles": [],
   "dry_run": false
 }
