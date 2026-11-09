@@ -1,5 +1,5 @@
 {
-  "added": 1,
+  "added": 2,
   "skipped_shared": 14,
   "checked": 75,
   "pages_scanned": 3,
@@ -10,16 +10,21 @@
     "warning": null
   },
   "page_stats": {
-    "followers": 161986,
+    "followers": 161990,
     "followersK": 161,
-    "updatedAt": "2026-11-09T01:18:27.924885+00:00",
+    "updatedAt": "2026-11-09T08:51:02.202778+00:00",
     "pageId": "367355370015900"
   },
   "articles": [
     {
-      "id": "wei-6618",
-      "title": "** เริ่มวันนี้ - 6 ธค. เป็นเดือนกุน ***",
-      "url": "https://www.facebook.com/1409584711201780/posts/1552523170241266"
+      "id": "wei-6619",
+      "title": "กฐินวัดที่ 3 : วัดห้วยสา",
+      "url": "https://www.facebook.com/1409584711201780/posts/1552648353562081"
+    },
+    {
+      "id": "wei-6620",
+      "title": "โรงเรียนที่ 2 : บ้านโจ้โก้",
+      "url": "https://www.facebook.com/1409584711201780/posts/1552861286874121"
     }
   ],
   "dry_run": false
