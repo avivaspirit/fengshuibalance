@@ -1,5 +1,5 @@
 {
-  "added": 2,
+  "added": 1,
   "skipped_shared": 14,
   "checked": 75,
   "pages_scanned": 3,
@@ -10,21 +10,16 @@
     "warning": null
   },
   "page_stats": {
-    "followers": 161990,
+    "followers": 161992,
     "followersK": 161,
-    "updatedAt": "2026-11-09T08:51:02.202778+00:00",
+    "updatedAt": "2026-11-09T20:16:18.112095+00:00",
     "pageId": "367355370015900"
   },
   "articles": [
     {
-      "id": "wei-6619",
-      "title": "กฐินวัดที่ 3 : วัดห้วยสา",
-      "url": "https://www.facebook.com/1409584711201780/posts/1552648353562081"
-    },
-    {
-      "id": "wei-6620",
-      "title": "โรงเรียนที่ 2 : บ้านโจ้โก้",
-      "url": "https://www.facebook.com/1409584711201780/posts/1552861286874121"
+      "id": "wei-6621",
+      "title": "เด็กป. 1 ร่วมเล่นเกมสร้างตึกสูง",
+      "url": "https://www.facebook.com/1409584711201780/posts/1552973783529538"
     }
   ],
   "dry_run": false
