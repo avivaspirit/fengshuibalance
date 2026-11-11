@@ -1,6 +1,6 @@
 {
-  "added": 1,
-  "skipped_shared": 15,
+  "added": 2,
+  "skipped_shared": 16,
   "checked": 75,
   "pages_scanned": 3,
   "backfill": false,
@@ -10,16 +10,21 @@
     "warning": null
   },
   "page_stats": {
-    "followers": 161986,
+    "followers": 161982,
     "followersK": 161,
-    "updatedAt": "2026-11-11T08:37:52.968812+00:00",
+    "updatedAt": "2026-11-11T17:33:05.946618+00:00",
     "pageId": "367355370015900"
   },
   "articles": [
     {
-      "id": "wei-6625",
-      "title": "Vasily Klyukin สถาปนิกชาวรัสเซียออกแบบตึกทรง \"งูยักษ์\"",
-      "url": "https://www.facebook.com/1409584711201780/posts/1554751536685096"
+      "id": "wei-6626",
+      "title": "งาน 11/11 20.30",
+      "url": "https://www.facebook.com/1409584711201780/posts/1555345029959080"
+    },
+    {
+      "id": "wei-6627",
+      "title": "11:11 Portal gate & NewMoon meditation",
+      "url": "https://www.facebook.com/1409584711201780/videos/1113393314835490"
     }
   ],
   "dry_run": false
