@@ -1,8 +1,8 @@
 {
-  "added": 1,
-  "skipped_shared": 15,
-  "checked": 75,
-  "pages_scanned": 3,
+  "added": 0,
+  "skipped_shared": 10,
+  "checked": 50,
+  "pages_scanned": 2,
   "backfill": false,
   "token": {
     "page_name": "Fengshui Balance - ฮวงจุ้ย สมดุลแห่งธรรมชาติ",
@@ -10,17 +10,11 @@
     "warning": null
   },
   "page_stats": {
-    "followers": 161979,
+    "followers": 161977,
     "followersK": 161,
-    "updatedAt": "2026-11-13T02:21:28.664054+00:00",
+    "updatedAt": "2026-11-13T18:55:42.137611+00:00",
     "pageId": "367355370015900"
   },
-  "articles": [
-    {
-      "id": "wei-6630",
-      "title": "กลับจากงานกฐิน Clear งานค้างเยอะมาก",
-      "url": "https://www.facebook.com/1409584711201780/posts/1557193799774203"
-    }
-  ],
+  "articles": [],
   "dry_run": false
 }
