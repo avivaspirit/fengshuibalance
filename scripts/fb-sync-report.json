@@ -1,8 +1,8 @@
 {
-  "added": 0,
-  "skipped_shared": 9,
-  "checked": 50,
-  "pages_scanned": 2,
+  "added": 1,
+  "skipped_shared": 15,
+  "checked": 75,
+  "pages_scanned": 3,
   "backfill": false,
   "token": {
     "page_name": "Fengshui Balance - ฮวงจุ้ย สมดุลแห่งธรรมชาติ",
@@ -10,11 +10,17 @@
     "warning": null
   },
   "page_stats": {
-    "followers": 161978,
+    "followers": 161979,
     "followersK": 161,
-    "updatedAt": "2026-11-15T22:16:29.461273+00:00",
+    "updatedAt": "2026-11-16T12:15:02.383175+00:00",
     "pageId": "367355370015900"
   },
-  "articles": [],
+  "articles": [
+    {
+      "id": "wei-6633",
+      "title": "เนื่องจากงานเยอะมาก",
+      "url": "https://www.facebook.com/1409584711201780/posts/1560675056092744"
+    }
+  ],
   "dry_run": false
 }
