@@ -1,8 +1,8 @@
 {
-  "added": 3,
-  "skipped_shared": 15,
-  "checked": 75,
-  "pages_scanned": 3,
+  "added": 0,
+  "skipped_shared": 8,
+  "checked": 50,
+  "pages_scanned": 2,
   "backfill": false,
   "token": {
     "page_name": "Fengshui Balance - ฮวงจุ้ย สมดุลแห่งธรรมชาติ",
@@ -10,27 +10,11 @@
     "warning": null
   },
   "page_stats": {
-    "followers": 161981,
+    "followers": 161980,
     "followersK": 161,
-    "updatedAt": "2026-11-17T15:09:13.604883+00:00",
+    "updatedAt": "2026-11-17T23:14:24.908910+00:00",
     "pageId": "367355370015900"
   },
-  "articles": [
-    {
-      "id": "wei-6635",
-      "title": "คิวว่างงานฮวงจุ้ย",
-      "url": "https://www.facebook.com/1409584711201780/posts/1561922065968043"
-    },
-    {
-      "id": "wei-6636",
-      "title": "\" เจ็บนี้อีกนาน เจ็บนี้ไม่ลืม \"",
-      "url": "https://www.facebook.com/1409584711201780/posts/1562075842619332"
-    },
-    {
-      "id": "wei-6637",
-      "title": "ท่านที่ได้รางวัล จองที่นี่",
-      "url": "https://www.facebook.com/1409584711201780/posts/1562152745944975"
-    }
-  ],
+  "articles": [],
   "dry_run": false
 }
