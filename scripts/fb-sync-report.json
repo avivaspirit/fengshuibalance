@@ -1,8 +1,8 @@
 {
-  "added": 0,
-  "skipped_shared": 8,
-  "checked": 50,
-  "pages_scanned": 2,
+  "added": 1,
+  "skipped_shared": 15,
+  "checked": 75,
+  "pages_scanned": 3,
   "backfill": false,
   "token": {
     "page_name": "Fengshui Balance - ฮวงจุ้ย สมดุลแห่งธรรมชาติ",
@@ -10,11 +10,17 @@
     "warning": null
   },
   "page_stats": {
-    "followers": 161980,
+    "followers": 161978,
     "followersK": 161,
-    "updatedAt": "2026-11-17T23:14:24.908910+00:00",
+    "updatedAt": "2026-11-18T05:07:22.047871+00:00",
     "pageId": "367355370015900"
   },
-  "articles": [],
+  "articles": [
+    {
+      "id": "wei-6638",
+      "title": "เมื่อวานดูดวงให้ลูกค้า รวมถึงผู้ที่ได้รับรางวัล",
+      "url": "https://www.facebook.com/1409584711201780/posts/1562847589208824"
+    }
+  ],
   "dry_run": false
 }
