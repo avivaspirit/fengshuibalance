@@ -1,8 +1,8 @@
 {
-  "added": 2,
-  "skipped_shared": 13,
-  "checked": 75,
-  "pages_scanned": 3,
+  "added": 0,
+  "skipped_shared": 6,
+  "checked": 50,
+  "pages_scanned": 2,
   "backfill": false,
   "token": {
     "page_name": "Fengshui Balance - ฮวงจุ้ย สมดุลแห่งธรรมชาติ",
@@ -10,22 +10,11 @@
     "warning": null
   },
   "page_stats": {
-    "followers": 161947,
+    "followers": 161938,
     "followersK": 161,
-    "updatedAt": "2026-11-20T14:35:04.414520+00:00",
+    "updatedAt": "2026-11-20T22:25:54.773417+00:00",
     "pageId": "367355370015900"
   },
-  "articles": [
-    {
-      "id": "wei-6644",
-      "title": "<เฉลย> เสาขวางประตูบ้านไหม ? ( ภาพจากสมาชิก )",
-      "url": "https://www.facebook.com/1409584711201780/posts/1565130608980522"
-    },
-    {
-      "id": "wei-6645",
-      "title": "ความกตัญญู​เป็นสิ่งทุกคนควรมี",
-      "url": "https://www.facebook.com/1409584711201780/posts/1565157088977874"
-    }
-  ],
+  "articles": [],
   "dry_run": false
 }
