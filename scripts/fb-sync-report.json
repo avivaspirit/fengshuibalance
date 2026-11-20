@@ -1,6 +1,6 @@
 {
-  "added": 1,
-  "skipped_shared": 14,
+  "added": 2,
+  "skipped_shared": 13,
   "checked": 75,
   "pages_scanned": 3,
   "backfill": false,
@@ -10,16 +10,21 @@
     "warning": null
   },
   "page_stats": {
-    "followers": 161964,
+    "followers": 161947,
     "followersK": 161,
-    "updatedAt": "2026-11-20T04:51:52.581457+00:00",
+    "updatedAt": "2026-11-20T14:35:04.414520+00:00",
     "pageId": "367355370015900"
   },
   "articles": [
     {
-      "id": "wei-6643",
-      "title": "อานิสงส์กฐิน",
-      "url": "https://www.facebook.com/1409584711201780/posts/1565114885648761"
+      "id": "wei-6644",
+      "title": "<เฉลย> เสาขวางประตูบ้านไหม ? ( ภาพจากสมาชิก )",
+      "url": "https://www.facebook.com/1409584711201780/posts/1565130608980522"
+    },
+    {
+      "id": "wei-6645",
+      "title": "ความกตัญญู​เป็นสิ่งทุกคนควรมี",
+      "url": "https://www.facebook.com/1409584711201780/posts/1565157088977874"
     }
   ],
   "dry_run": false
